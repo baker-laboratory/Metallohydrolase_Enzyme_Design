@@ -1,7 +1,7 @@
 # 🧬 Computational Design of Metallohydrolases
 
 🚧🚧 **THIS REPOSITORY IS UNDER ACTIVE CONSTRUCTION** 🚧🚧  
-We are currently **restructuring, cleaning, and unifying** this repository following the acceptance of our manuscript in **Nature**.  
+We are currently **restructuring, cleaning, and unifying** this repository following the publication of our manuscript in **Nature**.  
 Over the next several weeks, we will be:
 
 - Harmonizing folder organization and naming conventions  
@@ -10,7 +10,7 @@ Over the next several weeks, we will be:
 - Improving tutorial readability for new users  
 - Uploading data and documentation  
 
-Please expect rapid updates—thank you for your patience! Please reach out to Seth Woodbury (woodbuse@uw.edu) or Donghyo Kim (donghyo@uw.edu) for questions, concerns, bugs, or collaboration. Happy designing!! ✨
+Please expect rapid updates - thank you for your patience! Please reach out to Seth Woodbury (woodbuse@uw.edu) or Donghyo Kim (donghyo@uw.edu) for questions, concerns, bugs, or collaboration. Happy designing!! ✨
 
 ---
 
