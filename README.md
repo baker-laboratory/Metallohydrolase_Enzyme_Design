@@ -1,25 +1,55 @@
 # 🧬 Computational Design of Metallohydrolases
 
-This repository contains code and data to reproduce the key results from the manuscript:
+🚧🚧 **THIS REPOSITORY IS UNDER ACTIVE CONSTRUCTION** 🚧🚧  
+We are currently **restructuring, cleaning, and unifying** this repository following the acceptance of our manuscript in **Nature**.  
+Over the next several weeks, we will be:
 
-## Computational Design of Metallohydrolases
-Donghyo Kim†, Seth M. Woodbury†, Woody Ahern†, Doug Tischer, Nikita Hanikel, Saman Salike, Jason Yim, Samuel J. Pellock, Anna Lauko, Indrek Kalvet*, Donald Hilvert*, David Baker*  
-†Co-first authors, *Corresponding authors
+- Harmonizing folder organization and naming conventions  
+- Updating dependencies and removing legacy paths  
+- Clarifying whether Apptainer-based execution is required for full reproducibility  
+- Improving tutorial readability for new users  
+- Uploading data and documentation  
 
-> 📄 _The manuscript apllies RFdiffusion2, a generative AI method for de novo enzyme design, to build highly active zinc-dependent hydrolases from quantum chemistry-based active site geometries._
+Please expect rapid updates—thank you for your patience! Please reach out to Seth Woodbury (woodbuse@uw.edu) or Donghyo Kim (donghyo@uw.edu) for questions, concerns, bugs, or collaboration. Happy designing!! ✨
+
+---
+
+## 📄 Nature Publication
+
+**Computational Design of Metallohydrolases**  
+**Published in *Nature* on December 3, 2025**
+
+**DOI:** https://doi.org/10.1038/s41586-025-09746-w  
+**URL:** https://www.nature.com/articles/s41586-025-09746-w
+
+## 👥 Authors
+**Donghyo Kim‡, Seth M. Woodbury‡, Woody Ahern‡, Doug Tischer, Alex Kang, Emily Joyce,  
+Asim K. Bera, Nikita Hanikel, Saman Salike, Rohith Krishna, Jason Yim,  
+Samuel J. Pellock, Anna Lauko, Indrek Kalvet\*, Donald Hilvert\*, David Baker\***
+
+‡Co-first authors, \*Corresponding authors
+
+> 📄 _This manuscript applies RFdiffusion2, a generative AI model for de novo enzyme design, to build highly active zinc-dependent hydrolases from quantum-chemistry-defined active site geometries._
 
 ---
 
 ## 📁 Repository Overview
 
-- `design_zn_hydrolase.ipynb`  
-  A Jupyter Notebook to reproduce the core design and analysis pipeline for zinc metallohydrolases.
+This repository contains:
 
-- `env/zinc_hydro.yml`  
-  Conda environment specification file.
+- **Tutorials & Reproduction Pipelines**
+  - A JupyterHub notebook tutorial on how to use RFdiffusion2 (`RFdiffusion2_Tutorial_JuptyerNotebook.ipynb`) starting from your own input from a pre-existing PDB or a quantum chemistry-derived theozyme (worked examples for each case). Many scripts have been made to streamline this process.
+  - A reproduction tutorial for **Design Campaign 1**, nearly identical to what was provided to peer-reviewers (`design_zn_hydrolase.ipynb`). This contains the most important pipeline steps that were performed in the first design campaign, although we are working on modernizing it, to make it more user-friendly, and releasing the notebook for **Design Campaign 2**.
 
-- `software/`  
-  Folder containing required software dependencies, such as `RFdiffusion2`, `ProteinMPNN`, `PLACER`, and utility scripts.
+- **Dry Lab Data**
+  - DFT-optimized theozymes  
+  - Design models of the ordered & tested designs  
+
+- **Wet Lab Data**
+  - DNA & protein sequences  
+  - Expression sequences  
+  - Kinetic measurements (kcat, KM, kcat/KM)  
+  - Other wetlab data & all analysis/plotting! 
 
 ---
 
@@ -38,7 +68,7 @@ git submodule update
 
 ### 3. Create and activate the environment
 ```bash
-conda env create -f env/zinc_hydro.yml -n zinc_hydro
+conda env create -f Environment/zinc_hydro.yml -n zinc_hydro
 conda activate zinc_hydro
 ```
 ### 4. Register as Jupyter kernel
@@ -58,9 +88,9 @@ python -m ipykernel install --user --name=zinc_hydro
   ```bash
   sudo apt install aria2
   ```
-- Additionally, make sure you have access to the following pre-trained models
+- Additionally, make sure you have access to the following pre-trained models (which are available as submodules in this repo in the Software subdirectory)
   - [RFdiffusion2](https://github.com/RosettaCommons/RFdiffusion2)
-  - [Protein/LignadMPNN](https://github.com/dauparas/LigandMPNN)
+  - [Protein/LigandMPNN](https://github.com/dauparas/LigandMPNN)
   - [PLACER](https://github.com/baker-laboratory/PLACER)
   - [openfold](https://github.com/aqlaboratory/openfold)
 
@@ -68,5 +98,4 @@ python -m ipykernel install --user --name=zinc_hydro
 
 ## 🧾 Citation
 - If you use this repository, please cite:
-  `Kim, Woodbury, Ahern, et al. Computational Design of Metallohydrolases.`
 - DOI will be added upon publication
