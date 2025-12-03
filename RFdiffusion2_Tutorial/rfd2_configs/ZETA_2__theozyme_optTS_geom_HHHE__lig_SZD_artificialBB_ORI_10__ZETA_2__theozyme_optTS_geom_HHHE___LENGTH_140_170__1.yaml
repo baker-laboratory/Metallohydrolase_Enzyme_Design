@@ -1,0 +1,29 @@
+defaults:
+  - aa
+guidepost_bonds: True
+inference:
+  align_motif: False
+  num_designs: 2
+  output_prefix: /home/woodbuse/publication/metallohydrolase/github/Computational_Design_of_Metallohydrolases_PrivateGitHub/RFdiffusion2_Tutorial/outputs/rfdiffusion2_out/from_quantum_chemistry__ZN_ESTERASE/ZETA_2__theozyme_optTS_geom_HHHE__lig_SZD_artificialBB_ORI_10_LENGTH_140_170__1
+  input_pdb: /home/woodbuse/publication/metallohydrolase/github/Computational_Design_of_Metallohydrolases_PrivateGitHub/RFdiffusion2_Tutorial/theozymes/from_quantum_chemistry/rfdiffusion2_inputs/ZETA_2__theozyme_optTS_geom_HHHE__lig_SZD_artificialBB_ORI_10.pdb
+  contig_as_guidepost: True
+  guidepost_xyz_as_design: True
+  deterministic: False
+  ligand: SZD
+  idealize_sidechain_outputs: True
+  write_trajectory: False
+  write_trb: True
+  center_motif: True
+  conditions:
+    relative_sasa:
+      mean: 0.175
+      std: 0.075
+    radius_of_gyration:
+      mean: 12.5
+      std: 12.5
+contigmap:
+  contigs: ['140-170,A1-1,B2-2,C3-3,D4-4']
+  length: '140-170'
+  contig_atoms: '{"A1": "NE2,CD2,CG,CB,ND1,CE1", "B2": "NE2,CD2,CG,CB,ND1,CE1", "C3": "NE2,CD2,CG,CB,ND1,CE1", "D4": "OE1,OE2,CD,CG"}'
+diffuser:
+  T: 100

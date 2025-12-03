@@ -1,0 +1,18 @@
+[submodule "Software/RFdiffusion2"]
+	path = Software/RFdiffusion2
+	url = https://github.com/RosettaCommons/RFdiffusion2
+[submodule "Software/PLACER"]
+	path = Software/PLACER
+	url = https://github.com/baker-laboratory/PLACER.git
+[submodule "Software/openfold"]
+	path = Software/openfold
+	url = https://github.com/aqlaboratory/openfold.git
+[submodule "Software/superfold"]
+	path = Software/superfold
+	url = https://github.com/rdkibler/superfold.git
+[submodule "Software/proteininpainting"]
+	path = Software/proteininpainting
+	url = https://github.com/RosettaCommons/RFjoint2
+[submodule "Software/fastmpnndesign"]
+	path = Software/fastmpnndesign
+	url = https://github.com/ikalvet/fastmpnndesign.git

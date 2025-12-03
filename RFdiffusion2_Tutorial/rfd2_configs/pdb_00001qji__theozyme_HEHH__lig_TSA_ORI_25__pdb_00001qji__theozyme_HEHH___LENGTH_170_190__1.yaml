@@ -1,0 +1,29 @@
+defaults:
+  - aa
+guidepost_bonds: True
+inference:
+  align_motif: False
+  num_designs: 2
+  output_prefix: /home/woodbuse/publication/metallohydrolase/github/Computational_Design_of_Metallohydrolases_PrivateGitHub/RFdiffusion2_Tutorial/outputs/rfdiffusion2_out/from_PDB_structure__ZN_PROTEASE/pdb_00001qji__theozyme_HEHH__lig_TSA_ORI_25_LENGTH_170_190__1
+  input_pdb: /home/woodbuse/publication/metallohydrolase/github/Computational_Design_of_Metallohydrolases_PrivateGitHub/RFdiffusion2_Tutorial/theozymes/from_PDB_structure/rfdiffusion2_inputs/pdb_00001qji__theozyme_HEHH__lig_TSA_ORI_25.pdb
+  contig_as_guidepost: True
+  guidepost_xyz_as_design: True
+  deterministic: False
+  ligand: TSA
+  idealize_sidechain_outputs: True
+  write_trajectory: False
+  write_trb: True
+  center_motif: True
+  conditions:
+    relative_sasa:
+      mean: 0.16
+      std: 0.05
+    radius_of_gyration:
+      mean: 12.5
+      std: 6.25
+contigmap:
+  contigs: ['170-190,A92-93,A96-96,A102-102']
+  length: '170-190'
+  contig_atoms: '{"A92": "NE2,CD2,CG,CB,ND1,CE1", "A93": "OE1,OE2,CD,CG", "A96": "NE2,CD2,CG,CB,ND1,CE1", "A102": "NE2,CD2,CG,CB,ND1,CE1"}'
+diffuser:
+  T: 100

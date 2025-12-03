@@ -1,0 +1,32 @@
+
+defaults:
+  - base
+
+diffuser:
+  T: 75
+
+guidepost_bonds: True
+
+inference:
+  align_motif: False
+  ckpt_path: ./../Software/RFdiffusion2/rf_diffusion/model_weights/RFD_140.pt
+  num_designs: 10
+  output_prefix: ./output/rfd2_out/zn_hydrolase_PSZ_H_H_H_1_63_0
+  input_pdb: ./input/invrot/phenylacetate_4mu_HHH_ZnO_binding_S_enantio/PSZ_H_H_H_1_63.pdb
+  final_step: 1
+  ligand: PSZ
+  contig_as_guidepost: True
+  remove_guideposts_from_output: True
+  infer_guidepost_positions: True
+  guidepost_xyz_as_design: True
+  flexible_ligand: False
+  state_dict_to_load: model_state_dict
+  recenter_xt: True
+  deterministic: False
+  recenter_xt_dropt: 3
+  idealize_sidechain_outputs: True
+
+contigmap:
+  contigs: ['130-275,A1-1,B2-2,C3-3']
+  length: '130-275'
+  contig_atoms: '{"A1":"NE2,CD2,CG,CB,ND1,CE1","B2":"NE2,CD2,CG,CB,ND1,CE1","C3":"NE2,CD2,CG,CB,ND1,CE1"}'

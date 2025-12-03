@@ -1,0 +1,11 @@
+  chainbreak  rCA_nonadj    lig_dist bondlen_dev   loop_frac longest_helix         rog loop_at_motif term_mindist        SASA    SASA_rel description
+       3.833       4.566       2.923       0.007       0.216            25      26.095           nan       22.086      43.903       0.075 ./output/rfd2_out/zn_hydrolase_PSZ_H_H_H_1_63_0_8-atomized-bb-False.pdb
+       3.831       4.002       4.307       0.007       0.176            29      25.093           nan       19.625      73.485       0.126 ./output/rfd2_out/zn_hydrolase_PSZ_H_H_H_1_63_0_1-atomized-bb-False.pdb
+       3.831       4.229       3.251       0.008       0.238            23      28.167           nan       27.736     116.737       0.200 ./output/rfd2_out/zn_hydrolase_PSZ_H_H_H_1_63_0_2-atomized-bb-False.pdb
+       3.837       3.735       3.235       0.006       0.273            17      23.275           nan       23.517     133.311       0.228 ./output/rfd2_out/zn_hydrolase_PSZ_H_H_H_1_63_0_0-atomized-bb-False.pdb
+       3.831       3.409       3.078       0.045       0.258            15      25.559           nan       13.407         nan         nan ./output/rfd2_out/zn_hydrolase_PSZ_H_H_H_1_63_0_6-atomized-bb-False.pdb
+       3.838       3.974       3.345       0.007       0.235            23      29.673           nan       14.361         nan         nan ./output/rfd2_out/zn_hydrolase_PSZ_H_H_H_1_63_0_3-atomized-bb-False.pdb
+       3.833       4.172       3.458       0.105       0.104            35         nan           nan          nan         nan         nan ./output/rfd2_out/zn_hydrolase_PSZ_H_H_H_1_63_0_7-atomized-bb-False.pdb
+       3.826       4.330       3.181       0.007       0.306           nan         nan           nan          nan         nan         nan ./output/rfd2_out/zn_hydrolase_PSZ_H_H_H_1_63_0_9-atomized-bb-False.pdb
+       3.834       4.132       2.287         nan         nan           nan         nan           nan          nan         nan         nan ./output/rfd2_out/zn_hydrolase_PSZ_H_H_H_1_63_0_5-atomized-bb-False.pdb
+       3.831       3.785       2.366         nan         nan           nan         nan           nan          nan         nan         nan ./output/rfd2_out/zn_hydrolase_PSZ_H_H_H_1_63_0_4-atomized-bb-False.pdb

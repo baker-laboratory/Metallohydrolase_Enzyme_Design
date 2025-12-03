@@ -1,0 +1,8 @@
+[2025-12-03 02:00:37,458][rf_diffusion.config.config_format][INFO] - Translating obsolete key: extra_t1d_params -> ['extra_tXd_params']
+[2025-12-03 02:00:37,459][rf_diffusion.config.config_format][INFO] - Translating obsolete key: extra_t1d -> ['extra_tXd']
+[2025-12-03 02:00:41,522][__main__][INFO] - Making design 0 of 0:2: /home/woodbuse/publication/metallohydrolase/github/Computational_Design_of_Metallohydrolases_PrivateGitHub/RFdiffusion2_Tutorial/outputs/rfdiffusion2_out/test_run/ZETA_2__theozyme_optTS_geom_HHHE__lig_SZD_artificialBB_ORI_01_LENGTH_110_140__1_0
+[2025-12-03 02:00:41,811][se3_flow_matching.data.so3_utils][INFO] - Data loaded from .cache/cache_igso3_s0.100-1.500-1000_l1000_o1000-3.npz
+[2025-12-03 02:00:41,876][__main__][INFO] - Flow-matching step: 1/100
+[2025-12-03 02:00:47,487][__main__][INFO] - Flow-matching step: 2/100
+[2025-12-03 02:00:49,907][__main__][INFO] - Flow-matching step: 3/100
+[2025-12-03 02:00:52,337][__main__][INFO] - Flow-matching step: 4/100
