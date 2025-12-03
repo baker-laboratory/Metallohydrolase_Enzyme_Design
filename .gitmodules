@@ -16,3 +16,6 @@
 [submodule "Software/fastmpnndesign"]
 	path = Software/fastmpnndesign
 	url = https://github.com/ikalvet/fastmpnndesign.git
+[submodule "Software/RFjoint2"]
+	path = Software/RFjoint2
+	url = git@github.com:RosettaCommons/RFjoint2.git
