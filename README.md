@@ -57,8 +57,8 @@ This repository contains:
 
 ### 1. Clone the repository and submodules. 
 ```bash
-git clone https://github.com/SethWoodbury/Computational_Design_of_Metallohydrolases_PrivateGitHub.git
-cd Computational_Design_of_Metallohydrolases_PrivateGitHub
+git clone https://github.com/baker-laboratory/Metallohydrolase_Enzyme_Design.git
+cd Metallohydrolase_Enzyme_Design
 git submodule init 
 git submodule update
 ````
