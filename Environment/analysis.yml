@@ -29,6 +29,6 @@ dependencies:
   - scipy>=1.13
   - matplotlib>=3.9
   - seaborn>=0.13
-  - openpyxl>=3.1         # REQUIRED: 30 of the 41 raw data files are .xlsx
+  - openpyxl>=3.1         # REQUIRED: 30 of the 43 raw data files are .xlsx
   - jupyterlab>=4.2
   - ipykernel>=6.28

@@ -97,6 +97,9 @@ Metallohydrolase_Enzyme_Design/
 |-- LICENSE                                        # MIT License
 |-- .gitmodules
 |
+|-- model_weights/                                 # GITIGNORED - you populate this
+|                                                  #   see "Model weights" below
+|
 |-- Environment/
 |   |-- README.md                                  # which environment to use, and why
 |   |-- analysis.yml                               # wet lab analysis only (no GPU, no license)
@@ -133,7 +136,7 @@ Metallohydrolase_Enzyme_Design/
 |   |-- README.md
 |   |-- Metallohydrolase_Nature_2025/
 |   |   |-- wetlab_data_analysis.ipynb
-|   |   |-- raw_wetlab_data/                       #   41 primary files
+|   |   |-- raw_wetlab_data/                       #   43 primary files
 |   |   |-- supplemental_data/                     #   Data S1-S3
 |   |   +-- wetlab_data_plots/                     #   all generated figures
 |   |-- Phosphotriesterase_RFdiffusion3/           #   in preparation
@@ -160,6 +163,8 @@ Metallohydrolase_Enzyme_Design/
 +-- Software/                                      # SUBMODULES + bundled tools
     |-- RFdiffusion2/  foundry/  PLACER/  openfold/
     |-- superfold/  fastmpnndesign/  proteininpainting/
+    |-- foldseek/                                  #   GPL-3.0, see License below
+    |-- alphafold3/                                #   params are gated; see Model weights
     +-- theozyme_XYZ_2_PDB__beta/                  #   bundled XYZ->PDB theozyme converter
 ```
 
@@ -389,7 +394,22 @@ which shows the interpreter, resolved tools, and installed package versions.
 
 ## License
 
-[MIT License](LICENSE).
+[MIT License](LICENSE) — this covers original code written for this project.
+Third-party code and binaries retain their upstream licenses, including copies
+under `Scripts/`.
+
+Examples of third-party components and their terms:
+
+| Component | Origin | License |
+|---|---|---|
+| `Scripts/enzyme_design/DAlphaBall.gcc` | Rosetta distribution (`holes` filter) | See the [upstream source](https://github.com/RosettaCommons/rosetta/tree/main/source/external/DAlpahBall) and [Rosetta licensing](https://github.com/RosettaCommons/rosetta/blob/main/LICENSE.md); this repository's MIT license does not relicense third-party code. |
+| `Scripts/mpnn_relevant_utils/ligandmpnn_patched/sc_utils.py` | [LigandMPNN](https://github.com/dauparas/LigandMPNN) | MIT (upstream copyright retained in the file header) |
+| `Software/foldseek` | [steineggerlab/foldseek](https://github.com/steineggerlab/foldseek) | GPL-3.0 — a separate submodule, invoked as an external binary |
+
+Submodules under `Software/` are governed by their own licenses. PyRosetta has a
+[separate license](https://github.com/RosettaCommons/rosetta/blob/main/LICENSE.PyRosetta.md),
+and AlphaFold3 parameters are subject to Google DeepMind's
+[model parameter terms](https://github.com/google-deepmind/alphafold3/blob/main/WEIGHTS_TERMS_OF_USE.md).
 
 ---
 

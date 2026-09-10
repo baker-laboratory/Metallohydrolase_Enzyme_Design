@@ -44,7 +44,7 @@ from the working directory, creates `wetlab_data_plots/`, and exports the
 `*_dir` variables the rest of the notebook uses. Set `ZINC_HYDRO_REPO` only if
 you are running from somewhere unusual.
 
-`openpyxl` is required — 30 of the 41 raw files are `.xlsx`. It is included in
+`openpyxl` is required — 30 of the 43 raw files are `.xlsx`. It is included in
 both `analysis.yml` and `zinc_hydro.yml`.
 
 ### Where the figures go

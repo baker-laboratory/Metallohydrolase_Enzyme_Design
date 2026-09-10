@@ -52,9 +52,10 @@ you just need it to install.
 [els2.comotion.uw.edu/product/pyrosetta](https://els2.comotion.uw.edu/product/pyrosetta);
 the `conda.rosettacommons.org` channel then serves the builds.
 
-**CPU-only?** Delete the deep learning block from `zinc_hydro.yml` (`pytorch`
-through `tensorflow`). Everything except RFdiffusion2/3 inference still works —
-including the theozyme XYZ→PDB conversion and all PyRosetta scoring.
+**CPU-only?** Use the analysis environment for wet lab notebooks. Theozyme
+XYZ→PDB conversion and PyRosetta scoring also run on CPUs, but need their own
+dependencies from the full design environment. See [GPU requirements](#gpu-requirements)
+below before adapting the design environment for CPU use.
 
 ## 3. Containers
 
@@ -88,6 +89,50 @@ pixi run -e design python -c "import pyrosetta"   # full stack, linux-64
 `pixi install` writes a `pixi.lock` that reproduces the solve across machines.
 Commit that lock if you want a fixed environment; we ship the manifest without
 one so the first install resolves against current channels.
+
+---
+
+## GPU requirements
+
+The design workflows use GPUs for diffusion, sequence design, and structure
+prediction. Theozyme preparation, XYZ→PDB conversion, Rosetta/PyRosetta scoring,
+and wet lab analysis run on CPUs.
+
+| Execution in the design workflows | Steps |
+|---|---|
+| GPU | RFdiffusion2 / RFdiffusion3 inference, LigandMPNN, AlphaFold2 (SuperFold), AlphaFold3, PLACER |
+| CPU-only | theozyme prep, ligand `.params` generation, Rosetta/PyRosetta scoring and filtering, `Manuscript_Data/*/wetlab_data_analysis.ipynb` |
+
+LigandMPNN and PLACER also provide CPU fallbacks in their included source code;
+they still need PyTorch and their other model dependencies.
+
+`zinc_hydro.yml` pins `pytorch-cuda=12.1`. NVIDIA lists Linux x86_64 driver
+525.60.13 as the minimum for CUDA 12.1
+[minor version compatibility](https://docs.nvidia.com/cuda/archive/12.1.0/cuda-toolkit-release-notes/index.html#cuda-driver).
+Individual models or features may require a newer driver; this is not a tested
+minimum for the entire pipeline. The supplied full design environment targets
+Linux with NVIDIA CUDA; this repository does not provide a full AMD/ROCm or
+Apple-silicon design environment.
+
+**Example resource requests.** The saved diffusion job scripts in
+[`RFdiffusion2_Tutorial/slurm_submit/`](../RFdiffusion2_Tutorial/slurm_submit/)
+and [`RFdiffusion3_Tutorial/slurm_submit/`](../RFdiffusion3_Tutorial/slurm_submit/)
+request one A4000 GPU and one CPU core per job:
+
+| Workload | Request |
+|---|---|
+| RFdiffusion2 tutorial | `--gres=gpu:a4000:1 --mem=8g -c 1`, with 6–8 hour time limits |
+| RFdiffusion3 production | `--gres=gpu:a4000:1 --mem=16g -c 1 -t 06:30:00` |
+
+SLURM's `--mem` specifies host RAM, not GPU memory. These scripts record requested
+resources and time limits; they do not establish minimum hardware requirements
+or measured runtimes. Each model's own hardware requirements also apply.
+
+For wet lab analysis without a GPU, use the analysis environment above. A CPU
+adaptation of the design environment must retain the dependencies needed by the
+selected scripts, including CPU builds of PyTorch where required. Removing the
+entire deep learning block does not produce a working environment for every
+CPU-capable tool; no complete CPU design environment is provided here.
 
 ---
 

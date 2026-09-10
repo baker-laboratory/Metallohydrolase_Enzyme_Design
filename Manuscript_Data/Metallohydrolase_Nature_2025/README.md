@@ -12,7 +12,7 @@ The matching computational campaign is
 | Path | What it holds |
 |---|---|
 | `wetlab_data_analysis.ipynb` | Loads every raw file, fits the kinetics, produces the reported figures and statistics |
-| `raw_wetlab_data/` | 41 primary files, unmodified instrument output |
+| `raw_wetlab_data/` | 43 primary files, unmodified instrument output |
 | `supplemental_data/` | Deposited supplementary records (see below) |
 | `wetlab_data_plots/` | Every figure the notebook writes — 65 PNGs at 150 dpi, committed; vector exports are opt-in |
 
