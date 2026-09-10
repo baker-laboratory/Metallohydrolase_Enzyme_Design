@@ -1,0 +1,130 @@
+TITLE,A1_25mMtris_25mMnacl_ph8_25C___recoveryAFTER95C
+DATA TYPE,
+ORIGIN,JASCO
+OWNER,
+DATE,25/03/26
+TIME,17:58:44
+SPECTROMETER/DATA SYSTEM,
+LOCALE,1033
+RESOLUTION,
+DELTAX,-1
+XUNITS,NANOMETERS
+YUNITS,CD [mdeg]
+Y2UNITS,HT [V]
+FIRSTX,  250.0000
+LASTX,  200.0000
+NPOINTS,      51
+FIRSTY,    -0.22495
+MAXY,    31.48886
+MINY,   -88.56698
+XYDATA
+250.0000,-0.224949,294.312
+249.0000,-0.664744,294.566
+248.0000,-0.815231,294.815
+247.0000,-1.31959,295.219
+246.0000,-1.81954,295.575
+245.0000,-2.27033,296.006
+244.0000,-3.22926,296.538
+243.0000,-4.7299,297.15
+242.0000,-5.93308,297.977
+241.0000,-7.58802,298.985
+240.0000,-9.76713,300.283
+239.0000,-12.5767,301.888
+238.0000,-15.8294,303.739
+237.0000,-19.5729,306.01
+236.0000,-23.7034,308.569
+235.0000,-28.6236,311.75
+234.0000,-33.5515,315.16
+233.0000,-39.9335,319.382
+232.0000,-45.6585,323.944
+231.0000,-51.0598,328.124
+230.0000,-57.8553,332.968
+229.0000,-64.2886,338.358
+228.0000,-69.9245,343.592
+227.0000,-75.4337,348.932
+226.0000,-79.8505,353.852
+225.0000,-83.4388,358.464
+224.0000,-85.6286,363.076
+223.0000,-87.1239,367.557
+222.0000,-87.9925,372.53
+221.0000,-88.2096,377.532
+220.0000,-87.9555,382.182
+219.0000,-87.0991,387.436
+218.0000,-85.3725,392.468
+217.0000,-84.2285,398.09
+216.0000,-83.562,403.866
+215.0000,-82.1045,410.428
+214.0000,-80.7423,417.178
+213.0000,-81.8144,425.284
+212.0000,-81.7015,435.311
+211.0000,-83.3466,445.077
+210.0000,-86.0058,456.577
+209.0000,-88.3442,471.008
+208.0000,-88.567,487.659
+207.0000,-84.4553,509.595
+206.0000,-78.4142,533.887
+205.0000,-65.076,566.127
+204.0000,-54.253,597.845
+203.0000,-40.9283,640.717
+202.0000,-28.1415,687.927
+201.0000,5.80721,750.865
+200.0000,31.4889,818.885
+
+##### Extended Information
+[Comments]
+Sample name,A1_25mMtris_25mMnacl_ph8_25C___recoveryAFTER95C
+Comment,x
+User
+Division
+Company,ipd
+
+[Detailed Information]
+Creation date,3/26/2025 4:58 PM
+
+Data array type,Linear data array * 2
+Horizontal axis,Wavelength [nm]
+Vertical axis(1),CD [mdeg]
+Vertical axis(2),HT [V]
+Start,250 nm
+End,200 nm
+Data interval,1 nm
+Data points,51      
+
+[Measurement Information]
+Instrument name,CD
+Model name,J-1500
+Serial No.,B044061638
+
+Detector,PM-539
+Detector S/N,B044061638
+  Lock-in amp.,X mode
+  HT volt,Auto
+
+Accessory,MPTC-513
+Accessory S/N,A005061647
+  Cell,2
+  Temperature,24.99 C
+  Control sensor,Holder
+  Monitor sensor,Holder
+  Start Mode,Keep target temperature +/-0.10 deg C while 5 seconds
+
+Measurement date,3/26/2025 4:58 PM
+
+Parameter file,Z:\Users\Baker_Lab\woodbuse\cd_J1500\standard_200nm_to_250nm__25C__1nmBAND__50scanspeed.cdsp
+Photometric mode,CD, HT
+Measure range,250 - 200 nm
+Data pitch,1 nm
+CD scale,2000 mdeg/1.0 dOD
+FL scale,200 mdeg/1.0 dOD
+D.I.T.,2 sec
+Bandwidth,1.00 nm
+Start mode,Immediately
+Scanning mode,Continuous
+Scanning speed,50 nm/min
+Baseline correction,None
+Shutter control,Auto
+Accumulations,1
+N2 Flowmeter,Manual
+
+Concentration,0.4 umol/L
+

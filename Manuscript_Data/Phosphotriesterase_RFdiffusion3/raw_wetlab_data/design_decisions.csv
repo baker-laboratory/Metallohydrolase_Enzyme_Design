@@ -1,0 +1,9 @@
+design,action,recommendation,keep_replicates,n_clean,n_sequenced,discard_replicates,reasons,best_verdict,plate,well
+P1F5,RE-PICK,no clean clone - pick new colonies and re-sequence,-,0,3,"i2, i1, i3",i2=POINT_MUTANT; i1=REARRANGED; i3=NO_ASSEMBLY,POINT_MUTANT,1,F5
+P1H10,RE-PICK,no clean clone - pick new colonies and re-sequence,-,0,3,"i1, i2, i3",i1=REARRANGED; i2=NO_ASSEMBLY; i3=NO_ASSEMBLY,REARRANGED,1,H10
+P2B12,RE-PICK,no clean clone - pick new colonies and re-sequence,-,0,3,"i1, i2, i3",i1=POINT_MUTANT; i2=NO_ASSEMBLY; i3=NO_ASSEMBLY,POINT_MUTANT,2,B12
+P1E12,KEEP,keep i3,i3,1,3,"i1, i2",i1=POINT_MUTANT; i2=REARRANGED,PERFECT,1,E12
+P1F6,KEEP,keep i1,i1,1,3,"i2, i3",i2=NO_ASSEMBLY; i3=NO_ASSEMBLY,PERFECT,1,F6
+P2C4,KEEP,keep i1 (also clean: i2),"i1, i2",2,3,i3,i3=POINT_MUTANT,PERFECT,2,C4
+P2E3,KEEP,keep i3 (also clean: i1),"i3, i1",2,3,i2,i2=REARRANGED,PERFECT,2,E3
+P2G1,KEEP,keep i3 (also clean: i2),"i3, i2",2,3,i1,i1=POINT_MUTANT,PERFECT,2,G1

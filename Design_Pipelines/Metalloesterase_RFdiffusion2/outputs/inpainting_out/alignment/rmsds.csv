@@ -1,0 +1,14 @@
+rmsd,description
+0.331,./output/inpainting_out/zn_hydrolase_PSZ_H_H_H_1_63_0_0-atomized-bb-False_0_inp_1.pdb
+0.338,./output/inpainting_out/zn_hydrolase_PSZ_H_H_H_1_63_0_0-atomized-bb-False_0_inp_0.pdb
+0.354,./output/inpainting_out/zn_hydrolase_PSZ_H_H_H_1_63_0_0-atomized-bb-False_0_inp_3.pdb
+0.329,./output/inpainting_out/zn_hydrolase_PSZ_H_H_H_1_63_0_0-atomized-bb-False_0_inp_2.pdb
+0.338,./output/inpainting_out/zn_hydrolase_PSZ_H_H_H_1_63_0_0-atomized-bb-False_0_inp_4.pdb
+0.807,./output/inpainting_out/zn_hydrolase_PSZ_H_H_H_1_63_0_2-atomized-bb-False_0_inp_1.pdb
+0.868,./output/inpainting_out/zn_hydrolase_PSZ_H_H_H_1_63_0_2-atomized-bb-False_0_inp_0.pdb
+0.909,./output/inpainting_out/zn_hydrolase_PSZ_H_H_H_1_63_0_2-atomized-bb-False_0_inp_3.pdb
+0.270,./output/inpainting_out/zn_hydrolase_PSZ_H_H_H_1_63_0_8-atomized-bb-False_0_inp_0.pdb
+1.137,./output/inpainting_out/zn_hydrolase_PSZ_H_H_H_1_63_0_2-atomized-bb-False_0_inp_2.pdb
+0.260,./output/inpainting_out/zn_hydrolase_PSZ_H_H_H_1_63_0_8-atomized-bb-False_0_inp_1.pdb
+0.222,./output/inpainting_out/zn_hydrolase_PSZ_H_H_H_1_63_0_8-atomized-bb-False_0_inp_2.pdb
+0.267,./output/inpainting_out/zn_hydrolase_PSZ_H_H_H_1_63_0_8-atomized-bb-False_0_inp_3.pdb

@@ -1,0 +1,102 @@
+# =============================================================================
+#  zinc_hydro -- FULL DESIGN ENVIRONMENT (portable specification)
+# =============================================================================
+#
+#  This is the environment for the DESIGN pipelines and tutorials: RFdiffusion2,
+#  RFdiffusion3, PyRosetta scoring, LigandMPNN/FastMPNNDesign, PLACER, AF2.
+#
+#  It pins MINOR versions only, so conda is free to pick builds that suit your
+#  platform, driver, and the current state of the channels. This is the file to
+#  use on a machine that is not identical to ours.
+#
+#      conda env create -f Environment/zinc_hydro.yml
+#      conda activate zinc_hydro
+#
+#  If you need the EXACT builds we ran (every package pinned to its build
+#  string, linux-64 only), use the lockfile instead:
+#
+#      conda env create -f Environment/zinc_hydro.lock.yml
+#
+#  If you only want to reproduce the WET LAB ANALYSIS in Manuscript_Data/, you
+#  do not need any of this. Use the tiny analysis environment instead -- it has
+#  no GPU, CUDA, or PyRosetta dependency and installs in seconds:
+#
+#      conda env create -f Environment/analysis.yml
+#      # or:  uv venv && uv pip install -r Environment/requirements-analysis.txt
+#
+#  See Environment/README.md for the full decision table.
+#
+#  NOTE ON PYROSETTA: PyRosetta requires a license, free for academic use.
+#  Register at https://els2.comotion.uw.edu/product/pyrosetta . The
+#  conda.rosettacommons.org channel below serves the licensed builds.
+# =============================================================================
+
+name: zinc_hydro
+
+channels:
+  - pytorch
+  - nvidia
+  - https://conda.rosettacommons.org
+  - dglteam/label/th23_cu121
+  - conda-forge
+  - defaults
+
+dependencies:
+  # --- core runtime -----------------------------------------------------
+  - python=3.10
+  - pip
+
+  # --- scientific python ------------------------------------------------
+  - numpy=1.26
+  - pandas=2.2
+  - scipy=1.13
+  - matplotlib=3.9
+  - seaborn=0.13
+  - openpyxl=3.1          # REQUIRED to read the .xlsx plate-reader data
+  - scikit-learn
+  - biotite=1.0           # TM-score / lDDT in advanced_structure_prediction_tools
+  - requests=2.32         # ligand-code lookups against the RCSB API
+  - attrs=23.1            # SimplePdbLib
+
+  # --- notebooks --------------------------------------------------------
+  - jupyterlab=4.2
+  - ipykernel=6.28
+  - nbformat=5.10
+  - ipywidgets
+
+  # --- deep learning (CUDA 12.1) ---------------------------------------
+  # Drop/replace this block for a CPU-only install; see Environment/README.md.
+  - pytorch=2.3.1
+  - torchvision=0.18.1
+  - torchaudio=2.3.1
+  - pytorch-cuda=12.1
+  - dgl=2.4.0.th23.cu121
+  - e3nn=0.5.1
+  - jax=0.4.27
+  - jaxlib=0.4.23
+  - tensorflow=2.16.1     # used by SuperFold / OpenFold weights loading
+
+  # --- structural biology & cheminformatics ----------------------------
+  - pyrosetta=2024.39     # licensed; see note above
+  - biopython=1.84
+  - rdkit=2024.03
+  - openbabel=3.1         # XYZ -> PDB theozyme conversion
+  - openmm=8.1
+  - fpocket=4.2           # pocket detection, invoked by Scripts/design_filtering/
+  - pymol-open-source=3.1 # optional: for viewing outputs; no code here runs it
+
+  # --- pipeline plumbing ------------------------------------------------
+  - hydra-core=1.3
+  - omegaconf=2.3
+  - ml-collections=0.1
+  - opt_einsum=3.3
+  - assertpy=1.1
+  - deepdiff=7.0
+  - icecream=2.1
+  - fire=0.7
+  - tqdm=4.66
+
+  - pip:
+      - cython==3.0.*
+      - prody @ git+https://github.com/prody/ProDy
+      - se3-transformer @ git+https://github.com/NVIDIA/DeepLearningExamples.git#subdirectory=DGLPyTorch/DrugDiscovery/SE3Transformer

@@ -1,0 +1,21 @@
+{
+  "i": {
+    "input": "/path/to/Metallohydrolase_Enzyme_Design/RFdiffusion3_Tutorial/theozymes/from_PDB_structure/rfdiffusion3_inputs/pdb_00001qji__theozyme_HEHH__lig_TSA_ORI_12.pdb",
+    "dialect": 2,
+    "redesign_motif_sidechains": false,
+    "ligand": "TSA",
+    "length": "170-190",
+    "unindex": "A92,A93,A96,A102",
+    "select_fixed_atoms": {
+      "A92": "NE2,CD2,CG,CB,ND1,CE1",
+      "A93": "OE1,OE2,CD,CG",
+      "A96": "NE2,CD2,CG,CB,ND1,CE1",
+      "A102": "NE2,CD2,CG,CB,ND1,CE1"
+    },
+    "ori_token": [
+      18.2,
+      24.319,
+      20.579
+    ]
+  }
+}

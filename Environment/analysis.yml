@@ -1,0 +1,34 @@
+# =============================================================================
+#  zinc_hydro_analysis -- WET LAB ANALYSIS ONLY
+# =============================================================================
+#
+#  Everything needed to run Manuscript_Data/*/wetlab_data_analysis.ipynb and
+#  nothing else. No CUDA, no PyTorch, no PyRosetta, no license required.
+#  Installs in under a minute on any platform (linux-64, osx-64, osx-arm64,
+#  win-64).
+#
+#      conda env create -f Environment/analysis.yml
+#      conda activate zinc_hydro_analysis
+#      python -m ipykernel install --user --name=zinc_hydro_analysis
+#
+#  Prefer pip/uv? Use Environment/requirements-analysis.txt instead.
+#
+#  If you also want to run the DESIGN pipelines (RFdiffusion2/3, PyRosetta,
+#  AF2), you need the full environment: Environment/zinc_hydro.yml
+# =============================================================================
+
+name: zinc_hydro_analysis
+
+channels:
+  - conda-forge
+
+dependencies:
+  - python>=3.10,<3.13
+  - numpy>=1.26
+  - pandas>=2.2
+  - scipy>=1.13
+  - matplotlib>=3.9
+  - seaborn>=0.13
+  - openpyxl>=3.1         # REQUIRED: 30 of the 41 raw data files are .xlsx
+  - jupyterlab>=4.2
+  - ipykernel>=6.28

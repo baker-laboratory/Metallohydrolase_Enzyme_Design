@@ -1,0 +1,144 @@
+### --- BLOCK 1 START --- ###
+VARIABLE_CST::BEGIN
+# YYEB199_HISA93
+CST::BEGIN
+
+  TEMPLATE::   ATOM_MAP: 1 atom_name: ZN1 O3 P1
+  TEMPLATE::   ATOM_MAP: 1 residue3:  YYE
+
+  TEMPLATE::   ATOM_MAP: 2 atom_type: Nhis aroC Ntrp
+  TEMPLATE::   ATOM_MAP: 2 residue3:  HIS
+
+  CONSTRAINT:: distanceAB:    2.1142    0.0200   150     1   1
+  CONSTRAINT::    angle_A:  121.84      2.50      50   360.  1
+  CONSTRAINT::    angle_B:  127.27      2.50      50   360.  1
+  CONSTRAINT::  torsion_A: -169.22      2.50      50   360.  1
+  CONSTRAINT:: torsion_AB:   49.69      2.50      50   360.  1
+  CONSTRAINT::  torsion_B: -170.00      2.50      50   360.  1
+
+  ALGORITHM_INFO:: match
+   MAX_DUNBRACK_ENERGY 50.0
+  ALGORITHM_INFO::END
+CST::END
+VARIABLE_CST::END
+
+### --- BLOCK 2 START --- ###
+VARIABLE_CST::BEGIN
+# YYEB199_HISA89
+CST::BEGIN
+
+  TEMPLATE::   ATOM_MAP: 1 atom_name: ZN1 O3 P1
+  TEMPLATE::   ATOM_MAP: 1 residue3:  YYE
+
+  TEMPLATE::   ATOM_MAP: 2 atom_type: Nhis aroC Ntrp
+  TEMPLATE::   ATOM_MAP: 2 residue3:  HIS
+
+  CONSTRAINT:: distanceAB:    2.0548    0.0200   150     1   1
+  CONSTRAINT::    angle_A:  122.40      2.50      50   360.  1
+  CONSTRAINT::    angle_B:  131.97      2.50      50   360.  1
+  CONSTRAINT::  torsion_A:   20.31      2.50      50   360.  1
+  CONSTRAINT:: torsion_AB:  -81.65      2.50      50   360.  1
+  CONSTRAINT::  torsion_B: -179.54      2.50      50   360.  1
+
+  ALGORITHM_INFO:: match
+   MAX_DUNBRACK_ENERGY 50.0
+  ALGORITHM_INFO::END
+CST::END
+VARIABLE_CST::END
+
+### --- BLOCK 3 START --- ###
+VARIABLE_CST::BEGIN
+# YYEB199_LYSA16
+CST::BEGIN
+
+  TEMPLATE::   ATOM_MAP: 1 atom_name: C1 O1 ZN1
+  TEMPLATE::   ATOM_MAP: 1 residue3:  YYE
+
+  TEMPLATE::   ATOM_MAP: 2 atom_name: NZ CE CD
+  TEMPLATE::   ATOM_MAP: 2 residue3:  LYS
+
+  CONSTRAINT:: distanceAB:    1.3811    0.0200   150     1   1
+  CONSTRAINT::    angle_A:  115.52      2.50      50   360.  1
+  CONSTRAINT::    angle_B:  125.75      2.50      50   360.  1
+  CONSTRAINT::  torsion_A: -165.87      2.50      50   360.  1
+  CONSTRAINT:: torsion_AB: -159.37      2.50      50   360.  1
+  CONSTRAINT::  torsion_B: -131.47      2.50      50   360.  1
+
+  ALGORITHM_INFO:: match
+   MAX_DUNBRACK_ENERGY 50.0
+  ALGORITHM_INFO::END
+CST::END
+VARIABLE_CST::END
+
+### --- BLOCK 4 START --- ###
+VARIABLE_CST::BEGIN
+# YYEB199_HISA170
+CST::BEGIN
+
+  TEMPLATE::   ATOM_MAP: 1 atom_name: ZN2 O3 P1
+  TEMPLATE::   ATOM_MAP: 1 residue3:  YYE
+
+  TEMPLATE::   ATOM_MAP: 2 atom_type: Nhis aroC Ntrp
+  TEMPLATE::   ATOM_MAP: 2 residue3:  HIS
+
+  CONSTRAINT:: distanceAB:    2.0314    0.0200   150     1   1
+  CONSTRAINT::    angle_A:  150.99      2.50      50   360.  1
+  CONSTRAINT::    angle_B:  130.48      2.50      50   360.  1
+  CONSTRAINT::  torsion_A:    2.08      2.50      50   360.  1
+  CONSTRAINT:: torsion_AB:   -7.07      2.50      50   360.  1
+  CONSTRAINT::  torsion_B:  167.82      2.50      50   360.  1
+
+  ALGORITHM_INFO:: match
+   MAX_DUNBRACK_ENERGY 50.0
+  ALGORITHM_INFO::END
+CST::END
+VARIABLE_CST::END
+
+### --- BLOCK 5 START --- ###
+VARIABLE_CST::BEGIN
+# YYEB199_HISA133
+CST::BEGIN
+
+  TEMPLATE::   ATOM_MAP: 1 atom_name: ZN2 O3 P1
+  TEMPLATE::   ATOM_MAP: 1 residue3:  YYE
+
+  TEMPLATE::   ATOM_MAP: 2 atom_type: Nhis aroC Ntrp
+  TEMPLATE::   ATOM_MAP: 2 residue3:  HIS
+
+  CONSTRAINT:: distanceAB:    1.9903    0.0200   150     1   1
+  CONSTRAINT::    angle_A:   95.53      2.50      50   360.  1
+  CONSTRAINT::    angle_B:  129.64      2.50      50   360.  1
+  CONSTRAINT::  torsion_A: -120.09      2.50      50   360.  1
+  CONSTRAINT:: torsion_AB:  -11.19      2.50      50   360.  1
+  CONSTRAINT::  torsion_B: -179.89      2.50      50   360.  1
+
+  ALGORITHM_INFO:: match
+   MAX_DUNBRACK_ENERGY 50.0
+  ALGORITHM_INFO::END
+CST::END
+VARIABLE_CST::END
+
+### --- BLOCK 6 START --- ###
+VARIABLE_CST::BEGIN
+# YYEB199_GLUA92
+CST::BEGIN
+
+  TEMPLATE::   ATOM_MAP: 1 atom_name: O3 P1 O7
+  TEMPLATE::   ATOM_MAP: 1 residue3:  YYE
+
+  TEMPLATE::   ATOM_MAP: 2 atom_type: OOC COO CH2
+  TEMPLATE::   ATOM_MAP: 2 residue3:  GLU
+
+  CONSTRAINT:: distanceAB:    2.9041    0.0200   150     1   1
+  CONSTRAINT::    angle_A:  116.21      2.50      50   360.  1
+  CONSTRAINT::    angle_B:   96.30      2.50      50   360.  1
+  CONSTRAINT::  torsion_A:   -2.22      2.50      50   360.  1
+  CONSTRAINT:: torsion_AB: -123.94      2.50      50   360.  1
+  CONSTRAINT::  torsion_B: -178.27      2.50      50   360.  1
+
+  ALGORITHM_INFO:: match
+   MAX_DUNBRACK_ENERGY 50.0
+  ALGORITHM_INFO::END
+CST::END
+VARIABLE_CST::END
+

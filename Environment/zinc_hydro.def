@@ -1,0 +1,76 @@
+%help
+    zinc_hydro -- Apptainer/Singularity image for the Metallohydrolase enzyme
+    design repository.
+
+    This image REPLACES the lab-internal containers that older versions of the
+    tutorials referred to by absolute path (crispy.sif, allmighty.sif,
+    240125_shifty.sif). Those paths only ever existed inside the Baker lab
+    filesystem and are gone even there. Build this instead -- it is
+    self-contained and reproducible anywhere Apptainer runs.
+
+    BUILD (needs --fakeroot or root; takes ~20-40 min and ~12 GB):
+
+        cd Environment
+        apptainer build zinc_hydro.sif zinc_hydro.def
+
+    USE -- the runscript is the environment's python, so the image can be used
+    directly wherever a python interpreter is expected:
+
+        ./zinc_hydro.sif some_script.py --flag value
+        apptainer exec --nv zinc_hydro.sif python some_script.py
+
+    POINT THE REPO AT IT -- every script and notebook in this repository reads
+    the same two environment variables, so exporting them once is enough:
+
+        export ZINC_HYDRO_SIF=/abs/path/to/zinc_hydro.sif
+        export ZINC_HYDRO_OBABEL=obabel        # optional; auto-detected
+
+    Without ZINC_HYDRO_SIF set, everything falls back to the python interpreter
+    that is currently active, which is the right answer if you installed the
+    conda environment directly. You do NOT need this container.
+
+    GPU: pass --nv to apptainer for CUDA work (RFdiffusion2/3 inference).
+    The theozyme XYZ->PDB conversion and all scoring are CPU-only.
+
+%labels
+    Name        zinc_hydro
+    Description Metallohydrolase enzyme design environment (RFdiffusion2/3, PyRosetta, AF2)
+    Repository  https://github.com/baker-laboratory/Metallohydrolase_Enzyme_Design
+
+Bootstrap: docker
+From: condaforge/miniforge3:24.9.2-0
+
+%files
+    zinc_hydro.yml /opt/zinc_hydro.yml
+
+%post
+    set -eux
+
+    apt-get update -y
+    apt-get install -y --no-install-recommends \
+        build-essential git wget ca-certificates aria2
+    rm -rf /var/lib/apt/lists/*
+
+    # Solve into the base prefix so no `conda activate` is needed at runtime.
+    conda config --set always_yes yes --set changeps1 no
+    mamba env update -n base -f /opt/zinc_hydro.yml
+    mamba clean -afy
+
+    # Trim the caches that dominate image size.
+    find /opt/conda -follow -type f -name '*.a'      -delete || true
+    find /opt/conda -follow -type f -name '*.pyc'    -delete || true
+    rm -rf /opt/conda/pkgs
+
+%environment
+    export PATH=/opt/conda/bin:$PATH
+    export PYTHONNOUSERSITE=1
+    # Keep a container run from silently picking up the host's site-packages.
+    export PYTHONPATH=
+
+%runscript
+    exec /opt/conda/bin/python "$@"
+
+%test
+    /opt/conda/bin/python -c "import numpy, pandas, scipy, openpyxl; print('scientific stack OK')"
+    /opt/conda/bin/python -c "import pyrosetta; print('pyrosetta OK')"
+    command -v obabel >/dev/null && echo "openbabel OK"

@@ -1,0 +1,52 @@
+# Python bytecode
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Jupyter
+.ipynb_checkpoints/
+
+# OS / editor cruft
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+.idea/
+.vscode/
+
+# Environments
+.env
+.envrc
+
+# Build / dist artifacts
+*.egg-info/
+build/
+dist/
+
+# Generated figures. The 150-dpi PNGs ARE committed -- they are what renders on
+# GitHub and what a reader sees without running anything. Vector exports are
+# opt-in (SAVE_EPS=True in the analysis notebook) and stay local, since they are
+# large and regenerable.
+Manuscript_Data/*/wetlab_data_plots/*.eps
+Manuscript_Data/*/wetlab_data_plots/*.svg
+Manuscript_Data/*/wetlab_data_plots/*.pdf
+
+# Retired: figures used to be written here. Everything now goes to
+# wetlab_data_plots/. See Manuscript_Data/README.md.
+pics/
+
+# Model weights: downloaded per user, never committed. Keep them here, outside
+# the submodules, so the submodules stay clean.
+#   LigandMPNN: bash Software/fastmpnndesign/lib/LigandMPNN/get_model_params.sh model_weights/
+model_weights/
+*.pt
+*.ckpt
+
+# NFS silly-rename temp files, left behind when a file is deleted while open
+.nfs*
+
+# Windows download artifacts (alternate data streams) and office lock files
+*:Zone.Identifier
+*Zone.Identifier
+.~lock.*#

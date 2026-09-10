@@ -1,0 +1,103 @@
+# =============================================================================
+#  pixi manifest -- lockfile-based, cross-platform installs without conda
+# =============================================================================
+#
+#  pixi (https://pixi.sh) resolves conda packages and writes a pixi.lock that
+#  pins the exact solve for every listed platform. Unlike a conda env export,
+#  that lock is portable across machines and reproducible over time.
+#
+#  INSTALL PIXI:      curl -fsSL https://pixi.sh/install.sh | bash
+#
+#  ANALYSIS ONLY (wet lab notebook -- fast, no GPU, works on macOS/Windows):
+#
+#      cd Environment
+#      pixi run -e analysis jupyter lab
+#
+#  FULL DESIGN ENVIRONMENT (linux-64 only; PyRosetta needs a license):
+#
+#      cd Environment
+#      pixi run -e design python -c "import pyrosetta; print('ok')"
+#
+#  REGENERATE THE LOCK after editing this file:
+#
+#      pixi install -e analysis && pixi install -e design
+#
+#  Commit the resulting pixi.lock -- that file is the reproducible artifact.
+#  This manifest ships without one so the first `pixi install` solves against
+#  current channels rather than a stale pin.
+# =============================================================================
+
+[project]
+name = "zinc-hydro"
+version = "0.2.0"
+description = "Metallohydrolase enzyme design environment"
+authors = ["Baker Laboratory"]
+channels = ["conda-forge"]
+platforms = ["linux-64", "osx-64", "osx-arm64", "win-64"]
+
+# --- shared: the wet lab analysis stack ----------------------------------
+[dependencies]
+python = ">=3.10,<3.13"
+numpy = ">=1.26"
+pandas = ">=2.2"
+scipy = ">=1.13"
+matplotlib = ">=3.9"
+seaborn = ">=0.13"
+openpyxl = ">=3.1"
+jupyterlab = ">=4.2"
+ipykernel = ">=6.28"
+
+[tasks]
+lab = "jupyter lab"
+
+# --- feature: full design stack (linux-64 + CUDA only) -------------------
+[feature.design]
+channels = [
+    "pytorch",
+    "nvidia",
+    "https://conda.rosettacommons.org",
+    "dglteam/label/th23_cu121",
+    "schrodinger",
+    "conda-forge",
+]
+platforms = ["linux-64"]
+
+[feature.design.dependencies]
+python = "3.10.*"
+pytorch = "2.3.1.*"
+torchvision = "0.18.1.*"
+torchaudio = "2.3.1.*"
+pytorch-cuda = "12.1.*"
+dgl = "2.4.0.th23.cu121"
+e3nn = "0.5.1.*"
+jax = "0.4.27.*"
+jaxlib = "0.4.23.*"
+tensorflow = "2.16.1.*"
+pyrosetta = "2024.39.*"
+biopython = "1.84.*"
+rdkit = "2024.03.*"
+openbabel = "3.1.*"
+openmm = "8.1.*"
+fpocket = "4.2.*"
+biotite = "1.0.*"
+requests = "2.32.*"
+attrs = "23.1.*"
+pymol-open-source = "3.1.*"
+hydra-core = "1.3.*"
+omegaconf = "2.3.*"
+ml-collections = "0.1.*"
+opt_einsum = "3.3.*"
+assertpy = "1.1.*"
+deepdiff = "7.0.*"
+icecream = "2.1.*"
+fire = "0.7.*"
+tqdm = "4.66.*"
+
+[feature.design.pypi-dependencies]
+cython = ">=3.0,<3.1"
+prody = { git = "https://github.com/prody/ProDy" }
+se3-transformer = { git = "https://github.com/NVIDIA/DeepLearningExamples.git", subdirectory = "DGLPyTorch/DrugDiscovery/SE3Transformer" }
+
+[environments]
+analysis = { solve-group = "analysis" }
+design = { features = ["design"], solve-group = "design" }

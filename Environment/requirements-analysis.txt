@@ -1,0 +1,24 @@
+# Wet lab analysis dependencies (pip / uv equivalent of Environment/analysis.yml).
+#
+#   uv venv .venv --python 3.11
+#   source .venv/bin/activate
+#   uv pip install -r Environment/requirements-analysis.txt
+#   python -m ipykernel install --user --name=zinc_hydro_analysis
+#
+# or with plain pip:
+#
+#   python -m venv .venv && source .venv/bin/activate
+#   pip install -r Environment/requirements-analysis.txt
+#
+# This covers Manuscript_Data/*/wetlab_data_analysis.ipynb only. The design
+# pipelines need the full conda environment (Environment/zinc_hydro.yml),
+# because PyRosetta and the CUDA stack are not pip-installable from PyPI.
+
+numpy>=1.26,<3
+pandas>=2.2,<3
+scipy>=1.13
+matplotlib>=3.9
+seaborn>=0.13
+openpyxl>=3.1
+jupyterlab>=4.2
+ipykernel>=6.28
