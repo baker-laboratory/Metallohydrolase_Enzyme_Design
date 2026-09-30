@@ -56,7 +56,7 @@ def run_kinetics_PTE_RFd3(name, *, data_path, enzyme_uM, enzyme_cols, bg_cols,
             fig.text(.43, .93, name, ha="center", fontsize=9,
                      color=paper.famcol(name)[1], fontweight="bold")
             fig.text(.43, .76, "\n".join(lines), ha="center", fontsize=6.5)
-            paper.substrate_legend(fig, (.79, .99))
+            _standalone_legend(fig, paper)
             if plot_path:
                 fig.savefig(plot_path, dpi=150, bbox_inches="tight")
                 if save_eps:
@@ -65,6 +65,28 @@ def run_kinetics_PTE_RFd3(name, *, data_path, enzyme_uM, enzyme_cols, bg_cols,
                 plt.show()
             plt.close(fig)
     return mm
+
+
+def _standalone_legend(fig, paper):
+    """Stack legends by their rendered height on a short two-panel figure."""
+    from matplotlib.lines import Line2D
+    from matplotlib.patches import Patch
+    substrate = fig.legend(
+        [Line2D([], [], color=paper.RAMP[c], lw=1.8) for c in paper.CONC],
+        [f"{c:,.0f}" for c in paper.CONC], title="[Paraoxon] (µM)",
+        loc="upper left", bbox_to_anchor=(.79, .99), frameon=False,
+        fontsize=6, title_fontsize=6.5, handlelength=1.3, labelspacing=.30)
+    substrate._legend_box.align = "left"
+    fig.canvas.draw()
+    box = substrate.get_window_extent(fig.canvas.get_renderer()).transformed(
+        fig.transFigure.inverted())
+    window = fig.legend(
+        [Patch(facecolor=paper.GRAY, alpha=.22, lw=0)],
+        ["outside the\ninitial-velocity\nfit window"],
+        loc="upper left", bbox_to_anchor=(.79, box.y0-.035), frameon=False,
+        fontsize=6, handlelength=1.3, handleheight=1.1)
+    window._legend_box.align = "left"
+    return substrate, window
 
 
 def result_row(name, mm, condition, kuncat=None):
@@ -95,7 +117,7 @@ def result_row(name, mm, condition, kuncat=None):
     return r
 
 
-def validate_reference(fits, kuncat, output_dir):
+def validate_reference(fits, kuncat, output_dir=None):
     """Fail on differences exceeding saved precision / numerical solver drift.
 
     The paper workbook contains rounded fit numbers; the no-bicarbonate entry
@@ -167,8 +189,9 @@ def validate_reference(fits, kuncat, output_dir):
                            tolerance=0,passed=r['n']==expected))
     result=pd.DataFrame(checks)
     result['basis']=result['basis'].fillna('raw-plate refit')
-    out=Path(output_dir);out.mkdir(parents=True,exist_ok=True)
-    result.to_csv(out/"paper_reproduction_validation.csv",index=False)
+    if output_dir is not None:
+        out=Path(output_dir);out.mkdir(parents=True,exist_ok=True)
+        result.to_csv(out/"paper_reproduction_validation.csv",index=False)
     if not result.passed.all():
         raise AssertionError("Paper numerical validation failed:\n"+result[~result.passed].to_string(index=False))
     print(f"Paper reference: {len(result)} numerical checks passed at stored precision.")
@@ -183,8 +206,7 @@ def reproduce_paper_figures(notebook_namespace):
     the reference. All source data come from the deposited dataset.
     """
     paper=paper_style()
-    validate_reference(notebook_namespace["FITS"],notebook_namespace["KUNCAT"],
-                       notebook_namespace["wetlab_data_plots_dir"])
+    validate_reference(notebook_namespace["FITS"],notebook_namespace["KUNCAT"])
     with plt.rc_context(paper.STYLE):
         paper.build_all()
         from rfd3_figures import side_ZAPP1_tagless
@@ -207,55 +229,3 @@ def reproduce_paper_figures(notebook_namespace):
         ns["BACKGROUND_TRACE_FLAT"]=tuple(.55*np.array(to_rgb(ns["BACKGROUND_TRACE_COLOR"]))+.45)
         panel_g.build(ns)
     return Path(paper.FIGDIR)
-
-
-def update_tagless_supplement(workbook_path, mm, kuncat):
-    """Append/refresh the labeled comparison while preserving the 18 paper rows."""
-    from copy import copy
-    import openpyxl
-    book=openpyxl.load_workbook(workbook_path)
-    ws=book['kinetics']; headers=[c.value for c in ws[1]]
-    tagged={c.value:ws.cell(2,c.column).value for c in ws[1]}
-    f=result_row('ZAPP-1 tagless',mm,'+25 mM NaHCO3',kuncat)
-    row={'design':'ZAPP-1 tagless','design_id':tagged['design_id'],
-         'class':'additional tagless comparison','scaffold':tagged['scaffold'],
-         'condition':'+25 mM NaHCO3','[E]0 (uM)':23.4,'[E]0 sd (uM)':23.4*.06,
-         'kcat (s^-1)':f['kcat (reported)'],'Km (mM)':f['Km (reported, mM)'],
-         'kcat/Km (M^-1 s^-1)':f['kcat/Km (reported)'],
-         'kcat/kuncat (dimensionless)':f['kcat/kuncat (reported)'],
-         '(kcat/Km)/kuncat (M^-1)':f['(kcat/Km)/kuncat (reported)'],
-         'reliability':'Additional tagless comparison; high-[S] detector nonlinearity; see reproduction_notes',
-         'kcat (s^-1), raw number':f['kcat (s-1)'],
-         'kcat sd (s^-1), raw number':f['kcat sd (total)'],
-         'Km (uM), raw number':f['Km (uM)'],
-         'Km sd (uM), raw number':f['Km sd'],
-         'kcat/Km (M^-1 s^-1), raw number':f['kcat/Km (M-1 s-1)'],
-         'kcat/Km sd (M^-1 s^-1), raw number':f['kcat/Km sd (total)']}
-    idx=next((i for i in range(2,ws.max_row+1) if ws.cell(i,1).value=='ZAPP-1 tagless'),ws.max_row+1)
-    for col,key in enumerate(headers,1):
-        dest=ws.cell(idx,col,row.get(key));dest._style=copy(ws.cell(2,col)._style)
-        dest.alignment=copy(ws.cell(2,col).alignment)
-    ws.auto_filter.ref=ws.dimensions
-    for table in ws.tables.values():
-        table.ref=ws.dimensions
-    if 'reproduction_notes' in book:
-        del book['reproduction_notes']
-    notes=book.create_sheet('reproduction_notes')
-    for values in [
-        ('item','detail'),
-        ('Tagless provenance','Additional comparison from paraoxon_kinetics_FOR_PAPER.ipynb section 11; intentionally outside its original 18-row table and paper figure set.'),
-        ('Tagless assay','260731_p2E3 plate; rows A-F; enzyme columns 9-11; background column 12; 23.4 uM enzyme; 0.3-9.6 mM paraoxon; +25 mM NaHCO3; 300-20000 s (clipped to acquired times).'),
-        ('Tagless protein','Same designed ZAPP-1 sequence; C-terminal Strep-tag II omitted. Not an additional ordered design. No tagless cloning DNA sequence is inferred.'),
-        ('Tagless uncertainty','Fit SE combined with 6% assumed enzyme-concentration uncertainty and 0.135% calibration uncertainty; shared calibration cancels in kcat/kuncat and (kcat/Km)/kuncat.'),
-        ('Tagless detector check','High-[S] traces exceed 2.5 AU. Original side analysis reruns a shorter window; see SIDE__ZAPP1_tagless and notebook output. Do not interpret tiny tagged/tagless differences as a demonstrated effect.'),
-        ('Paper values','The original 18 kinetics rows and every pre-existing sheet value are unchanged. Raw refits and validation live in wetlab_data_plots/; archived paraoxon_kinetics_ALL_DATA.xlsx retains original rounding and provenance.'),
-        ('Main panel E','The historical PDF uses the bicarbonate calibration for no-bicarbonate points, unlike its fitted curve. Both the exact historical reproduction and a separately labeled condition-matched correction are generated.'),
-        ('Mutant labels','The archived source workbook describes MUT1-6 -> H93A, H89A, K16A, H170A, H133A, E92A as inferred from motif order; direct sequencing confirmation is not supplied with that workbook.'),
-    ]:notes.append(values)
-    notes.column_dimensions['A'].width=28;notes.column_dimensions['B'].width=115
-    for c in notes[1]:c._style=copy(book['overview'].cell(1,min(c.column,2))._style)
-    from openpyxl.styles import Alignment
-    for row_cells in notes.iter_rows(min_row=2):
-        row_cells[1].alignment=Alignment(wrap_text=True,vertical='top')
-    book.save(workbook_path)
-    return f

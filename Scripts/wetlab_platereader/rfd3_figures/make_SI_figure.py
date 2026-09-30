@@ -1,8 +1,4 @@
-# Adapted from FOR_RFdiffusion3_paper/scripts/make_SI_figure.py (2026-09-29).
-# Paper geometry, colors and labels are retained; paths resolve inside this repository.
-# Retain italic descriptive subscripts from the supplied PDF (the later source
-# script changed these to roman without regenerating this particular PDF).
-"""SI figure: kuncat determination (A,B) + rate enhancement and proficiency (C,D)."""
+"""Plot the uncatalyzed-rate measurements and catalytic rate ratios."""
 import sys
 import os
 import numpy as np, pandas as pd, matplotlib

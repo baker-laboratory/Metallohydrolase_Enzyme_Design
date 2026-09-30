@@ -1,41 +1,7 @@
-# Adapted from FOR_RFdiffusion3_paper/scripts/make_panelE_bicarbonate.py (2026-09-29).
-# Paper geometry, colors and labels are retained; paths resolve inside this repository.
-"""Figure 4 panel E (ZAPP-1 +/- bicarbonate) regenerated with live text.
+"""Render Figure 4E with the reference layout and optional condition-matched points.
 
-WHY THIS EXISTS
-The panel E currently in enzyme_experiments.svg has its parameter annotations as
-OUTLINED TEXT -- "Bicarbonate" and "uncat" appear zero times in the 12 MB of SVG
-source, and none of the 8 embedded rasters is this panel. So the numbers cannot
-be corrected by editing either the SVG or the PDF. The nearest live-text source,
-enzyme_experiments_full.svg (2026-08-07), is an older three-line revision with no
-k_cat/k_uncat row, and the generating cell (enzyme_experiments.ipynb cell 7) never
-drew the annotations at all and is still on a 0-5 mM axis.
-
-This script rebuilds the panel from the same raw plate-reader files, with the
-annotations as real text objects, so the next correction is an edit rather than a
-retype.
-
-WHAT CHANGED, AND WHY
-The printed figure quoted the FIT-ONLY standard error at 1-2 significant figures.
-The master xlsx, Table S1, and the SI Methods sentence all use the TOTAL error:
-regression SE combined in quadrature with 6% on [E]_o and the calibration, then
-rounded UP to one significant figure with the value truncated at that digit. Six
-of the eight numbers differed. Every value below is computed here from the xlsx
-raw columns using that rule, so the panel and Table S1 cannot drift apart again.
-
-    quantity              was (figure)        now (xlsx / Table S1)
-    +bic K_M              7.8 +/- 1.8 mM      8 +/- 2 mM
-    +bic k_cat            0.015 +/- 0.002     0.015 +/- 0.003
-    +bic k_cat/K_M        2.0 +/- 0.5         2.0 +/- 0.6
-    +bic k_cat/k_uncat    (3.1 +/- 0.9)e5     (3 +/- 1)e5
-    -bic K_M              2.6 +/- 0.7 mM      2.6 +/- 0.7 mM   (unchanged)
-    -bic k_cat            0.0013 +/- 0.0001   0.0013 +/- 0.0002
-    -bic k_cat/K_M        0.52 +/- 0.14       0.5 +/- 0.2
-    -bic k_cat/k_uncat    (2.5 +/- 0.3)e4     (2.5 +/- 0.4)e4
-
-Colors are sampled from the printed figure: markers and the "+ Bicarbonate"
-heading #4fb9af, the minus-condition markers #ffe0ac, its heading #d9962b.
-"""
+The corrected variant uses the no-bicarbonate calibration for that series;
+the default preserves the original figure for comparison."""
 import os, sys, importlib.util
 from math import floor, log10, ceil
 import numpy as np
@@ -81,18 +47,7 @@ def sci(v, e):
 
 
 def param_lines(name):
-    """The four annotation rows, computed from the xlsx raw columns.
-
-    Symbols are set FULLY ITALIC -- k, cat, K, M, uncat -- to match the rest of
-    the manuscript. Note this is not the IUPAC/IUBMB convention, which italicizes
-    only the quantity symbol and sets a descriptive subscript roman
-    (italic k, roman "cat"; italic K, roman "M" for Michaelis). Internal
-    consistency with the other figures and the main text wins here. To switch to
-    the standard later, wrap each subscript in \\mathrm{} in this one function and
-    in scripts/make_SI_tables.py; nothing else needs touching.
-
-    Order is k_cat, then K_M, then the two ratios.
-    """
+    """Return formatted parameter annotations from the reference workbook."""
     r = K.TAB.loc[name]
     return [
         f"$k_\\mathrm{{cat}}$ = {pm(r['kcat (s-1)'], r['kcat sd (total)'])} s$^{{-1}}$",
@@ -133,10 +88,6 @@ def build(figw=3.05, figh=2.05, base=5.6, axfs=None, dropin=None, correct_calibr
         S, v, e = K.mm_points(sp, spu)
         r = K.TAB.loc[name]
         Sf = np.linspace(0, 10.5, 400)
-        # The fit curve carries the series color rather than black. With both
-        # curves black, a black error bar on a black-edged marker sitting on a
-        # black line had nothing to read against. Now black is used for one thing
-        # only -- the error bar -- so it stays visible even at this size.
         ax.plot(Sf, 1e3*r["kcat (s-1)"]*Sf/(r["Km (uM)"]/1000.0 + Sf),
                 color=curve, lw=1.1, zorder=2, solid_capstyle="round")
         # White ring under each marker, so a point on the curve separates from it.
@@ -144,19 +95,6 @@ def build(figw=3.05, figh=2.05, base=5.6, axfs=None, dropin=None, correct_calibr
                 ls="none", zorder=3)
         ax.plot(S/1000.0, v*1e3, "o", ms=3.4, mfc=fill, mec=curve, mew=0.6,
                 ls="none", zorder=4)
-        # Error bars drawn LAST, so nothing occludes them. Thin and uncapped: a
-        # cap is what made this look like a strikethrough before, because the cap
-        # was far wider than the bar was tall.
-        #
-        # Be aware of the geometry. On the printed panel the y-axis spans 0-10
-        # over 94.9 pt, so the SEM of n = 3 gives a FULL bar of 0.03 to 1.59 pt
-        # against a 3.4 pt marker -- at most 47% of the symbol, and for 8 of the
-        # 12 points thinner than the 0.5 pt line used to draw it. Those eight
-        # therefore render as a horizontal dash rather than a vertical bar, and no
-        # choice of linewidth or marker size fixes that: the quantity really is
-        # that small. The caption still needs to say so:
-        #   "Error bars are s.e.m. of n = 3 technical replicates; where not
-        #    visible they are smaller than the symbols."
         ax.errorbar(S/1000.0, v*1e3, yerr=e*1e3, fmt="none", ecolor="black",
                     elinewidth=0.6, capsize=1.6, capthick=0.6, zorder=6)
         ymax = max(ymax, float((v*1e3 + e*1e3).max()))
@@ -175,16 +113,6 @@ def build(figw=3.05, figh=2.05, base=5.6, axfs=None, dropin=None, correct_calibr
     ax.set_xlabel("[Paraoxon] (mM)", fontsize=axfs, labelpad=2)
     ax.set_ylabel("$v$/[E] $\\times$10$^{-3}$ (s$^{-1}\\!$)", fontsize=axfs, labelpad=2)
 
-    # Annotation blocks, placed as in the printed panel: plus-condition upper
-    # left, minus-condition mid right. Each row is its own text object, so a
-    # future correction is a click and a retype rather than a redraw.
-    # Annotation blocks. Each row is placed individually at va="baseline" on a
-    # fixed pitch, NOT stacked at va="top" and NOT joined into one multi-line
-    # string. Both of those give uneven gaps here, because matplotlib measures a
-    # mathtext row by its own extent and a row carrying a superscript
-    # (s$^{-1}$, $\times$10$^{5}$) is taller than one without. That is what
-    # opened the visible gap between the k_cat and K_M rows. Baselines on a
-    # constant pitch are uniform whatever each row contains.
     LEAD = 0.076
     for (name, _, hdr, _, hcol), (x, y) in zip(CONDS, [(0.025, 1.00), (0.470, 0.495)]):
         ax.text(x, y, hdr, transform=ax.transAxes, ha="left", va="top",
@@ -196,11 +124,6 @@ def build(figw=3.05, figh=2.05, base=5.6, axfs=None, dropin=None, correct_calibr
     os.makedirs(OUT, exist_ok=True)
     if dropin:
         px_w, px_h, dpi = dropin
-        # margins copied from the embedded raster so the axes land in register
-        # Axes pinned to the band panels E, F and G now share: top 50.0 mm,
-        # bottom 83.0 mm on the page, i.e. 33.0 mm of plot in all three. The
-        # raster sits at y = 48.90073 mm and is 43.235897 mm tall, so those two
-        # page positions are these fractions of it.
         fig.subplots_adjust(left=0.215, bottom=0.211319, right=0.985, top=0.974576)
         p = os.path.join(OUT, f"{STEM}__dropin.png")
         fig.savefig(p, dpi=dpi, facecolor="white")      # no tight bbox: fixed canvas
@@ -222,29 +145,3 @@ def build(figw=3.05, figh=2.05, base=5.6, axfs=None, dropin=None, correct_calibr
         for line in param_lines(name):
             print("    " + line.replace("$", "").replace("\\times", "x")
                               .replace("^{-1}", "^-1").replace("_", ""))
-
-
-def build_dropin():
-    """Pixel-exact replacement for the raster embedded in enzyme_experiments.svg.
-
-    That panel is <image id="image1-36">, a 1396x1077 PNG placed at
-    x=37.204056 y=48.90073 w=56.042076 h=43.235897 (mm). Rendering to the same
-    1396x1077 canvas with the same axes fractions -- left spine at 0.145 of the
-    width, bottom spine at 0.798 of the height, both measured off the embedded
-    image -- means the swap needs no rescaling and nothing else in the figure
-    moves. preserveAspectRatio="none" on that element would stretch a mismatched
-    canvas, which is why the aspect is matched exactly (1.2962).
-    """
-    global _DROPIN
-    _DROPIN = True
-    px_w, px_h = 1396, 1077
-    in_w = 56.042076/25.4                      # placed size on the page
-    dpi  = px_w/in_w                           # 633 dpi, so text lands at print size
-    fig = build(figw=in_w, figh=px_h/dpi, base=4.9, axfs=7.5,
-                dropin=(px_w, px_h, dpi))
-    return fig
-
-
-if __name__ == "__main__":
-    import sys
-    build_dropin() if "--dropin" in sys.argv else build()

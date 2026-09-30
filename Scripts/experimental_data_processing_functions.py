@@ -708,7 +708,6 @@ def plot_CD_222nm_temperature_interval(file_path, protein_concentration, protein
     axes[1].set_ylabel("deg")
     axes[1].set_xlabel("temperature")
 
-    fig.legend(loc='center left', bbox_to_anchor=(1.0, 0.35))
     plt.tight_layout()
 
     if save:

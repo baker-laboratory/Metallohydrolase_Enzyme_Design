@@ -1,11 +1,7 @@
-# Adapted from FOR_RFdiffusion3_paper/scripts/make_kinetics_SI_figures.py (2026-09-29).
-# Paper geometry, colors and labels are retained; paths resolve inside this repository.
-"""SI kinetics figures: Round 1 (+screen), ZAPP-1 knockouts, Round 2 (+screen).
+"""SI kinetics panels for the RFdiffusion3 phosphotriesterase dataset.
 
-Panel pairs are [progress curves | Michaelis-Menten fit].  Every number annotated on a
-panel is read from paraoxon_kinetics_ALL_DATA.xlsx, so the figures and the table can
-never disagree.  Raw traces are re-parsed from the plate reader files for plotting only.
-"""
+Raw measurements supply the traces; the reference workbook supplies the
+reported parameter annotations and unresolved-fit reporting rules."""
 import os, sys, json, re
 import numpy as np, pandas as pd, matplotlib
 import matplotlib.pyplot as plt
@@ -69,7 +65,7 @@ plt.rcParams.update(STYLE)
 _REGISTRY = json.loads(__import__("pathlib").Path(__file__).with_name("plate_registry.json").read_text())
 def spec(cell, cols_override=None):
     sp = dict(_REGISTRY[str(cell)])
-    sp["path"] = os.path.join(RAW, sp.pop("file"))
+    sp["path"] = os.path.relpath(os.path.join(RAW, sp.pop("file")))
     if cols_override is not None:
         sp["cols"] = cols_override
     return sp
@@ -147,10 +143,6 @@ def draw_progress(ax, sp, spu, tmax_min=None):
     ylo, yhi = 0.0, 0.0
     for c, r in zip(CONC, list("ABCDEF")):
         y = np.column_stack([piv[f"{r}{k}"].to_numpy(float) for k in sp["cols"]])/spu
-        # Baseline = each well's minimum up to the start of the fit window.  For a
-        # clean monotonic well that is simply its t=0 read, so product starts at zero;
-        # for a well whose first reads are a bubble (p1D9 C7: 0.914 then 0.209) it
-        # returns the true baseline instead of the artifact.
         y = y - np.nanmin(y[:i0+1], axis=0)
         mu = np.nanmean(y, 1); sd = np.nanstd(y, 1, ddof=1)/np.sqrt(y.shape[1])
         tt = t/60.0

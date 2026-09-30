@@ -7,6 +7,20 @@ __pycache__/
 # Jupyter
 .ipynb_checkpoints/
 
+# Local working notes and development-only manuscript records
+.private/
+private_notes/
+Manuscript_Data/*/structure_preparation/
+Manuscript_Data/*/supplemental_data/notebook_validation.json
+Manuscript_Data/*/supplemental_data/model_sequence_audit.json
+Manuscript_Data/*/supplemental_data/model_sequence_differences.csv
+Manuscript_Data/*/supplemental_data/raw_data_manifest.csv
+Manuscript_Data/*/supplemental_data/source_provenance.json
+Manuscript_Data/*/supplemental_data/validation_summary.json
+Manuscript_Data/*/supplemental_data/reproduction_sources.json
+Manuscript_Data/*/wetlab_data_plots/paper_reproduction_validation.csv
+Manuscript_Data/*/wetlab_data_plots/paper_figures/figure_validation.json
+
 # OS / editor cruft
 .DS_Store
 Thumbs.db

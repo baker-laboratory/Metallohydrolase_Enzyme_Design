@@ -1,46 +1,4 @@
-# Adapted from FOR_RFdiffusion3_paper/scripts/make_fig4_panels_FI.py (2026-09-29).
-# Paper geometry, colors and labels are retained; paths resolve inside this repository.
-"""Figure 4 panels F and I, rebuilt with the standard symbol convention.
-
-WHY THIS EXISTS
-Both panels set the whole symbol in italic -- "k_cat/K_M" comes out as italic k,
-italic cat, italic K, italic M -- because they were drawn with matplotlib
-mathtext as $k_{cat}/K_M$, which italicizes everything inside math mode. The
-IUPAC/IUBMB convention, and what the SI tables and captions already use, is an
-italic quantity symbol with a roman descriptive subscript: italic k with roman
-"cat", italic K with roman "M". This rebuild changes that and nothing else.
-
-    was   $k_{cat}/K_M$      k, cat, K, M all italic
-    now   $k_\\mathrm{cat}/K_\\mathrm{M}$   only k and K italic
-
-Panel E was already correct (see make_panelE_bicarbonate.py, param_lines).
-
-WHAT IS REPRODUCED, AND HOW FAITHFULLY
-Both panels are embedded rasters in enzyme_experiments.svg -- panel F is
-image1-35 (1002x852 px placed at 52.166553 x 44.357189 mm) and panel I is
-image1-270 (1152x1452 px at 48.598057 x 61.253792 mm) -- so, as with panel E,
-the text is pixels and has to be replaced rather than retyped. Geometry, type
-sizes, colors and line weights below were measured off those two rasters at
-their placed scale, so a --dropin render lands in register and nothing else in
-the figure moves:
-
-    panel F   axes 0.2266-0.9721 x 0.2124-0.8967 of the canvas, 7.5 pt type,
-              bar height 0.8, bar edge 0.4 pt, spine 0.75 pt, ticks 3/1.8 pt
-    panel I   axes 0.2127-0.9757, top 0.6811-0.9807, bottom 0.1832-0.4828,
-              5.7 pt type, bar width 0.75, same edge and spine weights
-
-Values come from paraoxon_kinetics_ALL_DATA.xlsx, the same source as Table S1
-and Table S2, so the panels cannot drift from the tables. Both panels already
-carried the total error (fit SE combined with 6% on [E]_o and the calibration),
-and every value reproduced here matches what is printed. H170A is the one
-special case: its Michaelis-Menten fit is unconstrained (K_M 27x the highest
-[S]), so the table and the printed panel both use the first-order chord
-estimate, 0.002 +/- 0.001, and so does this rebuild.
-
-    python scripts/make_fig4_panels_FI.py            # standalone pdf/svg/png
-    python scripts/make_fig4_panels_FI.py --dropin   # + swap-in PNGs at raster size
-    python scripts/make_fig4_panels_FI.py --check    # measure the dropins vs source
-"""
+"""Render Figure 4F mutant efficiencies and Figure 4I design kinetics."""
 import importlib.util
 import os
 import sys
@@ -74,10 +32,6 @@ SPLIT = 3.5                      # the round 1 / round 2 divider sits here
 RASTER = {"F": dict(px=(1002, 852), mm=(52.166553, 44.357189), image="image1-35"),
           "I": dict(px=(1152, 1452), mm=(48.598057, 61.253792), image="image1-270")}
 
-# Mathtext leaves a gap after a superscript group, which is what separated the
-# units ("M^-1 s^-1 )") in the first rebuild. A negative thin space closes it,
-# giving the tight "M^-1s^-1)" of the printed panels. Only k and K are italic;
-# the descriptive subscripts are roman, which is the whole point of the rebuild.
 KCAT_S = "$k_\\mathrm{cat}$ (s$^{-1}\\!$)"
 KCAT_KM_M = "$k_\\mathrm{cat}/K_\\mathrm{M}$ (M$^{-1}\\!$s$^{-1}\\!$)"
 
@@ -236,42 +190,3 @@ def build_I(dropin=False):
     print("  panel I values:")
     for n, (a, ae), (b, be) in zip(names, kcat, keff):
         print("    %-9s kcat %.5f +/- %.5f   kcat/KM %.3f +/- %.3f" % (n, a, ae, b, be))
-
-
-def check():
-    """Measure the drop-in renders against the rasters they replace."""
-    import numpy as np
-    from PIL import Image
-
-    def geom(path):
-        A = np.asarray(Image.open(path).convert("RGB")).astype(int)
-        H, W, _ = A.shape
-        dark = A.sum(2) < 260
-        vs = [x for x in range(W) if dark[:, x].sum() > 0.15 * H]
-        hs = [y for y in range(H) if dark[y].sum() > 0.30 * W]
-        def runs(idx, gap=3):
-            out, cur = [], [idx[0], idx[0]]
-            for i in idx[1:]:
-                if i - cur[1] <= gap: cur[1] = i
-                else: out.append(tuple(cur)); cur = [i, i]
-            out.append(tuple(cur)); return out
-        return (W, H), runs(vs)[:2], runs(hs)[:2]
-
-    for tag, src, new in (
-            ("F", "/tmp/src_panelF.png",
-             os.path.join(OUT, "PTE__v2MAIN__fig4F__knockouts_kcatKM__dropin.png")),
-            ("I", "/tmp/src_panelI.png",
-             os.path.join(OUT, "PTE__v2MAIN__fig4I__kcat_kcatKM__dropin.png"))):
-        if not (os.path.exists(src) and os.path.exists(new)):
-            print("panel %s: missing %s" % (tag, src if not os.path.exists(src) else new))
-            continue
-        print("panel %s  source %s\n          rebuilt %s" % (tag, geom(src), geom(new)))
-
-
-if __name__ == "__main__":
-    if "--check" in sys.argv:
-        check()
-    else:
-        drop = "--dropin" in sys.argv
-        build_F(dropin=drop)
-        build_I(dropin=drop)

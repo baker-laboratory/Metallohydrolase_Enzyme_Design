@@ -39,8 +39,6 @@ STEP1_SCRIPT = str(_SCRIPT_DIR / "contact_counter__STEP1_calculate_contacts.py")
 
 STEP2_SCRIPT    = str(_SCRIPT_DIR / "contact_counter__STEP2_parse_coord_clouds_for_metrics.py")
 
-# STEP2 used to be launched through a lab container at
-# /software/containers/crispy.sif. That image was never published and is gone.
 # STEP2 needs only numpy/pandas/scipy/scikit-learn, all of which the zinc_hydro
 # environment provides, so the runner defaults to this interpreter; set
 # ZINC_HYDRO_SIF to route it through a container instead.

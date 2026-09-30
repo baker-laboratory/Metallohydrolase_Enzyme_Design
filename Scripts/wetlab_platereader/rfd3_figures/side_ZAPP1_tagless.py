@@ -1,16 +1,4 @@
-# Adapted from FOR_RFdiffusion3_paper/scripts/side_ZAPP1_tagless.py (2026-09-29).
-# Paper geometry, colors and labels are retained; paths resolve inside this repository.
-# Retain italic descriptive subscripts from the supplied PDF (the later source
-# script changed these to roman without regenerating this particular PDF).
-"""SIDE ANALYSIS - not part of any paper figure.
-
-ZAPP-1 expressed without the C-terminal Strep-tag II ("tagless"), from cell 7 of the source
-notebook: same plate as ZAPP-3 (p2G1) and ZAPP-4 (p2E3), columns 9-11, [E]0 = 23.4 uM,
-25 mM NaHCO3 in the reaction.
-
-Question this answers: does removing the purification tag change the kinetics?
-Output: figures/side/SIDE__ZAPP1_tagless.{png,pdf}
-"""
+"""Plot the additional tagless ZAPP-1 comparison and its detector-linearity check."""
 import os, sys, importlib.util
 import numpy as np, matplotlib
 import matplotlib.pyplot as plt

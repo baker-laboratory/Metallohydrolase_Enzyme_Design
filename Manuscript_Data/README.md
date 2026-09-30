@@ -19,8 +19,8 @@ Each dataset directory follows the same shape:
 
 ```
 <Campaign>/
-├── raw_wetlab_data/          # primary instrument output, unmodified
-├── supplemental_data/        # sequences, models, theozymes as deposited
+├── raw_wetlab_data/          # primary instrument measurements
+├── supplemental_data/        # sequences, models, and theozymes
 ├── wetlab_data_analysis.ipynb  # loads raw data -> figures + reported statistics
 └── wetlab_data_plots/        # every figure the notebook writes
 ```
