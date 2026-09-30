@@ -3,13 +3,13 @@
 A step-by-step Jupyter Notebook tutorial for designing metallohydrolase enzymes using **RFdiffusion3** (via the [foundry](https://github.com/RosettaCommons/foundry) framework). This tutorial accompanies the publications:
 
 > **Computational Design of Metallohydrolases**
-> Kim, Woodbury, Ahern et al. *Nature* (2025). [DOI: 10.1038/s41586-025-09746-w](https://doi.org/10.1038/s41586-025-09746-w)
+> Kim, Woodbury, Ahern et al. *Nature* (2026). [DOI: 10.1038/s41586-025-09746-w](https://doi.org/10.1038/s41586-025-09746-w)
 >
 > **De novo Design of All-atom Biomolecular Interactions with RFdiffusion3**
 > Butcher, Krishna, Mitra et al. *bioRxiv* (2025). [DOI: 10.1101/2025.09.18.676967](https://doi.org/10.1101/2025.09.18.676967) &mdash; *preprint, citation will update on peer-reviewed publication.*
 >
 > **Atom-level Enzyme Active Site Scaffolding using RFdiffusion2**
-> Ahern, Yim, Tischer et al. *Nature Methods* **23**, 96&ndash;105 (2025). [DOI: 10.1038/s41592-025-02975-x](https://doi.org/10.1038/s41592-025-02975-x) &mdash; *for context on the predecessor method that Sections I and II were originally designed for.*
+> Ahern, Yim, Tischer et al. *Nature Methods* **23**, 96&ndash;105 (2026). [DOI: 10.1038/s41592-025-02975-x](https://doi.org/10.1038/s41592-025-02975-x) &mdash; *for context on the predecessor method that Sections I and II were originally designed for.*
 
 ---
 
@@ -286,7 +286,7 @@ If you use this tutorial or the associated methods, please cite the primary meta
 ```
 Kim, D., Woodbury, S.M., Ahern, W. et al.
 Computational design of metallohydrolases.
-Nature (2025). https://doi.org/10.1038/s41586-025-09746-w
+Nature 649, 246–253 (2026). https://doi.org/10.1038/s41586-025-09746-w
 
 Butcher, J., Krishna, R., Mitra, R. et al.
 De novo design of all-atom biomolecular interactions with RFdiffusion3.
@@ -295,7 +295,7 @@ bioRxiv (2025). https://doi.org/10.1101/2025.09.18.676967
 
 Ahern, W., Yim, J., Tischer, D. et al.
 Atom-level enzyme active site scaffolding using RFdiffusion2.
-Nature Methods 23, 96-105 (2025). https://doi.org/10.1038/s41592-025-02975-x
+Nature Methods 23, 96-105 (2026). https://doi.org/10.1038/s41592-025-02975-x
 ```
 
 ---

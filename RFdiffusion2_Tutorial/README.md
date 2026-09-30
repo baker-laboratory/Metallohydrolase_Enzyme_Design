@@ -3,10 +3,10 @@
 A step-by-step Jupyter Notebook tutorial for designing metallohydrolase enzymes using **RFdiffusion2**. This tutorial accompanies the publications:
 
 > **Computational Design of Metallohydrolases**
-> Kim, Woodbury, Ahern et al. *Nature* (2025). [DOI: 10.1038/s41586-025-09746-w](https://doi.org/10.1038/s41586-025-09746-w)
+> Kim, Woodbury, Ahern et al. *Nature* (2026). [DOI: 10.1038/s41586-025-09746-w](https://doi.org/10.1038/s41586-025-09746-w)
 >
 > **Atom-level Enzyme Active Site Scaffolding using RFdiffusion2**
-> Ahern, Yim, Tischer et al. *Nature Methods* **23**, 96&ndash;105 (2025). [DOI: 10.1038/s41592-025-02975-x](https://doi.org/10.1038/s41592-025-02975-x)
+> Ahern, Yim, Tischer et al. *Nature Methods* **23**, 96&ndash;105 (2026). [DOI: 10.1038/s41592-025-02975-x](https://doi.org/10.1038/s41592-025-02975-x)
 
 ---
 
@@ -238,11 +238,11 @@ If you use this tutorial or the associated methods, please cite the primary meta
 ```
 Kim, D., Woodbury, S.M., Ahern, W. et al.
 Computational design of metallohydrolases.
-Nature (2025). https://doi.org/10.1038/s41586-025-09746-w
+Nature 649, 246–253 (2026). https://doi.org/10.1038/s41586-025-09746-w
 
 Ahern, W., Yim, J., Tischer, D. et al.
 Atom-level enzyme active site scaffolding using RFdiffusion2.
-Nature Methods 23, 96-105 (2025). https://doi.org/10.1038/s41592-025-02975-x
+Nature Methods 23, 96-105 (2026). https://doi.org/10.1038/s41592-025-02975-x
 ```
 
 ---

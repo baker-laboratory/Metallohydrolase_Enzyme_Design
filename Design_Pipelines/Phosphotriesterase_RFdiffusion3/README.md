@@ -201,4 +201,4 @@ example [protein_chisel](https://github.com/SethWoodbury/protein_chisel).
 
 - First campaign (RFdiffusion2, zinc esterase): [`../Metalloesterase_RFdiffusion2/`](../Metalloesterase_RFdiffusion2/)
 - Method tutorial: [`../../RFdiffusion3_Tutorial/`](../../RFdiffusion3_Tutorial/)
-- Experimental data: [`../../Manuscript_Data/Phosphotriesterase_RFdiffusion3/`](../../Manuscript_Data/Phosphotriesterase_RFdiffusion3/)
+- Experimental data: [`../../Manuscript_Data/Phosphotriesterase_RFdiffusion3_Science_2026/`](../../Manuscript_Data/Phosphotriesterase_RFdiffusion3_Science_2026/)

@@ -1,0 +1,50 @@
+{
+  "model_count": 96,
+  "ordered_sequence_matches": 96,
+  "publication_hit_models_unchanged": 3,
+  "reconstructed_models": 93,
+  "zn_histidine_distance_A_range": [
+    1.9206428611274924,
+    4.626594211728537
+  ],
+  "publication_hit_zn_histidine_distance_A_range": [
+    2.009156539446342,
+    2.1111432921523825
+  ],
+  "minimum_protein_ligand_heavy_atom_distance_A": 1.9206428611274924,
+  "models_with_heavy_atom_contacts_below_1p5A": 0,
+  "zn_coordination_above_3A": [
+    {
+      "well": "B5",
+      "max_zn_histidine_distance_A": 3.2053595742131646
+    },
+    {
+      "well": "B9",
+      "max_zn_histidine_distance_A": 3.554101292872785
+    },
+    {
+      "well": "B10",
+      "max_zn_histidine_distance_A": 3.8650521341891366
+    },
+    {
+      "well": "C3",
+      "max_zn_histidine_distance_A": 3.397067853311146
+    },
+    {
+      "well": "D5",
+      "max_zn_histidine_distance_A": 4.3944010968504
+    },
+    {
+      "well": "F9",
+      "max_zn_histidine_distance_A": 4.626594211728537
+    },
+    {
+      "well": "H3",
+      "max_zn_histidine_distance_A": 3.2416207366069214
+    }
+  ],
+  "notebook_code_cells_executed": 8,
+  "notebook_errors": 0,
+  "reference_mean_initial_rates_reproduced": 24,
+  "raw_input_files": 11
+}

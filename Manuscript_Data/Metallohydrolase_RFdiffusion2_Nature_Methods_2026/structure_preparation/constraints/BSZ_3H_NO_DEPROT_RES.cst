@@ -1,0 +1,86 @@
+# cst constraint descriptor for Zn esterase
+# with R-7-coumarinyl-1-methyl-1-phenylacetate
+# 3HIS, carboxylate general base and two ozyanion hole residues
+# I. Kalvet, Baker lab, UW,   ikalvet@uw.edu
+
+# NOTE
+
+
+#block 1 for His coordinated to Zn
+
+VARIABLE_CST::BEGIN
+# HIS coordination
+CST::BEGIN
+
+  TEMPLATE::   ATOM_MAP: 1 atom_name: ZN1 O1 C1
+  TEMPLATE::   ATOM_MAP: 1 residue3:  BSZ
+
+  TEMPLATE::   ATOM_MAP: 2 atom_type: Nhis
+  TEMPLATE::   ATOM_MAP: 2 residue3: HIS
+
+  CONSTRAINT:: distanceAB:   2.1   0.02   150.  1    0
+  CONSTRAINT::    angle_A:   98.2  2.0   150.0  360. 0
+  CONSTRAINT::    angle_B:  123.4  2.0   150.0  360. 0
+  CONSTRAINT::  torsion_A:  159.7  2.0   150.0  360. 0
+  CONSTRAINT:: torsion_AB:   99.8  2.0  150.0  180.  0
+  CONSTRAINT::  torsion_B:  -176.6  2.0  150.0  360. 0
+
+  ALGORITHM_INFO:: match
+   MAX_DUNBRACK_ENERGY 100.0 
+  ALGORITHM_INFO::END
+CST::END
+
+VARIABLE_CST::END
+
+#block 2 for His coordinated to Zn
+
+VARIABLE_CST::BEGIN
+# HIS coordination
+CST::BEGIN
+
+  TEMPLATE::   ATOM_MAP: 1 atom_name: ZN1 O1 C1
+  TEMPLATE::   ATOM_MAP: 1 residue3:  BSZ
+
+  TEMPLATE::   ATOM_MAP: 2 atom_type: Nhis
+  TEMPLATE::   ATOM_MAP: 2 residue3: HIS
+
+  CONSTRAINT:: distanceAB:   2.03   0.02   150.  1   0
+  CONSTRAINT::    angle_A:  139.6  2.0   150.0  360. 0
+  CONSTRAINT::    angle_B:  126.4  2.0   150.0  360. 0
+  CONSTRAINT::  torsion_A:   46.3  2.0   150.0  360. 0
+  CONSTRAINT:: torsion_AB:  110.5  2.0 150.0  180.  0
+  CONSTRAINT::  torsion_B:  178.3  2.0  150.0  360. 0
+
+  ALGORITHM_INFO:: match
+   MAX_DUNBRACK_ENERGY 100.0 
+  ALGORITHM_INFO::END
+CST::END
+
+VARIABLE_CST::END
+
+
+#block 3 for His coordinated to Zn
+
+VARIABLE_CST::BEGIN
+# HIS coordination
+CST::BEGIN
+
+  TEMPLATE::   ATOM_MAP: 1 atom_name: ZN1 O1 C1
+  TEMPLATE::   ATOM_MAP: 1 residue3:  BSZ
+
+  TEMPLATE::   ATOM_MAP: 2 atom_type: Nhis
+  TEMPLATE::   ATOM_MAP: 2 residue3: HIS
+
+  CONSTRAINT:: distanceAB:   2.04   0.02   150.  1    0
+  CONSTRAINT::    angle_A:   103.5  2.0   150.0  360. 0
+  CONSTRAINT::    angle_B:   127.4  2.0   150.0  360. 0
+  CONSTRAINT::  torsion_A:  -96.3  2.0   150.0  360. 0
+  CONSTRAINT:: torsion_AB:   175.5  2.0  150.0  180.0  0
+  CONSTRAINT::  torsion_B:   -178.4  2.0  150.0  360. 0
+
+  ALGORITHM_INFO:: match
+   MAX_DUNBRACK_ENERGY 100.0 
+  ALGORITHM_INFO::END
+CST::END
+
+VARIABLE_CST::END

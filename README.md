@@ -10,7 +10,10 @@ Code, data, and tutorials accompanying the publication in *Nature*:
 >
 > &dagger;Co-first authors &ensp; \*Corresponding authors
 >
-> *Nature* (2025). DOI: [10.1038/s41586-025-09746-w](https://doi.org/10.1038/s41586-025-09746-w)
+> *Nature* **649**, 246–253 (2026). DOI: [10.1038/s41586-025-09746-w](https://doi.org/10.1038/s41586-025-09746-w)
+
+Publication directories use the journal issue year. The Nature and Nature
+Methods articles appeared online on 3 December 2025 and in their 2026 volumes.
 
 This work applies **RFdiffusion2**, a generative model for de novo protein
 design, to build highly active zinc-dependent hydrolases from
@@ -41,7 +44,7 @@ Then pick the smallest environment that covers what you want to do:
 conda env create -f Environment/analysis.yml
 conda activate zinc_hydro_analysis
 python -m ipykernel install --user --name=zinc_hydro_analysis
-jupyter lab Manuscript_Data/Metallohydrolase_Nature_2025/wetlab_data_analysis.ipynb
+jupyter lab Manuscript_Data/Metallohydrolase_Nature_2026/wetlab_data_analysis.ipynb
 ```
 
 **Run the design tutorials and pipelines** (needs a GPU and a free academic
@@ -73,20 +76,20 @@ Full details, including containers and pixi: [`Environment/README.md`](Environme
 
 ### Campaigns
 
-`Design_Pipelines/` and `Manuscript_Data/` are organized by campaign, using
-matching directory names so the computation and the measurements stay findable
-from one another.
+`Design_Pipelines/` is organized by computational campaign; `Manuscript_Data/`
+is organized by publication. The links below connect the two.
 
 | Campaign | Model | Chemistry | Pipeline | Data | Status |
 |---|---|---|---|---|---|
-| Metalloesterase | RFdiffusion2 | Zn(II) esterase, 4MU-phenylacetate | [pipeline](Design_Pipelines/Metalloesterase_RFdiffusion2/) | [data](Manuscript_Data/Metallohydrolase_Nature_2025/) | **Published** (*Nature* 2025) |
-| Phosphotriesterase | RFdiffusion3 | Binuclear phosphotriesterase, paraoxon hydrolysis | [pipeline](Design_Pipelines/Phosphotriesterase_RFdiffusion3/) | [data](Manuscript_Data/Phosphotriesterase_RFdiffusion3/) | In preparation |
-| Metalloprotease | RFdiffusion3 | Zn(II) metalloprotease, amide hydrolysis | [pipeline](Design_Pipelines/Metalloprotease_RFdiffusion3/) | [data](Manuscript_Data/Metalloprotease_RFdiffusion3/) | In preparation |
+| Metalloesterase | RFdiffusion2 | Zn(II) esterase, 4MU-phenylacetate | [pipeline](Design_Pipelines/Metalloesterase_RFdiffusion2/) | [data](Manuscript_Data/Metallohydrolase_Nature_2026/) | **Published** (*Nature* 2026) |
+| Additional metalloesterases | RFdiffusion2 | 4MU-butyrate, with links to the shared phenylacetate results | [pipeline](Design_Pipelines/Metalloesterase_RFdiffusion2/) | [data](Manuscript_Data/Metallohydrolase_RFdiffusion2_Nature_Methods_2026/) | **Published** (*Nature Methods* 2026) |
+| Phosphotriesterase | RFdiffusion3 | Binuclear phosphotriesterase, paraoxon hydrolysis | [pipeline](Design_Pipelines/Phosphotriesterase_RFdiffusion3/) | [data](Manuscript_Data/Phosphotriesterase_RFdiffusion3_Science_2026/) | RFdiffusion3 Science 2026 manuscript; data and figure reproduction available |
+| Metalloprotease | RFdiffusion3 | Zn(II) metalloprotease, amide hydrolysis | [pipeline](Design_Pipelines/Metalloprotease_RFdiffusion3/) | [data](Manuscript_Data/Metalloprotease_RFdiffusion3_Science_2026/) | RFdiffusion3 Science 2026 manuscript; dataset pending |
 
-The two RFdiffusion3 campaigns are in preparation and will be published here
-shortly, alongside the RFdiffusion3 release. The RFdiffusion3 *method* is
-already fully demonstrated in
-[`RFdiffusion3_Tutorial/`](RFdiffusion3_Tutorial/), which runs today.
+The phosphotriesterase dataset includes the RFdiffusion3 manuscript's kinetics
+and progress-curve plotting style. The metalloprotease directory currently
+documents its scope; experimental files have not yet been deposited there.
+[`RFdiffusion3_Tutorial/`](RFdiffusion3_Tutorial/) demonstrates the method.
 
 ### Structure
 
@@ -134,13 +137,14 @@ Metallohydrolase_Enzyme_Design/
 |
 |-- Manuscript_Data/                               # EXPERIMENTAL DATA
 |   |-- README.md
-|   |-- Metallohydrolase_Nature_2025/
+|   |-- Metallohydrolase_Nature_2026/
 |   |   |-- wetlab_data_analysis.ipynb
 |   |   |-- raw_wetlab_data/                       #   43 primary files
-|   |   |-- supplemental_data/                     #   Data S1-S3
+|   |   |-- supplemental_data/                     #   Data S1-S3 + ZETA_2 crystal structures
 |   |   +-- wetlab_data_plots/                     #   all generated figures
-|   |-- Phosphotriesterase_RFdiffusion3/           #   in preparation
-|   +-- Metalloprotease_RFdiffusion3/              #   in preparation
+|   |-- Metallohydrolase_RFdiffusion2_Nature_Methods_2026/ # additional 4MU-butyrate designs
+|   |-- Phosphotriesterase_RFdiffusion3_Science_2026/      # PTE data and paper figures
+|   +-- Metalloprotease_RFdiffusion3_Science_2026/         # dataset pending
 |
 |-- Scripts/                                       # SHARED UTILITIES
 |   |-- env_config.py                              #   resolves interpreter/container/obabel paths
@@ -280,7 +284,7 @@ PyRosetta requires a license, free for academic use:
 
 | Submodule | Description | Repository | Method paper |
 |-----------|-------------|------------|--------------|
-| **RFdiffusion2** | Generative model for de novo backbone design with atom-level active-site scaffolding | [RosettaCommons/RFdiffusion2](https://github.com/RosettaCommons/RFdiffusion2) | Ahern et al., *Nature Methods* 23, 96&ndash;105 (2025). [doi:10.1038/s41592-025-02975-x](https://doi.org/10.1038/s41592-025-02975-x) |
+| **RFdiffusion2** | Generative model for de novo backbone design with atom-level active-site scaffolding | [RosettaCommons/RFdiffusion2](https://github.com/RosettaCommons/RFdiffusion2) | Ahern et al., *Nature Methods* 23, 96&ndash;105 (2026). [doi:10.1038/s41592-025-02975-x](https://doi.org/10.1038/s41592-025-02975-x) |
 | **foundry** | RFdiffusion3 &mdash; all-atom generative model, run through the `rfd3 design` CLI (tracked at `production`). Model weights are downloaded separately. | [RosettaCommons/foundry](https://github.com/RosettaCommons/foundry) | Butcher et al., *bioRxiv* (2025). [doi:10.1101/2025.09.18.676967](https://doi.org/10.1101/2025.09.18.676967) *(preprint)* |
 | **PLACER** | Protein-ligand atomic conformational ensemble prediction | [baker-laboratory/PLACER](https://github.com/baker-laboratory/PLACER) | &mdash; |
 | **OpenFold** | Open-source AlphaFold2 implementation | [aqlaboratory/openfold](https://github.com/aqlaboratory/openfold) | &mdash; |
@@ -421,10 +425,10 @@ also cite the corresponding method paper.
 
 ### Primary publication
 
-> Kim, D., Woodbury, S.M., Ahern, W. et al. Computational design of metallohydrolases. *Nature* (2025). https://doi.org/10.1038/s41586-025-09746-w
+> Kim, D., Woodbury, S.M., Ahern, W. et al. Computational design of metallohydrolases. *Nature* (2026). https://doi.org/10.1038/s41586-025-09746-w
 
 ```bibtex
-@article{kim2025metallohydrolases,
+@article{kim2026metallohydrolases,
   title     = {Computational design of metallohydrolases},
   author    = {Kim, Donghyo and Woodbury, Seth M. and Ahern, Woody and Tischer, Doug
                and Kang, Alex and Joyce, Emily and Bera, Asim K. and Hanikel, Nikita
@@ -432,7 +436,10 @@ also cite the corresponding method paper.
                and Pellock, Samuel J. and Lauko, Anna and Kalvet, Indrek
                and Hilvert, Donald and Baker, David},
   journal   = {Nature},
-  year      = {2025},
+  year      = {2026},
+  volume    = {649},
+  number    = {8095},
+  pages     = {246--253},
   doi       = {10.1038/s41586-025-09746-w},
   url       = {https://www.nature.com/articles/s41586-025-09746-w}
 }
@@ -440,10 +447,10 @@ also cite the corresponding method paper.
 
 ### Method papers
 
-**RFdiffusion2** — Ahern, W., Yim, J., Tischer, D., Salike, S., Woodbury, S.M., Kim, D., Kalvet, I., Kipnis, Y., Coventry, B., Altae-Tran, H.R., Bauer, M.S., Barzilay, R., Jaakkola, T.S., Krishna, R., Baker, D. Atom-level enzyme active site scaffolding using RFdiffusion2. *Nature Methods* **23**, 96&ndash;105 (2025). https://doi.org/10.1038/s41592-025-02975-x
+**RFdiffusion2** — Ahern, W., Yim, J., Tischer, D., Salike, S., Woodbury, S.M., Kim, D., Kalvet, I., Kipnis, Y., Coventry, B., Altae-Tran, H.R., Bauer, M.S., Barzilay, R., Jaakkola, T.S., Krishna, R., Baker, D. Atom-level enzyme active site scaffolding using RFdiffusion2. *Nature Methods* **23**, 96&ndash;105 (2026). https://doi.org/10.1038/s41592-025-02975-x
 
 ```bibtex
-@article{ahern2025rfdiffusion2,
+@article{ahern2026rfdiffusion2,
   title     = {Atom-level enzyme active site scaffolding using {RFdiffusion2}},
   author    = {Ahern, Woody and Yim, Jason and Tischer, Doug and Salike, Saman
                and Woodbury, Seth M. and Kim, Donghyo and Kalvet, Indrek
@@ -451,7 +458,7 @@ also cite the corresponding method paper.
                and Bauer, Magnus S. and Barzilay, Regina and Jaakkola, Tommi S.
                and Krishna, Rohith and Baker, David},
   journal   = {Nature Methods},
-  year      = {2025},
+  year      = {2026},
   volume    = {23},
   number    = {1},
   pages     = {96--105},

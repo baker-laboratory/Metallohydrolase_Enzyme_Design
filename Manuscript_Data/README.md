@@ -1,14 +1,19 @@
 # Manuscript Data
 
-Experimental measurements and supplementary data, organized by campaign. Each
-subdirectory pairs with the design campaign of the same name under
-[`Design_Pipelines/`](../Design_Pipelines/).
+Experimental measurements and supplementary data, organized by publication.
+The table links each publication to the corresponding computational campaign
+under [`Design_Pipelines/`](../Design_Pipelines/).
 
 | Dataset | Campaign | Status |
 |---|---|---|
-| [`Metallohydrolase_Nature_2025/`](Metallohydrolase_Nature_2025/) | [`Metalloesterase_RFdiffusion2`](../Design_Pipelines/Metalloesterase_RFdiffusion2/) | **Published** — Kim, Woodbury, Ahern et al., *Nature* (2025) |
-| [`Phosphotriesterase_RFdiffusion3/`](Phosphotriesterase_RFdiffusion3/) | [`Phosphotriesterase_RFdiffusion3`](../Design_Pipelines/Phosphotriesterase_RFdiffusion3/) | In preparation |
-| [`Metalloprotease_RFdiffusion3/`](Metalloprotease_RFdiffusion3/) | [`Metalloprotease_RFdiffusion3`](../Design_Pipelines/Metalloprotease_RFdiffusion3/) | In preparation |
+| [`Metallohydrolase_Nature_2026/`](Metallohydrolase_Nature_2026/) | [`Metalloesterase_RFdiffusion2`](../Design_Pipelines/Metalloesterase_RFdiffusion2/) | **Published** — Kim, Woodbury, Ahern et al., *Nature* (2026) |
+| [`Metallohydrolase_RFdiffusion2_Nature_Methods_2026/`](Metallohydrolase_RFdiffusion2_Nature_Methods_2026/) | [`Metalloesterase_RFdiffusion2`](../Design_Pipelines/Metalloesterase_RFdiffusion2/) | **Published** — additional 4MU-butyrate data and shared Nature results |
+| [`Phosphotriesterase_RFdiffusion3_Science_2026/`](Phosphotriesterase_RFdiffusion3_Science_2026/) | [`Phosphotriesterase_RFdiffusion3`](../Design_Pipelines/Phosphotriesterase_RFdiffusion3/) | RFdiffusion3 Science 2026 manuscript; data and figure reproduction available |
+| [`Metalloprotease_RFdiffusion3_Science_2026/`](Metalloprotease_RFdiffusion3_Science_2026/) | [`Metalloprotease_RFdiffusion3`](../Design_Pipelines/Metalloprotease_RFdiffusion3/) | RFdiffusion3 Science 2026 manuscript; experimental dataset pending |
+
+The Nature and Nature Methods directories use their 2026 journal issue year;
+both articles were first published online on 3 December 2025. RFdiffusion3
+directories use the manuscript designation supplied by the authors.
 
 Each dataset directory follows the same shape:
 
@@ -33,7 +38,7 @@ conda env create -f Environment/analysis.yml
 conda activate zinc_hydro_analysis
 python -m ipykernel install --user --name=zinc_hydro_analysis
 
-jupyter lab Manuscript_Data/Metallohydrolase_Nature_2025/wetlab_data_analysis.ipynb
+jupyter lab Manuscript_Data/Metallohydrolase_Nature_2026/wetlab_data_analysis.ipynb
 ```
 
 Select the **zinc_hydro_analysis** kernel, then **run the first cell before
@@ -44,13 +49,13 @@ from the working directory, creates `wetlab_data_plots/`, and exports the
 `*_dir` variables the rest of the notebook uses. Set `ZINC_HYDRO_REPO` only if
 you are running from somewhere unusual.
 
-`openpyxl` is required — 30 of the 43 raw files are `.xlsx`. It is included in
+`openpyxl` is required — 30 of the 43 Nature raw files are `.xlsx`. It is included in
 both `analysis.yml` and `zinc_hydro.yml`.
 
 ### Where the figures go
 
-**Every figure is written to `wetlab_data_plots/`**, as a PNG. Two knobs at the
-top of the notebook (cell 1) control this:
+The Nature notebook writes its analysis figures to `wetlab_data_plots/` as
+PNGs. Two knobs at the top of that notebook (cell 1) control this:
 
 ```python
 FIGURE_DPI = 150     # raster resolution for the PNGs
@@ -64,8 +69,14 @@ is off by default; set `SAVE_EPS = True` for a full vector run, or pass
 call takes `dpi=` and `save_eps=`, so a single panel can be exported at
 publication resolution without changing the rest.
 
-Vector exports (`.eps`, `.svg`, `.pdf`) are gitignored — regenerate them when
-you need them.
+Optional vector exports (`.eps`, `.svg`, `.pdf`) directly in
+`wetlab_data_plots/` are gitignored. The RFdiffusion3 reproduction PDFs in
+`wetlab_data_plots/paper_figures/` are included in the repository.
+
+The phosphotriesterase notebook uses its own RFdiffusion3 plotting functions to
+reproduce the manuscript's SI and main-figure panels, including their colors,
+labels, layouts, and PDF exports. See its dataset README for the numerical and
+visual comparison results and the separately labeled tagless ZAPP1 analysis.
 
 ### Reading it without running it
 
@@ -101,15 +112,17 @@ value is visible on GitHub without running anything.
   defined earlier, so running cells out of order can produce plots from a
   different experiment's wells.
 
-- **`supplemental_data/` is reference material** — the deposited sequences,
-  models and DFT theozymes. The analysis notebook does not read it.
+- **Nature `supplemental_data/` is reference material** — the deposited
+  sequences, design models, DFT theozymes, and ZETA_2 crystal structures. The
+  Nature analysis notebook does not read it. Other datasets may use their
+  supplemental tables for numerical comparisons.
 
 ---
 
 ## Adding a new campaign
 
-Create `Manuscript_Data/<Chemistry>_<Model>/` with the four-part layout above,
-add a row to the table at the top of this file, and create the matching
-`Design_Pipelines/<Chemistry>_<Model>/`. The analysis notebook's first cell is
+Create `Manuscript_Data/<Chemistry>_<Model>_<Journal>_<Year>/` with the four-part
+layout above and add a row linking its computational campaign. Shared results
+should link to their original dataset rather than duplicate raw files. The analysis notebook's first cell is
 campaign-agnostic apart from its `working_dir` line — copy it and change that
 one path.

@@ -1,0 +1,26 @@
+[
+  {
+    "pdb_id": "9PYJ",
+    "filename": "ZETA_2_apo_9PYJ.pdb",
+    "title": "Crystal Structure of ZETA_2-Apo",
+    "resolution_angstrom": 3.49,
+    "source_url": "https://files.rcsb.org/download/9PYJ.pdb",
+    "entry_url": "https://www.rcsb.org/structure/9PYJ",
+    "retrieved_utc": "2026-09-30T03:48:28.061441+00:00",
+    "sha256": "e13d613ac884cd726a9406fe6f50da0f1c14c898a2d0d93b0f5fb59acccbdaf6",
+    "revision_date": "2025-12-31T00:00:00.000+00:00",
+    "zinc_atom_records": 0
+  },
+  {
+    "pdb_id": "9PYL",
+    "filename": "ZETA_2_Zn_bound_9PYL.pdb",
+    "title": "Crystal structure of Zn(II)-bound ZETA_2",
+    "resolution_angstrom": 2.07,
+    "source_url": "https://files.rcsb.org/download/9PYL.pdb",
+    "entry_url": "https://www.rcsb.org/structure/9PYL",
+    "retrieved_utc": "2026-09-30T03:48:28.341720+00:00",
+    "sha256": "5aba99091775f1437734dfbff63eac3c7f07ca7f60eefb2b4c6fdf403ecf96de",
+    "revision_date": "2025-12-31T00:00:00.000+00:00",
+    "zinc_atom_records": 3
+  }
+]

@@ -29,7 +29,7 @@ Metalloprotease_RFdiffusion3/
 ```
 
 The matching experimental data will appear at
-[`../../Manuscript_Data/Metalloprotease_RFdiffusion3/`](../../Manuscript_Data/Metalloprotease_RFdiffusion3/).
+[`../../Manuscript_Data/Metalloprotease_RFdiffusion3_Science_2026/`](../../Manuscript_Data/Metalloprotease_RFdiffusion3_Science_2026/).
 
 ## In the meantime
 

@@ -1,0 +1,23 @@
+{
+  "final_wetlab_notebook": {
+    "source_path": "/home/donghyo/projects/zinc_hydrolase/enzyme_design/20240405_design_campaign1/wetlab_analysis_for_method_paper.ipynb",
+    "sha256": "7a03b84dad6b133e19b1ec96b2cbe2c55df1536c46b9e739fe217c0e487e279f"
+  },
+  "historical_design_notebook": {
+    "source_path": "/home/woodbuse/projects/zinc_hydrolase/old_4muButyrate_stuff/20240402_design_campaign1/design_campaign1_zn_hydrolase.ipynb",
+    "sha256": "cf9bb6ff0d00291dfd830de1ee27068499e8aab277fa49a1cf178285394e7536"
+  },
+  "historical_exploratory_wetlab_notebook": {
+    "source_path": "/home/woodbuse/projects/zinc_hydrolase/old_4muButyrate_stuff/20240402_design_campaign1/wetlab_data_order1_pub/dry_and_wetlab_analysis_for_butyrate_publication_240920.ipynb",
+    "sha256": "f5c28ec05592077381b535af64e54a246d8366ed985d2a8645527041c888f876"
+  },
+  "sequence_order_table": {
+    "source_path": "/home/woodbuse/projects/zinc_hydrolase/old_4muButyrate_stuff/20240402_design_campaign1/Order1_SETH_68bbs_96seq_240523/john_bercow_order/2024_05_23_240523_SMW_Zn_Hydrolase_68bbs_96_seq_Order1_e_coli_BsaI_df.csv",
+    "sha256": "dda03d46e5fea11d64ae61581748b47c93d64c49fdcf5ecfeed9fa1aaddc3ecf"
+  },
+  "paper": {
+    "doi": "10.1038/s41592-025-02975-x",
+    "issue_year": 2026,
+    "first_online_date": "2025-12-03"
+  }
+}

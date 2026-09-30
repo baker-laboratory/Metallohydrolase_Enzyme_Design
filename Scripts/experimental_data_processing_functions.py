@@ -421,7 +421,7 @@ def mm_kinetics(data, bn, rows=None, cols=None, active_wells=None, bg_well_id=No
         print()
 
         for i, sub_conc in enumerate(sub_concs):
-            print(f"[SUBST] = {sub_conc}uM, v0/[E] = {avg_velocities[i]*1e-6}")
+            print(f"[SUBST] = {sub_conc}uM, v0/[E] = {avg_velocities[i]} s⁻¹")
 
     return avg_velocities
 

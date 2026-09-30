@@ -5,7 +5,7 @@ This directory reproduces the **core computational design pipeline for Design Ca
 This tutorial accompanies:
 
 > **Computational Design of Metallohydrolases**
-> Kim, D., Woodbury, S.M., Ahern, W. et al. *Nature* (2025). [DOI: 10.1038/s41586-025-09746-w](https://doi.org/10.1038/s41586-025-09746-w)
+> Kim, D., Woodbury, S.M., Ahern, W. et al. *Nature* (2026). [DOI: 10.1038/s41586-025-09746-w](https://doi.org/10.1038/s41586-025-09746-w)
 
 The pipeline applies **RFdiffusion2** (Ahern et al., *Nat. Methods* 2025, [DOI: 10.1038/s41592-025-02975-x](https://doi.org/10.1038/s41592-025-02975-x)) to build highly active zinc-dependent hydrolases from theozymes, followed by inpainting, structure prediction, sequence design, and ligand-placement assessment.
 
@@ -127,11 +127,11 @@ If you use this pipeline, please cite the primary metallohydrolase paper and the
 ```
 Kim, D., Woodbury, S.M., Ahern, W. et al.
 Computational design of metallohydrolases.
-Nature (2025). https://doi.org/10.1038/s41586-025-09746-w
+Nature 649, 246–253 (2026). https://doi.org/10.1038/s41586-025-09746-w
 
 Ahern, W., Yim, J., Tischer, D. et al.
 Atom-level enzyme active site scaffolding using RFdiffusion2.
-Nature Methods 23, 96-105 (2025). https://doi.org/10.1038/s41592-025-02975-x
+Nature Methods 23, 96-105 (2026). https://doi.org/10.1038/s41592-025-02975-x
 ```
 
 ---

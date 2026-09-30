@@ -14,7 +14,7 @@ designs.
 
 | Campaign | Model | Target chemistry | Status |
 |---|---|---|---|
-| [`Metalloesterase_RFdiffusion2/`](Metalloesterase_RFdiffusion2/) | RFdiffusion2 | Zn(II) esterase, 4MU-phenylacetate hydrolysis | **Published** — Kim, Woodbury, Ahern et al., *Nature* (2025) |
+| [`Metalloesterase_RFdiffusion2/`](Metalloesterase_RFdiffusion2/) | RFdiffusion2 | Zn(II) esterase, 4MU-phenylacetate hydrolysis | **Published** — Kim, Woodbury, Ahern et al., *Nature* (2026) |
 | [`Phosphotriesterase_RFdiffusion3/`](Phosphotriesterase_RFdiffusion3/) | RFdiffusion3 | Binuclear phosphotriesterase | In preparation — releasing with RFdiffusion3 |
 | [`Metalloprotease_RFdiffusion3/`](Metalloprotease_RFdiffusion3/) | RFdiffusion3 | Zn(II) metalloprotease, amide hydrolysis | In preparation — releasing with RFdiffusion3 |
 
