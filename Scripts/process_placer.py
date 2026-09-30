@@ -71,6 +71,8 @@ def get_residue_rmsd(residue1, residue2, specified_atoms=None):
             atoms = specified_atoms
         else:
             atoms = [residue1.atom_name(n).strip() for n in range(1, residue1.natoms()+1) if not residue1.atom_is_hydrogen(n)]
+        if not atoms or any(not residue1.has(a) or not residue2.has(a) for a in atoms):
+            return np.nan
         ref_coords = [residue2.xyz(a) for a in atoms]
         mdl_coords = [residue1.xyz(a) for a in atoms]
         rmsd = np.sqrt(sum([(np.linalg.norm(c1-c2))**2 for c1, c2 in zip(ref_coords, mdl_coords)])/len(atoms))
@@ -82,6 +84,14 @@ def get_residue_rmsd(residue1, residue2, specified_atoms=None):
             print ([np.linalg.norm(c1-c2) for c1, c2 in zip(ref_coords, mdl_coords)])
         """
         return rmsd
+
+
+def get_residue_score(model_pdb, chain, resno):
+    """Mean PLACER uncertainty for one PDB residue, independent of the pocket."""
+    scores = [float(line[60:66]) for line in model_pdb.splitlines()
+              if line.startswith(("ATOM  ", "HETATM"))
+              and line[21] == chain and int(line[22:26]) == resno]
+    return np.mean(scores) if scores else np.nan
 
 
 #Pnear calculation function by Vikram from tools/analysis/compute_pnear.py
@@ -107,10 +117,12 @@ def calculate_pnear( scores, rmsds, lambda_val=1.5, kbt=0.62 ):
 
 
 def load_poses(models):
-    poses = {}
-    for i, mdl in enumerate(models):
-        poses[i] = pyrosetta.distributed.io.pose_from_pdbstring(mdl).pose.clone()
-    return [poses[n].clone() for n in range(len(poses))]
+    poses = []
+    for mdl in models:
+        pose = pyr.Pose()
+        pyr.rosetta.core.import_pose.pose_from_pdbstring(pose, mdl)
+        poses.append(pose)
+    return poses
 
 
 def filter_scores(scores, filters):
@@ -142,7 +154,7 @@ parser.add_argument("--placer_pdb_path", type=str, help="Path to PDB files used 
 parser.add_argument("--lig_name", type=str, help="Name of target ligand")
 parser.add_argument("--lig_atom", type=str, nargs="+", help="Name of ions of target ligand")
 
-parser.add_argument("--top", default=5, required=False, help="Number of top ranked structures to investigate")
+parser.add_argument("--top", type=int, default=5, required=False, help="Number of top ranked structures to investigate")
 
 parser.add_argument("--scorefile", type=str, nargs="+", help="PLACER output scorefiles")
 parser.add_argument("--scorefile_list", type=str, help="File with a list of PLACER output scorefiles")
@@ -153,6 +165,8 @@ parser.add_argument("--scorefile_out", type=str, default="scorefile.txt", help="
 parser.add_argument("--dump", action="store_true", default=False, help="Dump top 5 models as full protein PDB files")
 
 args = parser.parse_args()
+if args.top < 1:
+    parser.error("--top must be a positive integer")
 
 
 extra_res_fa = ""
@@ -218,10 +232,11 @@ def process(q):
         pocket_residue_rmsds = {}
         catalytic_residues = {}
         catalytic_residue_rmsds = {}
+        catalytic_residue_scores = {}
         model_res_scores = {}
     
         DF = pd.DataFrame()
-        _df = scores.loc[scores.label.str.contains(d)]
+        _df = scores.loc[scores.label.eq(d)].copy()
     
         DF.at[i, "description"] = d
         DF.at[i, "kabsch"] = _df.kabsch.mean()
@@ -268,31 +283,34 @@ def process(q):
                 
         ## Calculating catalytic residue info
         catalytic_residue_rmsds[d] = pd.DataFrame()
+        catalytic_residue_scores[d] = pd.DataFrame()
         
         ## Extracting ligand info
         ref_lig_seqpos = None
         ref_ligands = [res for res in ref_pose.residues if res.is_ligand()]
-        if len(ref_ligands) > 1:
-            for res in ref_ligands:
-                if res.name3() == args.lig_name:
-                    ref_lig_seqpos = res.seqpos()
-        else:
-            assert ref_ligands[0].name3() == args.lig_name
-            ref_lig_seqpos = ref_ligands[0].seqpos()
+        for res in ref_ligands:
+            if res.name3() == args.lig_name:
+                ref_lig_seqpos = res.seqpos()
+                break
+        if ref_lig_seqpos is None:
+            raise ValueError(f"Target ligand {args.lig_name!r} is missing from the reference for design {d}.")
 
         ## Calculating ligand metrics
         lig_rmsds = []
         
-        mdl_ligands = [res for res in model_poses[0].residues if res.is_ligand()]
-        
         for j, p in enumerate(model_poses):
-            lig_mdl_pos = p.size()
+            mdl_lig_seqpos = None
+            mdl_ligands = [res for res in p.residues if res.is_ligand()]
             for mdl_ligand in mdl_ligands:
                 if mdl_ligand.name3() == args.lig_name:
                     mdl_lig_seqpos = mdl_ligand.seqpos()
                     break
+            if mdl_lig_seqpos is None:
+                raise ValueError(f"Target ligand {args.lig_name!r} is missing from design {d}, model {j + 1}.")
             lig_rmsds.append(get_residue_rmsd(ref_pose.residue(ref_lig_seqpos), p.residue(mdl_lig_seqpos), args.lig_atom))
-            _df.at[j, "rmsd_ligand"] = lig_rmsds[-1]
+        # CSV rows may be shuffled or retain indices from earlier designs.
+        # PLACER model_idx is one-based and refers to the MODEL order in the PDB.
+        _df["rmsd_ligand"] = _df.model_idx.map(dict(enumerate(lig_rmsds, start=1)))
         DF.at[i, "rmsd_ligand"] = np.average(lig_rmsds)
         #DF.at[i, "rmsd_ligand"] = np.median(lig_rmsds)
         DF.at[i, "rmsd_std_ligand"] = np.std(lig_rmsds)
@@ -320,39 +338,35 @@ def process(q):
 
         ## pnear values for rmsd of ligand0 vs lddt / plddt / plddt_pde
         for jj, cr in enumerate(catalytic_residues[d]):
+            chain = catalytic_residues[d][cr]["chain"]
+            ref_cr = ref_pose.pdb_info().pdb2pose(chain, cr)
             for j, p in enumerate(model_poses):
-                try:
-                    _cr_in_crop = pocket_residues[d][pocket_residues_pdb[d].index(cr)]
-                except ValueError:
-                    # This catalytic residue is not among the distance-defined
-                    # pocket residues. That is legitimate for second-shell
-                    # catalytic residues, which can matter functionally without
-                    # lining the pocket. Warn and leave its columns as NaN
-                    # (handled immediately below) rather than aborting the whole
-                    # run and discarding every other design's metrics.
+                # Second-shell catalytic residues need not line the pocket.
+                # Match their PDB chain/number directly in each cropped model.
+                _cr_in_crop = p.pdb_info().pdb2pose(chain, cr)
+                catalytic_residue_scores[d].at[j, cr] = get_residue_score(models[j], chain, cr)
+                if not ref_cr or not _cr_in_crop:
                     print(
-                        f"WARNING: catalytic residue {cr} of design {d} is not in the "
-                        f"pocket residue set; reporting NaN for its RMSD columns.\n"
-                        f"         pocket residues (pdb numbering): {pocket_residues_pdb[d]}\n"
-                        f"         Widen the pocket definition in get_pocket_residues() "
-                        f"if this residue should have been included."
+                        f"WARNING: catalytic residue {chain}{cr} of design {d} is missing "
+                        f"from the reference or model {j + 1}; reporting NaN for its RMSD."
                     )
-                    break
-                catalytic_residue_rmsds[d].at[j, cr] = get_residue_rmsd(ref_pose.residue(cr), p.residue(_cr_in_crop))
+                    catalytic_residue_rmsds[d].at[j, cr] = np.nan
+                    continue
+                rmsd = get_residue_rmsd(ref_pose.residue(ref_cr), p.residue(_cr_in_crop))
+                if rmsd is None or not np.isfinite(rmsd):
+                    print(
+                        f"WARNING: catalytic residue {chain}{cr} of design {d}, model {j + 1}, "
+                        f"has mismatched residue identity or missing atoms; reporting NaN for its RMSD."
+                    )
+                    rmsd = np.nan
+                catalytic_residue_rmsds[d].at[j, cr] = rmsd
 
-            # If catalytic residues are not in the pocket.
-            if not cr in catalytic_residue_rmsds[d]:
-                DF.at[i, f"rmsd_catres{jj}"] = np.nan
-                DF.at[i, f"rmsd_std_catres{jj}"] = np.nan
-            else:
-                DF.at[i, f"rmsd_catres{jj}"] = np.median(list(filter(lambda x: ~np.isnan(x), catalytic_residue_rmsds[d][cr])))
-                DF.at[i, f"rmsd_std_catres{jj}"] = np.std(list(filter(lambda x: ~np.isnan(x), catalytic_residue_rmsds[d][cr])))
-            if not cr in model_res_scores[d]:    
-                DF.at[i, f"u_catres{jj}"] = np.nan
-                DF.at[i, f"u_std_catres{jj}"] = np.nan
-            else:
-                DF.at[i, f"u_catres{jj}"] = np.average(list(filter(lambda x: ~np.isnan(x), model_res_scores[d][cr])))
-                DF.at[i, f"u_std_catres{jj}"] = np.std(list(filter(lambda x: ~np.isnan(x), model_res_scores[d][cr])))
+            valid_rmsds = catalytic_residue_rmsds[d][cr].dropna().to_numpy()
+            valid_scores = catalytic_residue_scores[d][cr].dropna().to_numpy()
+            DF.at[i, f"rmsd_catres{jj}"] = np.median(valid_rmsds) if len(valid_rmsds) else np.nan
+            DF.at[i, f"rmsd_std_catres{jj}"] = np.std(valid_rmsds) if len(valid_rmsds) else np.nan
+            DF.at[i, f"u_catres{jj}"] = np.mean(valid_scores) if len(valid_scores) else np.nan
+            DF.at[i, f"u_std_catres{jj}"] = np.std(valid_scores) if len(valid_scores) else np.nan
                 
         ## Calculating pocket residue metrics
         pocket_residue_rmsds[d] = pd.DataFrame()
@@ -384,6 +398,10 @@ the_queue.close()
 the_queue.join_thread()
 pool.close()
 pool.join()
+
+missing_designs = [d for i, d in enumerate(designs) if i not in results]
+if missing_designs:
+    raise RuntimeError(f"PLACER processing failed for {missing_designs}; no partial scorefile was written.")
 
 DF = pd.DataFrame()
 for i in results.keys():
