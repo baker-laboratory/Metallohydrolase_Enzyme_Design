@@ -1,0 +1,161 @@
+{
+  "constructs": {
+    "expressed_format": "MSHHHHHHSG-MVKIVSRKSLGVQNVYDIGVEKDHNFLLANGLIASN-SVG-design-GS",
+    "cleaved_format": "SVG-design-GS",
+    "design_residues": 198,
+    "protein_select_tag": "MVKIVSRKSLGVQNVYDIGVEKDHNFLLANGLIASN",
+    "expressed_sequence": "MSHHHHHHSGMVKIVSRKSLGVQNVYDIGVEKDHNFLLANGLIASNSVGITEEQYRAILEGLREKQELIRKGEIPGAHPEVYELYEEIVRTLEEKGPTEEAIIEAVKVYLKKAKEIVEKLADEEFEAPTGTKVTLAEHALEHPAIALKAAGVELPPELKAALEKFDEIARKLHPGLDALRLHLAGIADDPLFVELAREFGLGEDVERARASGFRISAAHGKGAFAVVFLFLYAIRKGYEDLIIEELKGS",
+    "expressed_residues": 249,
+    "design_reference": {
+      "sequence_workbook": "../supp_data__denovo_PTE_DNA_and_protein_sequences.xlsx",
+      "sheet": "all_designs",
+      "design_id": "R1 p1D1",
+      "model_file": "denovo_PTE__design_campaign1__037_scaffold_03____Plate1__D1__ZAPP1.pdb",
+      "cleaved_sequence_design_positions_1_based": [
+        4,
+        201
+      ]
+    }
+  },
+  "tagless": {
+    "spec": {
+      "path": "../../raw_wetlab_data/260731_p2E3_28pt9uM__p2G1_27pt5uM__ZAPP1tagless_23pt4uM_80uL_1prctMeOH_trip_blak__legacy_buf_9pt6mMpxn_serialDIL_30m_25bic.xlsx",
+      "cols": [
+        9,
+        10,
+        11
+      ],
+      "bg": [
+        12
+      ],
+      "E": 23.4,
+      "requested_fit_window_s": [
+        300,
+        20000
+      ]
+    },
+    "fit": {
+      "kcat_s": 0.01670457987488257,
+      "kcat_fit_sd_s": 0.006008552056095471,
+      "kcat_total_sd_s": 0.0060916140001089185,
+      "Km_uM": 6938.667245187848,
+      "Km_sd_uM": 4595.920746471152,
+      "kcat_over_Km_M_s": 2.407462310066482,
+      "kcat_over_Km_total_sd_M_s": 1.8203150345385732,
+      "MM_R2": 0.9241918937896412,
+      "kuncat_s": 4.979e-08,
+      "kuncat_sd_s": 1.32e-08,
+      "kcat_over_kuncat": 335500.7004394973,
+      "kcat_over_kuncat_sd": 151260.43438531304
+    }
+  },
+  "tagged": {
+    "spec": {
+      "path": "../../raw_wetlab_data/260804_ZAPP1strp_24uM__p1D9_44pt6uM__p1H4_39pt1uM__80uL_1prctMeOH_trip_blank__leg_buff__9pt6mMpxn_serialDIL_30m_25finalbica.xlsx",
+      "cols": [
+        1,
+        2,
+        3
+      ],
+      "bg": [
+        4
+      ],
+      "E": 24.0,
+      "requested_fit_window_s": [
+        300,
+        20000
+      ]
+    },
+    "official_curve": {
+      "kcat_s": 0.015313,
+      "Km_uM": 7778.23
+    },
+    "refit": {
+      "kcat_s": 0.015312799269028654,
+      "kcat_fit_sd_s": 0.002024068596606934,
+      "kcat_total_sd_s": 0.0022229295049827364,
+      "Km_uM": 7778.227140228582,
+      "Km_sd_uM": 1825.282347541013,
+      "kcat_over_Km_M_s": 1.9686747369245183,
+      "kcat_over_Km_total_sd_M_s": 0.5432319299889383,
+      "MM_R2": 0.9902805631900278,
+      "kuncat_s": 4.979e-08,
+      "kuncat_sd_s": 1.32e-08,
+      "kcat_over_kuncat": 307547.6856603465,
+      "kcat_over_kuncat_sd": 92957.32525819445
+    },
+    "official_workbook": "../paraoxon_kinetics_ALL_DATA.xlsx"
+  },
+  "calibration_AU_per_uM": 0.00667808,
+  "fit_window_actual_s": [
+    300,
+    1800
+  ],
+  "n_technical_replicates": 3,
+  "fitting": "Unweighted Michaelis-Menten fit to six concentration means; matched blank slopes subtracted.",
+  "progress": "Matched no-enzyme trace subtracted, then zeroed at the first time point.",
+  "uncertainty": "Existing SI model: fit SE, 6% enzyme concentration and 0.135% calibration in quadrature; displayed errors rounded upward to one significant figure.",
+  "confidence_bands": {
+    "tagless": {
+      "method": "pointwise delta method, full nonlinear-regression covariance",
+      "confidence": 0.95,
+      "degrees_of_freedom": 4,
+      "t_critical": 2.7764451051977987,
+      "covariance_kcat_Km": [
+        [
+          3.61026978108091e-05,
+          26.72150737605408
+        ],
+        [
+          26.721507376054085,
+          21122487.50784395
+        ]
+      ],
+      "parameter_correlation": 0.9676506534528363,
+      "includes_enzyme_or_calibration_systematic_uncertainty": false
+    },
+    "tagged": {
+      "method": "pointwise delta method, full nonlinear-regression covariance",
+      "confidence": 0.95,
+      "degrees_of_freedom": 4,
+      "t_critical": 2.7764451051977987,
+      "covariance_kcat_Km": [
+        [
+          4.096853683770363e-06,
+          3.5923043550553158
+        ],
+        [
+          3.5923043550553158,
+          3331655.6482448312
+        ]
+      ],
+      "parameter_correlation": 0.9723393107624795,
+      "includes_enzyme_or_calibration_systematic_uncertainty": false
+    },
+    "note": "Fit-only approximate pointwise 95% confidence intervals for the mean response, not prediction intervals or an equivalence test."
+  },
+  "mass": {
+    "sequence": "SVGITEEQYRAILEGLREKQELIRKGEIPGAHPEVYELYEEIVRTLEEKGPTEEAIIEAVKVYLKKAKEIVEKLADEEFEAPTGTKVTLAEHALEHPAIALKAAGVELPPELKAALEKFDEIARKLHPGLDALRLHLAGIADDPLFVELAREFGLGEDVERARASGFRISAAHGKGAFAVVFLFLYAIRKGYEDLIIEELKGS",
+    "residues": 203,
+    "expected_average_Da": 22465.79078,
+    "observed_Da": 22466.27,
+    "difference_Da": 0.479220000001078,
+    "observed_approximate_uncertainty_Da": 1.0,
+    "uncertainty_source": "Approximate core measurement uncertainty supplied by author; not calculated from the spectrum image.",
+    "mass_table_url": "https://web.expasy.org/findmod/findmod_masses.html",
+    "calculation": "Sum of average residue masses plus 18.01528 Da (water); unmodified neutral polypeptide.",
+    "spectrum": "../../mass_spectrometry/ZAPP1_tagless/SMW_ZAPP_tagless.png",
+    "spectrum_sha256": "07a1111e73a092fa380d73f256b95a2255b1ae4e9b59cfce987a8d65eb9b7137",
+    "software_banner_overlay_pixels": {
+      "x": 58,
+      "y": 2,
+      "width": 640,
+      "height": 23
+    },
+    "image_processing": "The original instrument-exported PNG is deposited separately and embedded in the SI PDF. The SI artwork covers only the software banner with a white vector overlay; spectral data, axes and peak labels are retained."
+  },
+  "reference_precision": "Rate enhancement in this SI figure uses the reference workbook kuncat of 4.979e-8 s^-1; the notebook uses its fresh fit. The reported rounded enhancement is unchanged.",
+  "path_base": "All relative file paths are relative to this analysis.json file.",
+  "figure_pdf": "../../wetlab_data_plots/paper_figures/pdf/PTE__v2SI__ZAPP1_tagless.pdf",
+  "figure_png": "../../wetlab_data_plots/paper_figures/png/PTE__v2SI__ZAPP1_tagless.png"
+}

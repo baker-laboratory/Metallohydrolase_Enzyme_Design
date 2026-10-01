@@ -14,6 +14,8 @@ is in [Design_Pipelines/Phosphotriesterase_RFdiffusion3](../../Design_Pipelines/
 | `supplemental_data/supp_data__denovo_PTE_DNA_and_protein_sequences.xlsx` | Sequences, model identifiers, cloning information, 18 paper kinetics entries and an additional tagless ZAPP-1 comparison |
 | `supplemental_data/paraoxon_kinetics_ALL_DATA.xlsx` | Reference kinetic parameters, uncertainty budget and reporting notes used by the figure routines |
 | `wetlab_data_plots/` | Analysis tables and PNG figures; `paper_figures/` also contains vector PDFs |
+| [Tagless ZAPP-1 SI data](supplemental_data/ZAPP1_tagless/) | Source tables, protein sequences and methods for the final tagless SI figure |
+| [Mass spectrometry](mass_spectrometry/) | Tagless ZAPP-1 intact-mass image and paired overview/zoom images for the TEO samples |
 | [Analysis notes](REPRODUCTION.md) | Fitting conventions, figure outputs and interpretation notes |
 
 The two eluate screens cover 96 campaign-1 designs and 192 campaign-2 designs.
@@ -21,6 +23,21 @@ Kinetics use six paraoxon concentrations, three enzyme replicates and a
 background measurement per concentration. Instrument measurements are unchanged;
 local file metadata has been removed from the workbooks. The tagless ZAPP-1 measurements
 share a plate with ZAPP-3 and ZAPP-4.
+
+## Tagless ZAPP-1 and mass spectrometry
+
+The final tagless SI figure is available as
+[PNG](wetlab_data_plots/paper_figures/png/PTE__v2SI__ZAPP1_tagless.png),
+[PDF](wetlab_data_plots/paper_figures/pdf/PTE__v2SI__ZAPP1_tagless.pdf) and
+[TeX caption](wetlab_data_plots/paper_figures/pdf/PTE__v2SI__ZAPP1_tagless.tex).
+It combines tagless kinetics, the tagged/tagless fit overlay and the
+intact-mass spectrum. Its [source data](supplemental_data/ZAPP1_tagless/)
+include the protein sequences and full-precision plotting tables.
+
+The [mass-spectrometry deposit](mass_spectrometry/) retains the original
+instrument-exported PNGs: one tagless spectrum and overview/zoom pairs for the
+control and four TEO-treated samples. The image manifest records original
+filenames and checksums.
 
 ## Run the analysis
 

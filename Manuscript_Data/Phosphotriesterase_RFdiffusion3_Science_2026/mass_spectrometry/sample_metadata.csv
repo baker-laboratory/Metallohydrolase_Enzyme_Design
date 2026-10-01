@@ -1,0 +1,6 @@
+sample_id,expression_host,replicate_label,teo_to_protein_molar_equivalents,equivalents_approximate
+SMW_P1D1_Control,E. coli,,0,false
+SMW_P1D1_High_TEO_1,E. coli,1,3270,true
+SMW_P1D1_High_TEO_2,E. coli,2,3270,true
+SMW_P1D1_Low_TEO_1,E. coli,1,1635,true
+SMW_P1D1_Low_TEO_2,E. coli,2,1635,true
