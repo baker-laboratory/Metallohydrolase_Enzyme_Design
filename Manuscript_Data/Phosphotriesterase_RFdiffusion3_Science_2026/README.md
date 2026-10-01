@@ -8,7 +8,8 @@ is in [Design_Pipelines/Phosphotriesterase_RFdiffusion3](../../Design_Pipelines/
 
 | Location | Contents |
 |---|---|
-| `wetlab_data_analysis.ipynb` | Calibration, background rates, kinetics, screening and manuscript figures |
+| [wetlab_data_analysis.py](wetlab_data_analysis.py) | Reactive marimo analysis: raw-data calibration, background rates, kinetics, complete screens and figure export |
+| `wetlab_data_analysis.ipynb` | Historical Jupyter workflow |
 | `raw_wetlab_data/` | 15 files: calibration and background plates, nine kinetics plates, two screens, an order FASTA and design-assignment table |
 | `supplemental_data/supp_data__denovo_PTE_design_models.zip` | 288 design models: 96 from campaign 1 and 192 from campaign 2 |
 | `supplemental_data/supp_data__denovo_PTE_DNA_and_protein_sequences.xlsx` | Sequences, model identifiers, cloning information, 18 paper kinetics entries and an additional tagless ZAPP-1 comparison |
@@ -46,26 +47,32 @@ From this directory:
 ```bash
 conda env create -f ../../Environment/analysis.yml
 conda activate zinc_hydro_analysis
-jupyter lab wetlab_data_analysis.ipynb
+marimo edit wetlab_data_analysis.py
 ```
 
-Run the notebook from top to bottom. It locates the repository automatically
-and uses the deposited files; no GPU or external laboratory filesystem is
-required. Section V generates the manuscript-style figures. Arial reproduces
-the figure typography; a fallback font is used when Arial is unavailable.
+The notebook runs its dependency graph automatically, using the deposited raw
+files. It refits all 19 enzyme/condition entries, including tagless ZAPP-1,
+and performs 234 checks against the paper reference workbook. Select an assay
+or scaffold to inspect its curves. The export button regenerates the tables
+and manuscript figures. No GPU or external laboratory filesystem is required.
+Arial reproduces the figure typography; an installed fallback font is used
+when Arial is unavailable.
 
-The notebook uses `Scripts/wetlab_platereader/kinetics_pte_rfd3.py` for the
-RFdiffusion3 plot style and the shared plate-reader fitter for numerical analysis.
-Existing analysis PNG output is 150 dpi. The additional standalone SI-style
-screening views are 600 dpi. Manuscript panels also produce PDF; optional
-per-design EPS export is controlled by `SAVE_EPS`.
+The app calls ordinary Python analysis functions in
+`Scripts/wetlab_platereader/analysis_pte_rfd3.py`, the RFdiffusion3 drawing
+helpers in `kinetics_pte_rfd3.py`, and the shared numerical fitter. It does not
+read or execute the Jupyter notebook or depend on saved notebook output.
+Screening PNGs are 600 dpi; kinetics PNGs are 150 dpi. Historical manuscript
+panels also produce PDF.
 
-The notebook retains its original screening views and adds the round-1 SI
-panel A presentation for both screens: [round 1](wetlab_data_plots/screen_round1_SI_style.png)
-and [round 2](wetlab_data_plots/screen_round2_SI_style.png). These use
-`plot_screening_PTE_RFd3`, with time in hours, first-read-referenced ΔA₄₀₅,
-direct labels on characterized designs and a gray 5th–95th percentile range
-for the other designs. Both views use the same deposited measurements.
+The current [round-1](wetlab_data_plots/screen_round1_SI_style.png) and
+[round-2](wetlab_data_plots/screen_round2_SI_style.png) screening views retain
+the SI typography and display **every design as an individual scaffold-colored
+curve**. Kinetics-tested designs are thicker and directly labeled. Time is in
+hours and ΔA₄₀₅ is referenced to each well's first acquisition. Negative-going
+traces remain visible; no percentile band or hit filter replaces the data.
+Historical manuscript artwork and the original Jupyter screening views remain
+available alongside these complete views.
 
 ## Sequence and model identifiers
 

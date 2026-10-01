@@ -64,3 +64,9 @@ model_weights/
 *:Zone.Identifier
 *Zone.Identifier
 .~lock.*#
+
+# Local marimo sessions, HTML previews and environments
+__marimo__/
+.venv/
+.venv-*/
+Manuscript_Data/*/wetlab_data_analysis.html

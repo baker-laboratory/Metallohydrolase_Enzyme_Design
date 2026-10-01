@@ -43,8 +43,7 @@ Then pick the smallest environment that covers what you want to do:
 ```bash
 conda env create -f Environment/analysis.yml
 conda activate zinc_hydro_analysis
-python -m ipykernel install --user --name=zinc_hydro_analysis
-jupyter lab Manuscript_Data/Metallohydrolase_Nature_2026/wetlab_data_analysis.ipynb
+marimo edit Manuscript_Data/Metallohydrolase_Nature_2026/wetlab_data_analysis.py
 ```
 
 **Run the design tutorials and pipelines** (needs a GPU and a free academic
@@ -138,7 +137,7 @@ Metallohydrolase_Enzyme_Design/
 |-- Manuscript_Data/                               # EXPERIMENTAL DATA
 |   |-- README.md
 |   |-- Metallohydrolase_Nature_2026/
-|   |   |-- wetlab_data_analysis.ipynb
+|   |   |-- wetlab_data_analysis.py
 |   |   |-- raw_wetlab_data/                       #   43 primary files
 |   |   |-- supplemental_data/                     #   Data S1-S3 + ZETA_2 crystal structures
 |   |   +-- wetlab_data_plots/                     #   all generated figures
@@ -258,7 +257,7 @@ python Scripts/env_config.py
 
 | Environment | File | For |
 |---|---|---|
-| `zinc_hydro_analysis` | [`Environment/analysis.yml`](Environment/analysis.yml) | Wet lab analysis. numpy, pandas, scipy, matplotlib, openpyxl, JupyterLab. No GPU, no license. |
+| `zinc_hydro_analysis` | [`Environment/analysis.yml`](Environment/analysis.yml) | Wet lab analysis. numpy, pandas, scipy, matplotlib, openpyxl, marimo. No GPU, no license. |
 | `zinc_hydro` | [`Environment/zinc_hydro.yml`](Environment/zinc_hydro.yml) | Everything else. |
 
 Key packages in `zinc_hydro`:

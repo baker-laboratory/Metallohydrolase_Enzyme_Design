@@ -21,7 +21,7 @@ Each dataset directory follows the same shape:
 <Campaign>/
 ├── raw_wetlab_data/          # primary instrument measurements
 ├── supplemental_data/        # sequences, models, and theozymes
-├── wetlab_data_analysis.ipynb  # loads raw data -> figures + reported statistics
+├── wetlab_data_analysis.py  # loads raw data -> figures + reported statistics
 └── wetlab_data_plots/        # every figure the notebook writes
 ```
 
@@ -30,23 +30,22 @@ Each dataset directory follows the same shape:
 ## Running the analysis
 
 You do **not** need the design environment. The analysis notebooks use only
-numpy, pandas, scipy, matplotlib, and openpyxl.
+marimo, numpy, pandas, scipy, matplotlib, and openpyxl.
 
 ```bash
 # from the repository root
 conda env create -f Environment/analysis.yml
 conda activate zinc_hydro_analysis
-python -m ipykernel install --user --name=zinc_hydro_analysis
-
-jupyter lab Manuscript_Data/Metallohydrolase_Nature_2026/wetlab_data_analysis.ipynb
+marimo edit Manuscript_Data/Metallohydrolase_Nature_2026/wetlab_data_analysis.py
 ```
 
-Select the **zinc_hydro_analysis** kernel, then **run the first cell before
-anything else** and proceed top to bottom.
+The marimo notebooks execute cells in dependency order. The Python source contains
+the analysis; historical `.ipynb` files are retained as an archive and are not
+required to run the marimo notebooks.
 
 There are no paths to edit. The first cell locates the repository by walking up
-from the working directory, creates `wetlab_data_plots/`, and exports the
-`*_dir` variables the rest of the notebook uses. Set `ZINC_HYDRO_REPO` only if
+from the notebook location, creates `wetlab_data_plots/`, and supplies the
+paths used by the analysis cells. Set `ZINC_HYDRO_REPO` only if
 you are running from somewhere unusual.
 
 `openpyxl` is required — 30 of the 43 Nature raw files are `.xlsx`. It is included in
@@ -80,8 +79,9 @@ visual comparison results and the separately labeled tagless ZAPP1 analysis.
 
 ### Reading it without running it
 
-The notebook ships with its cell outputs intact, so every figure and fitted
-value is visible on GitHub without running anything.
+Generated PNGs and result tables are available in `wetlab_data_plots/`. For a
+local executed HTML copy, run `marimo export html <notebook.py> -o analysis.html`.
+The archived Jupyter notebooks also retain their previous outputs.
 
 ---
 
@@ -108,9 +108,8 @@ value is visible on GitHub without running anything.
   to the experiments recorded alongside it. To change a calibration, edit
   §II.I.A rather than the individual analysis cells.
 
-- **Run the notebook top to bottom.** Several sections build on variables
-  defined earlier, so running cells out of order can produce plots from a
-  different experiment's wells.
+- **Reactive execution.** Each marimo cell names its inputs explicitly; changing
+  an upstream analysis setting reruns the dependent cells.
 
 - **Nature `supplemental_data/` is reference material** — the deposited
   sequences, design models, DFT theozymes, and ZETA_2 crystal structures. The
@@ -124,5 +123,5 @@ value is visible on GitHub without running anything.
 Create `Manuscript_Data/<Chemistry>_<Model>_<Journal>_<Year>/` with the four-part
 layout above and add a row linking its computational campaign. Shared results
 should link to their original dataset rather than duplicate raw files. The analysis notebook's first cell is
-campaign-agnostic apart from its `working_dir` line — copy it and change that
-one path.
+specific to its dataset. Copy a marimo entrypoint and update its dataset path
+and analysis cells.

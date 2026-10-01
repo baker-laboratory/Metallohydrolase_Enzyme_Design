@@ -23,45 +23,132 @@ def paper_style():
     return paper
 
 
-def plot_screening_PTE_RFd3(round_number, *, plot_path=None, show=True, dpi=600):
-    """Draw a standalone screening panel with the RFdiffusion3 SI artwork.
+# Scaffold IDs are the global identifiers in the deposited all_designs sheet.
+# The five characterized families retain the manuscript's label/curve colors.
+SCREEN_SCAFFOLD_COLORS = {
+    1: "#8a6db1", 2: "#bc8b45", 3: "#2e8b82", 4: "#8d5871",
+    5: "#667f4b", 6: "#957357", 7: "#cf7c52", 8: "#699bb0",
+    9: "#3c4d8c", 10: "#aa724b", 11: "#8b77aa", 12: "#c9647a",
+    13: "#4a68a8", 14: "#738b38", 15: "#ad5f96", 16: "#477f91",
+    17: "#9f8d48",
+}
+SCREEN_KINETICS_LABELS = {
+    1: {"D1": "ZAPP-1", "D7": "R1 p1D7", "D8": "R1 p1D8", "E10": "R1 p1E10"},
+    2: {"F7": "ZAPP-2", "H1": "ZAPP-3", "G5": "ZAPP-4", "C12": "ZAPP-5",
+        "E24": "R2 p2B12", "B18": "R2 p1D9", "D8": "R2 p1H4"},
+}
 
-    Reuses the manuscript renderer and deposited measurements. Colored lines
-    are the kinetically characterized designs; gray is the 5th–95th percentile
-    envelope of the remaining designs. Absorbance is relative to each well's
-    first measurement, without fitting, censoring, or selecting new hits.
-    The original notebook screening views remain available separately.
+
+def load_screening_PTE_RFd3(round_number):
+    """Load every raw screening trace and its deposited design/scaffold mapping.
+
+    Mapping is checked against all 288 ordered designs. Round 2 uses interleaved
+    row pairs: reader A–D contain source plate 1; E–H contain source plate 2.
+    Global scaffold IDs are 1–6 (round 1) and 7–17 (round 2).
     """
-    paper = paper_style()
-    panels = {
-        1: (paper.screen_round1,
-            {"D1": ("ZAPP-1", "ZAPP-1"), "D7": ("R1 p1D7", "R1 p1D7"),
-             "D8": ("R1 p1D8", "R1 p1D8"), "E10": ("R1 p1E10", "R1 p1E10")},
-            96, "300 µM paraoxon · 1% MeOH · 200 µM ZnSO$_4$ · 25 °C, 1 h"),
-        2: (paper.screen_round2,
-            {"F7": ("ZAPP-2", "ZAPP-2"), "H1": ("ZAPP-3", "ZAPP-3"),
-             "G5": ("ZAPP-4", "ZAPP-4"), "C12": ("ZAPP-5", "ZAPP-5"),
-             "E24": ("R2 p2B12", "R2 p2B12"), "B18": ("R2 p1D9", "R2 p1D9"),
-             "D8": ("R2 p1H4", "R2 p1H4")},
-            192, "600 µM paraoxon · 1% MeOH · 25 mM NaHCO$_3$ (final) · 25 °C, 1 h"),
-    }
-    if round_number not in panels:
+    from neo2_util import parse_neo2_kinetics
+    import re
+
+    if round_number not in (1, 2):
         raise ValueError("round_number must be 1 or 2")
-    draw, hits, n_designs, conditions = panels[round_number]
+    paper = paper_style()
+    designs = pd.read_excel(
+        Path(paper.ROOT) / "supplemental_data" /
+        "supp_data__denovo_PTE_DNA_and_protein_sequences.xlsx", sheet_name="all_designs")
+    mapping = designs.loc[designs.design_campaign == round_number].copy()
+    if round_number == 1:
+        traces = (parse_neo2_kinetics(paper.SCREEN_R1)
+                  .groupby(["Well", "time"], as_index=False).agg(value=("value", "mean"))
+                  .pivot(index="time", columns="Well", values="value").sort_index())
+        time_hours = (traces.index.to_numpy(float) - traces.index.min()) / 3600
+        mapping["reader_well"] = mapping["well"]
+    else:
+        raw = pd.read_csv(paper.SCREEN_R2)
+        wells = [c for c in raw if re.fullmatch(r"[A-H](?:[1-9]|1[0-9]|2[0-4])", str(c))]
+        traces = raw[wells].apply(pd.to_numeric, errors="coerce")
+        time_hours = raw["Time"].to_numpy(float) * 24
+        time_hours -= time_hours[0]
+        def reader_well(row):
+            source_row, source_column = row.well[0], int(row.well[1:])
+            row_index = "ABCDEFGH".index(source_row)
+            reader_row = "ABCDEFGH"[(int(row.order_plate)-1)*4 + row_index//2]
+            return f"{reader_row}{2*source_column-1+row_index%2}"
+        mapping["reader_well"] = [reader_well(row) for row in mapping.itertuples()]
+    expected = {1: 96, 2: 192}[round_number]
+    if len(mapping) != expected or len(traces.columns) != expected:
+        raise ValueError(f"Round {round_number}: expected {expected} designs and traces")
+    if mapping.reader_well.duplicated().any() or set(mapping.reader_well) != set(traces):
+        raise ValueError("Design mapping does not cover each reader well exactly once")
+    mapping["screen_scaffold"] = mapping.scaffold - (6 if round_number == 2 else 0)
+    mapping["color"] = mapping.scaffold.map(SCREEN_SCAFFOLD_COLORS)
+    mapping["kinetics_tested"] = mapping.reader_well.isin(SCREEN_KINETICS_LABELS[round_number])
+    mapping["plot_label"] = mapping.reader_well.map(SCREEN_KINETICS_LABELS[round_number])
+    if mapping.color.isna().any():
+        raise ValueError("A scaffold has no assigned color")
+    return time_hours, traces, mapping
+
+
+def plot_screening_PTE_RFd3(round_number, *, plot_path=None, show=True, dpi=600,
+                             scaffold=None):
+    """Plot every screening design individually, colored by its scaffold.
+
+    SI typography, boxed axes, time in hours and first-read-referenced ΔA405
+    are retained. Every design is a line: there is no envelope, percentile
+    reduction, hit filter, or fitted replacement. Kinetics-tested designs are
+    drawn last, bold, and directly labeled. ``scaffold`` optionally selects a
+    global scaffold ID for inspection; the default always includes all designs.
+    """
+    from matplotlib.lines import Line2D
+    from matplotlib.ticker import MaxNLocator
+
+    paper = paper_style()
+    time_hours, traces, mapping = load_screening_PTE_RFd3(round_number)
+    if scaffold is not None:
+        mapping = mapping.loc[mapping.scaffold == scaffold]
+        if mapping.empty:
+            raise ValueError(f"Scaffold {scaffold} is absent from round {round_number}")
+    conditions = {
+        1: "300 µM paraoxon · 1% MeOH · 200 µM ZnSO$_4$ · 25 °C, 1 h",
+        2: "600 µM paraoxon · 1% MeOH · 25 mM NaHCO$_3$ (final) · 25 °C, 1 h",
+    }
     with plt.rc_context({**paper.STYLE, "mathtext.cal": paper.fam}):
-        fig = plt.figure(figsize=(3.55, 2.15))
-        ax = fig.add_axes([.14, .22, .82, .55])
-        draw(ax, hits)
+        fig = plt.figure(figsize=(4.8, 3.0))
+        ax = fig.add_axes([.12, .29, .85, .48])
+        ends = []
+        for row in mapping.sort_values("kinetics_tested", kind="stable").itertuples():
+            y = traces[row.reader_well].to_numpy(float)
+            y = y - y[0]
+            ax.plot(time_hours, y, color=row.color,
+                    lw=1.5 if row.kinetics_tested else .48,
+                    alpha=1.0 if row.kinetics_tested else .7,
+                    zorder=4 if row.kinetics_tested else 2,
+                    label=row.design_id, gid=f"design:{row.design_id}")
+            if row.kinetics_tested and np.isfinite(y[-1]):
+                ends.append((y[-1], row.plot_label, row.color))
+        ax.set_xlabel("Time (h)", fontsize=paper.LABFS, labelpad=2)
+        ax.set_ylabel("$\\Delta$A$_{405}$", fontsize=paper.LABFS, labelpad=2)
+        ax.set_xlim(0, time_hours.max() * 1.30)
+        lo, hi = ax.get_ylim()
+        ax.set_ylim(lo, hi + (hi-lo)*.10)
+        ax.yaxis.set_major_locator(MaxNLocator(nbins=4, min_n_ticks=4))
+        paper.style(ax)
+        paper.place_labels(ax, ends, time_hours[-1], fs=5.6)
         bounds = ax.get_position()
         center = (bounds.x0 + bounds.x1) / 2
+        suffix = "" if scaffold is None else f", scaffold {scaffold}"
         fig.text(center, bounds.y1 + .325 / fig.get_figheight(),
-                 f"Round {round_number} eluate screen  ($\\mathbfit{{n}}$ = {n_designs} designs)",
-                 ha="center", va="bottom", fontsize=7.8,
-                 color=paper.INK, fontweight="bold")
+                 f"Round {round_number} eluate screen{suffix}  ($\\mathbfit{{n}}$ = {len(mapping)} designs)",
+                 ha="center", va="bottom", fontsize=7.8, color=paper.INK, fontweight="bold")
         fig.text(center, bounds.y1 + .05 / fig.get_figheight(),
-                 conditions + "\ngray = other uncharacterized designs (5–95% envelope)",
-                 ha="center", va="bottom", fontsize=6.1,
-                 color=paper.INK, linespacing=.94)
+                 conditions[round_number] + "\nall designs colored by scaffold; bold = kinetics tested",
+                 ha="center", va="bottom", fontsize=6.1, color=paper.INK, linespacing=.94)
+        handles = [Line2D([], [], color=SCREEN_SCAFFOLD_COLORS[s], lw=1.0,
+                          label=f"{s} (n={sum(mapping.scaffold == s)})")
+                   for s in sorted(mapping.scaffold.unique())]
+        fig.legend(handles=handles, title="Scaffold (deposited model IDs)",
+                   loc="lower center", bbox_to_anchor=(.55, .005), ncol=6,
+                   frameon=False, fontsize=5.6, title_fontsize=5.8,
+                   handlelength=1.4, columnspacing=1.0, labelspacing=.5)
         if plot_path:
             fig.savefig(plot_path, dpi=dpi, bbox_inches="tight")
         if show:
@@ -91,7 +178,7 @@ def run_kinetics_PTE_RFd3(name, *, data_path, enzyme_uM, enzyme_cols, bg_cols,
     if show or plot_path:
         sp = dict(path=str(data_path), E=enzyme_uM, cols=list(enzyme_cols),
                   bg=list(bg_cols), tr=time_range_seconds)
-        with plt.rc_context(paper.STYLE):
+        with plt.rc_context({**paper.STYLE, "mathtext.cal": paper.fam}):
             fig, axs = plt.subplots(1, 2, figsize=(6.4, 2.65))
             fig.subplots_adjust(left=.10, right=.77, bottom=.23, top=.70, wspace=.55)
             paper.draw_progress(axs[0], sp, spu)

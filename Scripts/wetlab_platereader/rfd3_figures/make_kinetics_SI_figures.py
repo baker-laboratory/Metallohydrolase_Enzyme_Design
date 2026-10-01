@@ -31,6 +31,7 @@ E_REL = 0.06                    # rel. sd on [E]0, same budget as the xlsx
 TEAL, NAVY, MBLUE, PINK, PEACH = "#4fb9af", "#4b5faa", "#6686c5", "#f0a4b3", "#ffc6b2"
 FAM = {
  "ZAPP-1":(TEAL,"#2e8b82"), "ZAPP-1 (no NaHCO3)":(TEAL,"#2e8b82"),
+ "ZAPP-1 tagless":(TEAL,"#2e8b82"),
  "R1 p1D7":(TEAL,"#2e8b82"), "R1 p1D8":(TEAL,"#2e8b82"), "R1 p1E10":(TEAL,"#2e8b82"),
  "ZAPP-2":(NAVY,"#3c4d8c"),  "R2 p2B12":(NAVY,"#3c4d8c"),
  "ZAPP-3":(MBLUE,"#4a68a8"),
@@ -160,9 +161,10 @@ def draw_progress(ax, sp, spu, tmax_min=None):
     ax.set_xlim(0, None); style(ax)
     ax.yaxis.set_major_locator(MaxNLocator(nbins=4, min_n_ticks=4)); ax.xaxis.set_major_locator(MaxNLocator(nbins=4, min_n_ticks=4))
 
-def draw_mm(ax, name, sp, spu):
-    row = TAB.loc[name]
-    S, v, e = mm_points(sp, spu)
+def draw_mm(ax, name, sp, spu, *, parameters=None, points=None):
+    """Draw supplied fresh results, or the archival paper row when omitted."""
+    row = TAB.loc[name] if parameters is None else parameters
+    S, v, e = mm_points(sp, spu) if points is None else points
     kcat, Km = row["kcat (s-1)"], row["Km (uM)"]
     unresolved = str(row["kcat (reported)"]).strip() == "n.d."
     sc = 1e-3                                    # every kinetics panel uses 10^-3 s^-1

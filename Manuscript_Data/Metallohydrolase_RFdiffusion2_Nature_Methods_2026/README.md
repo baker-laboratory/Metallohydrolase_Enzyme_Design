@@ -9,15 +9,16 @@ The shared 4MU-phenylacetate experiments, sequences and structures are in
 
 | File | Contents |
 |---|---|
-| [Analysis notebook](wetlab_data_analysis.ipynb) | Screening progress curves and kinetics for C4, B11 and D11 |
+| [Analysis notebook](wetlab_data_analysis.py) | Screening progress curves and kinetics for C4, B11 and D11 |
 | [Experimental inputs](raw_wetlab_data/) | Screening plates, calibration and kinetics measurements |
 | [Figures and result tables](wetlab_data_plots/) | Notebook outputs |
 | [Supplementary sequence and kinetics workbook](supplemental_data/Data_S1__4MU_B_Ordered_Sequences.xlsx) | All 96 ordered protein/DNA sequences, expression constructs and kinetics |
 | [Protein sequences: CSV](supplemental_data/ordered_sequences.csv) / [FASTA](supplemental_data/ordered_sequences.fasta) | Ordered protein sequences and model mapping |
 | [Transition-state models](supplemental_data/Data_S2__4MU_B_Ordered_Models_with_Transition_States.zip) / [model index](supplemental_data/model_manifest.csv) | 96 sequence-matched computational design models containing the transition state and Zn |
 
-Run all notebook cells with Python, NumPy, pandas, SciPy, matplotlib and
-openpyxl. Section I includes the 96-well screen and additional screening
+Open the notebook with `marimo edit wetlab_data_analysis.py` using the
+[analysis environment](../../Environment/README.md). It recalculates from the
+raw measurements; the previous `.ipynb` is retained as an archive. Section I includes the 96-well screen and additional screening
 conditions; Section II uses the included 2025-04-01 calibration for the
 publication kinetics. D11 is reported as a low-substrate catalytic-efficiency
 estimate because separate kcat and KM values are not resolved. Screening

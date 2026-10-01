@@ -14,8 +14,8 @@ The computational workflow is in
 
 ## Analysis
 
-Open [wetlab_data_analysis.ipynb](wetlab_data_analysis.ipynb), select the
-`zinc_hydro_analysis` kernel, and run the cells from top to bottom. See the
+Open [wetlab_data_analysis.py](wetlab_data_analysis.py) with `marimo edit`.
+The cells recalculate from the raw measurements in dependency order. See the
 [analysis environment instructions](../README.md#running-the-analysis).
 No GPU or design software is required.
 
@@ -25,8 +25,8 @@ The notebook reads all 43 primary data files and includes:
 - Calibration, Michaelis–Menten kinetics, uncatalyzed hydrolysis and zinc dependence.
 - Total turnover, zinc-binding curves and circular-dichroism measurements.
 
-Figures are saved in [wetlab_data_plots](wetlab_data_plots/), and the executed
-notebook includes the plots and fitted values. `FIGURE_DPI` and `SAVE_EPS` in
+Figures are saved in [wetlab_data_plots](wetlab_data_plots/); marimo displays
+the plots and fitted values as it runs. The previous `.ipynb` is retained as an archive. `FIGURE_DPI` and `SAVE_EPS` in
 the setup cell control figure exports.
 
 ## Supplementary data

@@ -17,13 +17,13 @@ Four ways to get a working environment. Pick one — you do not need all of them
 
 ## 1. Analysis only (smallest, works everywhere)
 
-Everything needed for `Manuscript_Data/*/wetlab_data_analysis.ipynb` and nothing
+Everything needed for `Manuscript_Data/*/wetlab_data_analysis.py` and nothing
 else. No CUDA, no PyTorch, no PyRosetta, no license.
 
 ```bash
 conda env create -f Environment/analysis.yml
 conda activate zinc_hydro_analysis
-python -m ipykernel install --user --name=zinc_hydro_analysis
+marimo edit Manuscript_Data/Metallohydrolase_Nature_2026/wetlab_data_analysis.py
 ```
 
 Or with `uv` / `pip`:
@@ -31,7 +31,7 @@ Or with `uv` / `pip`:
 ```bash
 uv venv .venv --python 3.11 && source .venv/bin/activate
 uv pip install -r Environment/requirements-analysis.txt
-python -m ipykernel install --user --name=zinc_hydro_analysis
+marimo edit Manuscript_Data/Metallohydrolase_Nature_2026/wetlab_data_analysis.py
 ```
 
 ## 2. Full design environment
@@ -82,7 +82,7 @@ works anywhere this repository expects an interpreter. Pass `--nv` for GPU work.
 
 ```bash
 cd Environment
-pixi run -e analysis jupyter lab      # analysis stack, cross-platform
+pixi run -e analysis marimo edit ../Manuscript_Data   # analysis notebooks, cross-platform
 pixi run -e design python -c "import pyrosetta"   # full stack, linux-64
 ```
 
@@ -101,7 +101,7 @@ and wet lab analysis run on CPUs.
 | Execution in the design workflows | Steps |
 |---|---|
 | GPU | RFdiffusion2 / RFdiffusion3 inference, LigandMPNN, AlphaFold2 (SuperFold), AlphaFold3, PLACER |
-| CPU-only | theozyme prep, ligand `.params` generation, Rosetta/PyRosetta scoring and filtering, `Manuscript_Data/*/wetlab_data_analysis.ipynb` |
+| CPU-only | theozyme prep, ligand `.params` generation, Rosetta/PyRosetta scoring and filtering, `Manuscript_Data/*/wetlab_data_analysis.py` |
 
 LigandMPNN and PLACER also provide CPU fallbacks in their included source code;
 they still need PyTorch and their other model dependencies.

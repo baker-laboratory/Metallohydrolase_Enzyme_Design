@@ -11,7 +11,7 @@
 #  ANALYSIS ONLY (wet lab notebook -- fast, no GPU, works on macOS/Windows):
 #
 #      cd Environment
-#      pixi run -e analysis jupyter lab
+#      pixi run -e analysis marimo edit ../Manuscript_Data/Metallohydrolase_Nature_2026/wetlab_data_analysis.py
 #
 #  FULL DESIGN ENVIRONMENT (linux-64 only; PyRosetta needs a license):
 #
@@ -44,11 +44,12 @@ scipy = ">=1.13"
 matplotlib = ">=3.9"
 seaborn = ">=0.13"
 openpyxl = ">=3.1"
-jupyterlab = ">=4.2"
-ipykernel = ">=6.28"
+
+[pypi-dependencies]
+marimo = "==0.25.0"
 
 [tasks]
-lab = "jupyter lab"
+lab = "marimo edit ../Manuscript_Data"
 
 # --- feature: full design stack (linux-64 + CUDA only) -------------------
 [feature.design]
@@ -63,6 +64,8 @@ channels = [
 platforms = ["linux-64"]
 
 [feature.design.dependencies]
+jupyterlab = ">=4.2"
+ipykernel = ">=6.28"
 python = "3.10.*"
 pytorch = "2.3.1.*"
 torchvision = "0.18.1.*"
