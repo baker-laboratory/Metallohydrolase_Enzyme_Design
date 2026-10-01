@@ -56,8 +56,16 @@ the figure typography; a fallback font is used when Arial is unavailable.
 
 The notebook uses `Scripts/wetlab_platereader/kinetics_pte_rfd3.py` for the
 RFdiffusion3 plot style and the shared plate-reader fitter for numerical analysis.
-PNG output is 150 dpi. Manuscript panels also produce PDF; optional per-design
-EPS export is controlled by `SAVE_EPS`.
+Existing analysis PNG output is 150 dpi. The additional standalone SI-style
+screening views are 600 dpi. Manuscript panels also produce PDF; optional
+per-design EPS export is controlled by `SAVE_EPS`.
+
+The notebook retains its original screening views and adds the round-1 SI
+panel A presentation for both screens: [round 1](wetlab_data_plots/screen_round1_SI_style.png)
+and [round 2](wetlab_data_plots/screen_round2_SI_style.png). These use
+`plot_screening_PTE_RFd3`, with time in hours, first-read-referenced ΔA₄₀₅,
+direct labels on characterized designs and a gray 5th–95th percentile range
+for the other designs. Both views use the same deposited measurements.
 
 ## Sequence and model identifiers
 

@@ -23,6 +23,53 @@ def paper_style():
     return paper
 
 
+def plot_screening_PTE_RFd3(round_number, *, plot_path=None, show=True, dpi=600):
+    """Draw a standalone screening panel with the RFdiffusion3 SI artwork.
+
+    Reuses the manuscript renderer and deposited measurements. Colored lines
+    are the kinetically characterized designs; gray is the 5th–95th percentile
+    envelope of the remaining designs. Absorbance is relative to each well's
+    first measurement, without fitting, censoring, or selecting new hits.
+    The original notebook screening views remain available separately.
+    """
+    paper = paper_style()
+    panels = {
+        1: (paper.screen_round1,
+            {"D1": ("ZAPP-1", "ZAPP-1"), "D7": ("R1 p1D7", "R1 p1D7"),
+             "D8": ("R1 p1D8", "R1 p1D8"), "E10": ("R1 p1E10", "R1 p1E10")},
+            96, "300 µM paraoxon · 1% MeOH · 200 µM ZnSO$_4$ · 25 °C, 1 h"),
+        2: (paper.screen_round2,
+            {"F7": ("ZAPP-2", "ZAPP-2"), "H1": ("ZAPP-3", "ZAPP-3"),
+             "G5": ("ZAPP-4", "ZAPP-4"), "C12": ("ZAPP-5", "ZAPP-5"),
+             "E24": ("R2 p2B12", "R2 p2B12"), "B18": ("R2 p1D9", "R2 p1D9"),
+             "D8": ("R2 p1H4", "R2 p1H4")},
+            192, "600 µM paraoxon · 1% MeOH · 25 mM NaHCO$_3$ (final) · 25 °C, 1 h"),
+    }
+    if round_number not in panels:
+        raise ValueError("round_number must be 1 or 2")
+    draw, hits, n_designs, conditions = panels[round_number]
+    with plt.rc_context({**paper.STYLE, "mathtext.cal": paper.fam}):
+        fig = plt.figure(figsize=(3.55, 2.15))
+        ax = fig.add_axes([.14, .22, .82, .55])
+        draw(ax, hits)
+        bounds = ax.get_position()
+        center = (bounds.x0 + bounds.x1) / 2
+        fig.text(center, bounds.y1 + .325 / fig.get_figheight(),
+                 f"Round {round_number} eluate screen  ($\\mathbfit{{n}}$ = {n_designs} designs)",
+                 ha="center", va="bottom", fontsize=7.8,
+                 color=paper.INK, fontweight="bold")
+        fig.text(center, bounds.y1 + .05 / fig.get_figheight(),
+                 conditions + "\ngray = other uncharacterized designs (5–95% envelope)",
+                 ha="center", va="bottom", fontsize=6.1,
+                 color=paper.INK, linespacing=.94)
+        if plot_path:
+            fig.savefig(plot_path, dpi=dpi, bbox_inches="tight")
+        if show:
+            plt.show()
+        plt.close(fig)
+    return fig, ax
+
+
 def run_kinetics_PTE_RFd3(name, *, data_path, enzyme_uM, enzyme_cols, bg_cols,
                         condition="+25 mM NaHCO3", time_range_seconds=(300, 20000),
                         plot_path=None, show=True, save_eps=False):

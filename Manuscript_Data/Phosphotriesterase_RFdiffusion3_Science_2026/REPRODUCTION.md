@@ -29,6 +29,18 @@ uses the no-bicarbonate calibration for those points and error bars, consistent
 with its fitted curve. Notebook fits and SI panels use condition-matched
 calibration throughout.
 
+## Additional SI screening views
+
+Section IV keeps the original screening plots and adds standalone SI-style
+views of [round 1](wetlab_data_plots/screen_round1_SI_style.png) and
+[round 2](wetlab_data_plots/screen_round2_SI_style.png). The helper
+`plot_screening_PTE_RFd3(round_number, plot_path=..., dpi=600)` calls the same
+rendering functions used for panel A of the manuscript SI kinetics figures.
+Time is in hours, ΔA₄₀₅ is measured from each well's first acquisition, and
+characterized designs have scaffold colors and direct endpoint labels. The
+gray band is the pointwise 5th–95th percentile range of the remaining designs;
+it is not a confidence interval. No new fits, thresholds or hit calls are made.
+
 ## Tagless ZAPP-1 SI
 
 Tagless ZAPP-1 is a supplementary construct analysis in addition to the
