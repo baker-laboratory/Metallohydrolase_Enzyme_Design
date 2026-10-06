@@ -28,7 +28,7 @@ Metalloprotease_RFdiffusion3/
 └── outputs/                       # per-stage outputs
 ```
 
-The matching experimental data will appear at
+The matching experimental data are available at
 [`../../Manuscript_Data/Metalloprotease_RFdiffusion3_Science_2026/`](../../Manuscript_Data/Metalloprotease_RFdiffusion3_Science_2026/).
 
 ## In the meantime

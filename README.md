@@ -83,11 +83,12 @@ is organized by publication. The links below connect the two.
 | Metalloesterase | RFdiffusion2 | Zn(II) esterase, 4MU-phenylacetate | [pipeline](Design_Pipelines/Metalloesterase_RFdiffusion2/) | [data](Manuscript_Data/Metallohydrolase_Nature_2026/) | **Published** (*Nature* 2026) |
 | Additional metalloesterases | RFdiffusion2 | 4MU-butyrate, with links to the shared phenylacetate results | [pipeline](Design_Pipelines/Metalloesterase_RFdiffusion2/) | [data](Manuscript_Data/Metallohydrolase_RFdiffusion2_Nature_Methods_2026/) | **Published** (*Nature Methods* 2026) |
 | Phosphotriesterase | RFdiffusion3 | Binuclear phosphotriesterase, paraoxon hydrolysis | [pipeline](Design_Pipelines/Phosphotriesterase_RFdiffusion3/) | [data](Manuscript_Data/Phosphotriesterase_RFdiffusion3_Science_2026/) | RFdiffusion3 Science 2026 manuscript; data and figure reproduction available |
-| Metalloprotease | RFdiffusion3 | Zn(II) metalloprotease, amide hydrolysis | [pipeline](Design_Pipelines/Metalloprotease_RFdiffusion3/) | [data](Manuscript_Data/Metalloprotease_RFdiffusion3_Science_2026/) | RFdiffusion3 Science 2026 manuscript; dataset pending |
+| Metalloprotease | RFdiffusion3 | Zn(II) metalloprotease, amide hydrolysis | [pipeline](Design_Pipelines/Metalloprotease_RFdiffusion3/) | [data](Manuscript_Data/Metalloprotease_RFdiffusion3_Science_2026/) | RFdiffusion3 Science 2026 manuscript; wet lab data and marimo analysis available |
 
 The phosphotriesterase dataset includes the RFdiffusion3 manuscript's kinetics
-and progress-curve plotting style. The metalloprotease directory currently
-documents its scope; experimental files have not yet been deposited there.
+and progress-curve plotting style. The metalloprotease directory contains
+screening, kinetics, zinc-condition, peptide-specificity and mass-spectrum
+measurements, with marimo analyses of screening, specificity and mass spectrometry.
 [`RFdiffusion3_Tutorial/`](RFdiffusion3_Tutorial/) demonstrates the method.
 
 ### Structure
@@ -143,7 +144,7 @@ Metallohydrolase_Enzyme_Design/
 |   |   +-- wetlab_data_plots/                     #   all generated figures
 |   |-- Metallohydrolase_RFdiffusion2_Nature_Methods_2026/ # additional 4MU-butyrate designs
 |   |-- Phosphotriesterase_RFdiffusion3_Science_2026/      # PTE data and paper figures
-|   +-- Metalloprotease_RFdiffusion3_Science_2026/         # dataset pending
+|   +-- Metalloprotease_RFdiffusion3_Science_2026/         # wet lab data and marimo analysis
 |
 |-- Scripts/                                       # SHARED UTILITIES
 |   |-- env_config.py                              #   resolves interpreter/container/obabel paths

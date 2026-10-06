@@ -9,13 +9,13 @@ under [`Design_Pipelines/`](../Design_Pipelines/).
 | [`Metallohydrolase_Nature_2026/`](Metallohydrolase_Nature_2026/) | [`Metalloesterase_RFdiffusion2`](../Design_Pipelines/Metalloesterase_RFdiffusion2/) | **Published** — Kim, Woodbury, Ahern et al., *Nature* (2026) |
 | [`Metallohydrolase_RFdiffusion2_Nature_Methods_2026/`](Metallohydrolase_RFdiffusion2_Nature_Methods_2026/) | [`Metalloesterase_RFdiffusion2`](../Design_Pipelines/Metalloesterase_RFdiffusion2/) | **Published** — additional 4MU-butyrate data and shared Nature results |
 | [`Phosphotriesterase_RFdiffusion3_Science_2026/`](Phosphotriesterase_RFdiffusion3_Science_2026/) | [`Phosphotriesterase_RFdiffusion3`](../Design_Pipelines/Phosphotriesterase_RFdiffusion3/) | RFdiffusion3 Science 2026 manuscript; data and figure reproduction available |
-| [`Metalloprotease_RFdiffusion3_Science_2026/`](Metalloprotease_RFdiffusion3_Science_2026/) | [`Metalloprotease_RFdiffusion3`](../Design_Pipelines/Metalloprotease_RFdiffusion3/) | RFdiffusion3 Science 2026 manuscript; experimental dataset pending |
+| [`Metalloprotease_RFdiffusion3_Science_2026/`](Metalloprotease_RFdiffusion3_Science_2026/) | [`Metalloprotease_RFdiffusion3`](../Design_Pipelines/Metalloprotease_RFdiffusion3/) | RFdiffusion3 Science 2026 manuscript; wet lab data and marimo analysis available |
 
 The Nature and Nature Methods directories use their 2026 journal issue year;
 both articles were first published online on 3 December 2025. RFdiffusion3
 directories use the manuscript designation supplied by the authors.
 
-Each dataset directory follows the same shape:
+A typical dataset directory uses this layout:
 
 ```
 <Campaign>/
@@ -25,12 +25,16 @@ Each dataset directory follows the same shape:
 └── wetlab_data_plots/        # every figure the notebook writes
 ```
 
+The metalloprotease deposit groups its measurement files in `cis_screen/` and
+`raw_data_files/`; its [dataset index](Metalloprotease_RFdiffusion3_Science_2026/)
+links each experiment to its files.
+
 ---
 
 ## Running the analysis
 
 You do **not** need the design environment. The analysis notebooks use only
-marimo, numpy, pandas, scipy, matplotlib, and openpyxl.
+marimo, numpy, pandas, scipy, matplotlib, seaborn, and openpyxl.
 
 ```bash
 # from the repository root
