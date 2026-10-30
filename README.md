@@ -1,30 +1,24 @@
-<h1 align="center">Computational Design of Metallohydrolases</h1>
-
-<p align="center">From catalytic geometry to designed enzymes.</p>
+<h1 align="center">
+  <picture>
+    <source media="(max-width: 640px)" srcset="Docs/assets/readme/masthead-narrow.svg">
+    <img src="Docs/assets/readme/masthead.svg" width="100%" alt="Computational design of metallohydrolases — from catalytic geometry to designed enzymes. Ribbon drawing of astacin with its zinc ion and a transition-state analogue, PDB 1QJI.">
+  </picture>
+</h1>
 
 <p align="center">
-  <a href="Docs/README.md"><img src="Docs/assets/badges/docs.svg" width="48" height="26" alt="Documentation"></a>
-  <a href="#learn-the-workflow"><img src="Docs/assets/badges/tutorials.svg" width="74" height="26" alt="Tutorials and example notebooks"></a>
-  <a href="Manuscript_Data/README.md"><img src="Docs/assets/badges/data.svg" width="48" height="26" alt="Four experimental datasets"></a>
-  <a href="RFdiffusion3_Tutorial/README.md#learning-resources"><img src="Docs/assets/badges/videos.svg" width="61" height="26" alt="RFdiffusion3 video tutorials"></a>
-  <a href="#citation"><img src="Docs/assets/badges/cite.svg" width="104" height="26" alt="Citations and copyable BibTeX"></a>
+  Code, tutorials, and experimental data for designing metal-dependent enzymes
+  with RFdiffusion2 and RFdiffusion3. It accompanies the metallohydrolase
+  study <a href="#ref-1">[1]</a> and contributes enzyme-design examples and data
+  to the RFdiffusion2 <a href="#ref-2">[2]</a> and RFdiffusion3 <a href="#ref-3">[3]</a> studies.
 </p>
 
 <p align="center">
-  <a href="https://doi.org/10.1038/s41586-025-09746-w"><img src="Docs/assets/badges/nature.svg" width="187" height="24" alt="Metallohydrolases in Nature — DOI 10.1038/s41586-025-09746-w"></a>
-  <a href="https://doi.org/10.1038/s41592-025-02975-x"><img src="Docs/assets/badges/nature-methods.svg" width="209" height="24" alt="RFdiffusion2 in Nature Methods — DOI 10.1038/s41592-025-02975-x"></a>
-  <a href="https://doi.org/10.1126/science.aeh2982"><img src="Docs/assets/badges/science.svg" width="156" height="24" alt="RFdiffusion3 in Science — DOI 10.1126/science.aeh2982"></a>
+  <a href="Docs/README.md"><img src="Docs/assets/readme/go-docs.svg" width="170" height="88" alt="Documentation: setup and workflows"></a>&nbsp;<a href="#the-design-pipeline"><img src="Docs/assets/readme/go-tutorials.svg" width="170" height="88" alt="Tutorials for RFdiffusion2 and RFdiffusion3"></a>&nbsp;<a href="Manuscript_Data/README.md"><img src="Docs/assets/readme/go-data.svg" width="170" height="88" alt="Datasets: four experimental datasets with analysis apps"></a>&nbsp;<a href="#citation"><img src="Docs/assets/readme/go-cite.svg" width="170" height="88" alt="Cite: BibTeX and CITATION.cff"></a>
 </p>
 
 <p align="center">
-  <a href="LICENSE"><img src="Docs/assets/badges/license.svg" width="90" height="22" alt="MIT license"></a>
-  <a href="Environment/README.md#cpu-manuscript-analysis"><img src="Docs/assets/badges/python.svg" width="180" height="22" alt="CPU analysis: Python 3.10–3.12"></a>
+  <a href="https://doi.org/10.1038/s41586-025-09746-w"><img src="Docs/assets/readme/paper-nature.svg" width="272" height="112" alt="Main paper: Computational design of metallohydrolases, Nature 649, 246–253 (2026), doi 10.1038/s41586-025-09746-w"></a>&nbsp;<a href="https://doi.org/10.1038/s41592-025-02975-x"><img src="Docs/assets/readme/paper-nature-methods.svg" width="272" height="112" alt="Method paper: Atom-level enzyme active site scaffolding using RFdiffusion2, Nature Methods 23, 96–105 (2026), doi 10.1038/s41592-025-02975-x"></a>&nbsp;<a href="https://doi.org/10.1126/science.aeh2982"><img src="Docs/assets/readme/paper-science.svg" width="272" height="112" alt="Method paper: Atomic functional site scaffolding in biopolymers with RFdiffusion3, Science eaeh2982 (2026), doi 10.1126/science.aeh2982"></a>
 </p>
-
-Code, tutorials, and experimental data for designing metal-dependent enzymes
-with RFdiffusion2 and RFdiffusion3. The repository accompanies the
-metallohydrolase study [[1]](#ref-1) and contributes enzyme-design examples and data
-to the RFdiffusion2 [[2]](#ref-2) and RFdiffusion3 [[3]](#ref-3) studies.
 
 <p align="center">
   <a href="Docs/assets/rfdiffusion3-highlight.mp4?raw=true">
@@ -38,7 +32,7 @@ to the RFdiffusion2 [[2]](#ref-2) and RFdiffusion3 [[3]](#ref-3) studies.
   <a href="Docs/assets/rfdiffusion3-highlight.mp4?raw=true">Full-resolution MP4 · 58 seconds</a> · <a href="Docs/media.md">All animations and downloads</a>
 </p>
 
-## Choose your starting point
+## Start here
 
 | I want to… | Start here |
 | :--- | :--- |
@@ -48,19 +42,20 @@ to the RFdiffusion2 [[2]](#ref-2) and RFdiffusion3 [[3]](#ref-3) studies.
 | Adapt a design campaign | [Workflows and available drivers](Docs/workflows.md) |
 | Configure a workstation or cluster | [Environments](Environment/README.md) · [Software and weights](Docs/software-and-models.md) |
 
-## Learn the workflow
+<a id="learn-the-workflow"></a>
+
+## The design pipeline
 
 A **theozyme** specifies catalytic residues, metal ions, and substrate or
 transition-state geometry. Diffusion builds a protein scaffold around this
 active site; sequence design and validation select candidates for testing.
 
-```mermaid
-flowchart LR
-    A[Active-site geometry] --> B[Scaffold generation]
-    B --> C[Sequence design]
-    C --> D[Structure validation]
-    D --> E[Experimental characterization]
-```
+<p align="center">
+  <picture>
+    <source media="(max-width: 640px)" srcset="Docs/assets/readme/pipeline-narrow.svg">
+    <img src="Docs/assets/readme/pipeline.svg" width="100%" alt="Schematic of the design pipeline: active-site geometry (theozyme), scaffold generation with RFdiffusion2 and RFdiffusion3, sequence design with ProteinMPNN and LigandMPNN, structure validation with AlphaFold2 and AlphaFold3, and experimental characterization by activity assays. Illustration only: the noise cloud is not a model output, the overlaid traces are not an AlphaFold result, and the assay wells are not measurements.">
+  </picture>
+</p>
 
 Both tutorials cover theozyme preparation from [PDB 1QJI](https://www.rcsb.org/structure/1QJI)
 and the ZETA_2 quantum-chemistry example, followed by scaffold generation and
@@ -97,6 +92,8 @@ from installation and motif scaffolding to advanced enzyme design.
   </tr>
 </table>
 
+These animations are computational design trajectories, not experimental structures.
+
 ## Explore the data
 
 | Dataset | Publication | Available design material |
@@ -126,8 +123,11 @@ conda activate zinc_hydro_analysis
 marimo edit Manuscript_Data/Metallohydrolase_Nature_2026/wetlab_data_analysis.py
 ```
 
-No GPU, model weights, or software submodules are needed. Change the dataset
-path to open another app. [Other installation options](Docs/getting-started.md).
+> [!NOTE]
+> The analysis path needs no GPU, model weights, or software submodules:
+> [Python 3.10–3.12 on a CPU](Environment/README.md#cpu-manuscript-analysis).
+> Change the dataset path to open another app.
+> [Other installation options](Docs/getting-started.md).
 
 ### Run design workflows
 
@@ -320,3 +320,5 @@ with the failing command, error, and environment details.
 
 Original project code uses the **[MIT License](LICENSE)**. Third-party software
 and model parameters retain their [own terms](Docs/software-and-models.md#licensing).
+
+<p align="center"><img src="Docs/assets/readme/spectrum.svg" width="100%" height="5" alt=""></p>
