@@ -1,7 +1,7 @@
 <h1 align="center">
   <picture>
     <source media="(max-width: 1011px)" srcset="Docs/assets/readme/masthead-narrow.svg">
-    <img src="Docs/assets/readme/masthead.svg" width="100%" alt="Computational design of metallohydrolases — from catalytic geometry to designed enzymes. Ribbon drawing of astacin with its zinc ion and a transition-state analogue, PDB 1QJI.">
+    <img src="Docs/assets/readme/masthead.svg" width="100%" alt="Hypothesis-driven enzyme design — quantum chemistry and generative deep learning. Ribbon drawing of the deposited ZAPP-1 computational design model with its two zinc ions and modeled ligand.">
   </picture>
 </h1>
 
@@ -13,7 +13,7 @@
 </p>
 
 <p align="center">
-  <a href="Docs/README.md"><picture><source media="(max-width: 1199px)" srcset="Docs/assets/readme/go-docs.svg" width="142"><img src="Docs/assets/readme/go-docs.svg" width="170" height="88" alt="Documentation: setup and workflows"></picture></a>&nbsp;<a href="#the-design-pipeline"><picture><source media="(max-width: 1199px)" srcset="Docs/assets/readme/go-tutorials.svg" width="142"><img src="Docs/assets/readme/go-tutorials.svg" width="170" height="88" alt="Tutorials for RFdiffusion2 and RFdiffusion3"></picture></a>&nbsp;<a href="Manuscript_Data/README.md"><picture><source media="(max-width: 1199px)" srcset="Docs/assets/readme/go-data.svg" width="142"><img src="Docs/assets/readme/go-data.svg" width="170" height="88" alt="Datasets: four experimental datasets with analysis apps"></picture></a>&nbsp;<a href="#citation"><picture><source media="(max-width: 1199px)" srcset="Docs/assets/readme/go-cite.svg" width="142"><img src="Docs/assets/readme/go-cite.svg" width="170" height="88" alt="Cite: BibTeX and CITATION.cff"></picture></a>
+  <a href="Docs/README.md"><picture><source media="(max-width: 1199px)" srcset="Docs/assets/readme/go-docs.svg" width="142"><img src="Docs/assets/readme/go-docs.svg" width="170" height="60" alt="Documentation: setup and workflows"></picture></a>&nbsp;<a href="#the-design-pipeline"><picture><source media="(max-width: 1199px)" srcset="Docs/assets/readme/go-tutorials.svg" width="142"><img src="Docs/assets/readme/go-tutorials.svg" width="170" height="60" alt="Tutorials for RFdiffusion2 and RFdiffusion3"></picture></a>&nbsp;<a href="Manuscript_Data/README.md"><picture><source media="(max-width: 1199px)" srcset="Docs/assets/readme/go-data.svg" width="142"><img src="Docs/assets/readme/go-data.svg" width="170" height="60" alt="Datasets: four experimental datasets with analysis apps"></picture></a>&nbsp;<a href="#citation"><picture><source media="(max-width: 1199px)" srcset="Docs/assets/readme/go-cite.svg" width="142"><img src="Docs/assets/readme/go-cite.svg" width="170" height="60" alt="Cite: BibTeX and CITATION.cff"></picture></a>
 </p>
 
 <p align="center">

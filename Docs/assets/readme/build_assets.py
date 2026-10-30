@@ -1,19 +1,20 @@
 #!/usr/bin/env python3
 """Regenerate the README's self-contained SVG artwork.
 
-    uv run --no-project --with fonttools --with uharfbuzz --with numpy \
-        python -I Docs/assets/readme/build_assets.py
+    uv run --no-project --python 3.12 --with fonttools --with uharfbuzz \
+        --with numpy --with biotite==2.0.0 python -I Docs/assets/readme/build_assets.py
 
 Type is converted to outlines so the art renders identically without web fonts.
-Fonts (SIL OFL) come from a pinned google/fonts commit. The 1QJI coordinates are
-a live RCSB download of a stable accession, not a pinned file or checksum, so a
-remediated entry could change the output. Both are cached outside the repository.
+Mona Sans (SIL OFL) comes from a pinned google/fonts commit. The masthead uses
+the checksum-verified ZAPP-1 model from the repository deposit, with P-SEA
+secondary structure assigned only for drawing. The unchanged pipeline uses
+1QJI from a live RCSB download; fonts and 1QJI are cached outside the repository.
 Edit the content tables at the end of this file.
 
 The pipeline art is schematic. Its noise cloud, overlaid trace and plate wells
 are seeded or drawn illustrations: not model outputs, AlphaFold results or data.
 """
-import argparse, io, math, pathlib, sys, urllib.request
+import argparse, hashlib, io, math, pathlib, urllib.request, zipfile
 import numpy as np
 import uharfbuzz as hb
 from fontTools.pens.svgPathPen import SVGPathPen
@@ -23,10 +24,11 @@ from fontTools.varLib import instancer
 from xml.sax.saxutils import escape
 
 OUT = pathlib.Path(__file__).resolve().parent
+ROOT = OUT.parents[2]
+ZAPP1_ARCHIVE = ROOT / "Manuscript_Data/Phosphotriesterase_RFdiffusion3_Science_2026/supplemental_data/supp_data__denovo_PTE_design_models.zip"
 FONT_COMMIT = "6157dfaa640ca5738b4d1a7070fe389c3036d7fc"
 FONT_BASE = f"https://raw.githubusercontent.com/google/fonts/{FONT_COMMIT}/ofl"
 SOURCES = {
-    "Newsreader.ttf": f"{FONT_BASE}/newsreader/Newsreader%5Bopsz,wght%5D.ttf",
     "MonaSans.ttf": f"{FONT_BASE}/monasans/MonaSans%5Bwdth,wght%5D.ttf",
     "1QJI.pdb": "https://files.rcsb.org/download/1QJI.pdb",
 }
@@ -202,8 +204,92 @@ class Structure:
         return np.array([self.ca[i] for i in self.ids])
 
 
+ZAPP1_MEMBER = (
+    "all_design_models/"
+    "denovo_PTE__design_campaign1__037_scaffold_03____Plate1__D1__ZAPP1.pdb"
+)
+ZAPP1_ARCHIVE_SHA256 = "772a498af2cd4bed16b5eed3cdf602799b9e2bdbc32dbee13d78722ecf2b066c"
+ZAPP1_PDB_SHA256 = "2d4f1ecb8111f363db5f4e4380caeee5aac4af7a1394aca212d37a2a7b791709"
+
+
+def load_zapp1(structure_type, archive_path):
+    """Create a Structure-compatible ZAPP-1 object from the verified deposit.
+
+    The original Structure initializer and the existing pipeline object remain
+    untouched. Coordinate arrays come directly from the deposited PDB records.
+    ``zn`` is a camera target (metal midpoint), not an additional drawn atom.
+    Dashed links represent N/O/S donor proximity within 2.8 A in this model.
+    """
+    import biotite.structure as struc
+    from biotite.structure.io.pdb import PDBFile
+
+    archive = pathlib.Path(archive_path)
+    if hashlib.sha256(archive.read_bytes()).hexdigest() != ZAPP1_ARCHIVE_SHA256:
+        raise ValueError("ZAPP-1 archive checksum differs from the verified deposit")
+    with zipfile.ZipFile(archive) as source:
+        data = source.read(ZAPP1_MEMBER)
+    if hashlib.sha256(data).hexdigest() != ZAPP1_PDB_SHA256:
+        raise ValueError("ZAPP-1 PDB checksum differs from the verified deposit")
+    text = data.decode("utf-8")
+    st = structure_type.__new__(structure_type)
+    st.ca, st.o, st.ss, st.res, st.seq = {}, {}, {}, {}, {}
+    st.metals, st.metal_names, st.tsa = [], [], []
+    donors = []
+    backbone = {"N", "CA", "C", "O", "OXT"}
+    for line in text.splitlines():
+        record = line[:6].strip()
+        if record not in {"ATOM", "HETATM"} or line[16] not in " A":
+            continue
+        name, resn, chain = line[12:16].strip(), line[17:20].strip(), line[21]
+        resid, element = int(line[22:26]), line[76:78].strip().upper()
+        xyz = np.array([float(line[30:38]), float(line[38:46]), float(line[46:54])])
+        if record == "ATOM" and chain == "A":
+            st.res.setdefault(resid, {})[name] = xyz
+            st.seq[resid] = resn
+            if name == "CA":
+                st.ca[resid] = xyz
+            elif name == "O":
+                st.o[resid] = xyz
+            if element in {"N", "O", "S"} and name not in backbone:
+                donors.append((resid, xyz))
+        elif record == "HETATM" and (chain, resn, resid) == ("B", "YYE", 199):
+            if element == "ZN":
+                st.metals.append(xyz)
+                st.metal_names.append(name)
+            elif element not in {"H", "D"}:
+                st.tsa.append((name, element, xyz))
+                if element in {"N", "O", "S"}:
+                    donors.append((None, xyz))
+    if len(st.ca) != 198 or len(st.o) != 198 or len(st.metals) != 2:
+        raise ValueError("Unexpected ZAPP-1 protein/metal inventory")
+
+    atoms = PDBFile.read(io.StringIO(text)).get_structure(model=1, altloc="first")
+    protein = atoms[(atoms.chain_id == "A") & struc.filter_amino_acids(atoms)]
+    residue_ids, _ = struc.get_residues(protein)
+    sse = struc.annotate_sse(protein)
+    styles = {
+        struc.PSeaElement.HELIX: "H",
+        struc.PSeaElement.STRAND: "E",
+        struc.PSeaElement.COIL: "L",
+        struc.PSeaElement.NONE: "L",
+    }
+    st.ss = {int(resid): styles[struc.PSeaElement(kind)]
+             for resid, kind in zip(residue_ids, sse, strict=True)}
+    st.ids = sorted(st.ca.keys() & st.o.keys())
+    st.centroid = np.mean([st.ca[i] for i in st.ids], axis=0)
+    st.zn = np.mean(st.metals, axis=0)
+    st.coordinating_residues, st.coordination = set(), []
+    for resid, donor in donors:
+        for metal in st.metals:
+            if np.linalg.norm(donor - metal) <= 2.8:
+                st.coordination.append((donor, metal))
+                if resid is not None:
+                    st.coordinating_residues.add(resid)
+    return st
+
+
 def film_color(facing, phase, light=0.0):
-    """Colour as a function of viewing angle: the defining property of iridescence."""
+    """IPD-inspired shading based on facet angle and sequence position."""
     t = 0.62 * facing ** 1.2 + 0.38 * phase
     base = ramp([(0, "#5A36A2"), (0.3, PINK), (0.52, "#BC4FAD"), (0.76, BLUE), (1, "#A9DFF2")], t)
     return base + (np.array([255, 244, 252.0]) - base) * light
@@ -276,7 +362,7 @@ def ribbon(st, rot, scale, cx, cy, per=6, fog=0.7, halfwidth=1.35):
         items.append((z, "q", pts, hexc(color)))
         i = j
 
-    # Zinc ligands and transition-state analogue, drawn as sticks from real coordinates.
+    # Metal-coordinating residues and bound ligand, drawn from source coordinates.
     def stick(p, q, color, width, dash=False):
         a, b = project(p), project(q)
         z = (a[2] + b[2]) / 2 + 0.6
@@ -284,7 +370,7 @@ def ribbon(st, rot, scale, cx, cy, per=6, fog=0.7, halfwidth=1.35):
         items.append((z, "s", (to2d(a), to2d(b)), hexc(ink + (rgb(color) - ink) * fade), width * scale, dash))
 
     atom_color = {"N": "#A6DAEE", "O": "#F39AD8", "P": "#FFFFFF", "S": "#FFFFFF"}
-    ligands = [92, 96, 102]
+    ligands = sorted(getattr(st, "coordinating_residues", [92, 96, 102]))
     for r in ligands:
         atoms = st.res[r]
         names = list(atoms)
@@ -294,14 +380,18 @@ def ribbon(st, rot, scale, cx, cy, per=6, fog=0.7, halfwidth=1.35):
                     continue
                 if np.linalg.norm(atoms[x] - atoms[y]) < 1.75:
                     stick(atoms[x], atoms[y], WHITE, 0.26)
-        stick(atoms["NE2"], st.zn, "#D8CFF7", 0.11, True)
+        if not hasattr(st, "coordination"):
+            stick(atoms["NE2"], st.zn, "#D8CFF7", 0.11, True)
+    for donor, metal in getattr(st, "coordination", []):
+        stick(donor, metal, "#D8CFF7", 0.11, True)
     for i, (nx, ex, x) in enumerate(st.tsa):
         for ny, ey, y in st.tsa[i + 1:]:
             if np.linalg.norm(x - y) < (2.0 if "P" in (ex, ey) else 1.75):
                 color = atom_color.get(ex, atom_color.get(ey, "#F2EEFF"))
                 stick(x, y, color, 0.19)
-    zv = project(st.zn)
-    items.append((zv[2] + 1.2, "z", to2d(zv), 0.92 * scale))
+    for metal in getattr(st, "metals", [st.zn]):
+        zv = project(metal)
+        items.append((zv[2] + 1.2, "z", to2d(zv), 0.92 * scale))
     return sorted(items, key=lambda it: it[0])
 
 
@@ -388,27 +478,27 @@ def fit(font, text, size, maxw, tracking=0.0, floor=8.0):
 
 
 # ---------------------------------------------------------------- controls
-TILE = (170, 88)
+TILE = (170, 60)
 
 
 def tile(label, sub, kind, index, total, alt):
     w, h = TILE
     t0, t1 = index / total, (index + 1) / total
     defs, body = surface(w, h, t0, t1)
-    body += arrow(kind, w - 28, 18, SOFT)
-    body += SANS_SEMI.path(label, fit(SANS_SEMI, label, 16.5, w - 52, -0.006), 14, 50, WHITE, tracking=-0.006)
-    body += SANS.path(sub, fit(SANS, sub, 12, w - 28), 14, 69, SOFT)
+    body += arrow(kind, w - 28, 21, SOFT)
+    body += UI_SEMI.path(label, fit(UI_SEMI, label, 16.5, w - 52), 14, 28, WHITE)
+    body += UI_BODY.path(sub, fit(UI_BODY, sub, 12, w - 28), 14, 47, SOFT)
     return svg(w, h, alt, body, defs)
 
 
-def plate(role, study, doi, index, total, alt, size=34):
+def plate(role, study, doi, index, total, alt, size=24):
     w, h = 272, 112
     t0, t1 = index / total, (index + 1) / total
     defs, body = surface(w, h, t0, t1, radius=6, band=4)
-    body += SANS_SEMI.path(role, fit(SANS_SEMI, role, 12.5, w - 60), 17, 32, SOFT, tracking=0.002)
+    body += UI_SEMI.path(role, fit(UI_SEMI, role, 12.5, w - 60), 17, 32, SOFT)
     body += arrow("out", w - 32, 20, SOFT)
-    body += SERIF_DISPLAY.path(study, size, 15, 72, WHITE, tracking=-0.015)
-    body += SANS.path(doi, fit(SANS, doi, 11.5, w - 34), 17, 94, MUTED)
+    body += UI_SEMI.path(study, size, 17, 71, WHITE)
+    body += UI_BODY.path(doi, fit(UI_BODY, doi, 11.5, w - 34), 17, 94, MUTED)
     return svg(w, h, alt, body, defs)
 
 
@@ -418,9 +508,10 @@ def spectrum(w=1200, h=5):
 
 # ---------------------------------------------------------------- masthead
 VIEW = (0, -35, 20)   # roll, tilt, yaw about the centroid-to-zinc axis
-MAST_ALT = ("Computational design of metallohydrolases — from catalytic geometry to designed enzymes. "
-            "Ribbon drawing of astacin with its zinc ion and a transition-state analogue, PDB 1QJI.")
-CREDIT = "Zinc metallohydrolase astacin with a transition-state analogue · crystal structure, PDB 1QJI"
+MAST_VIEW = (0, -35, 20)
+MAST_ALT = ("Hypothesis-driven enzyme design — quantum chemistry and generative deep learning. "
+            "Ribbon drawing of the deposited ZAPP-1 computational design model with its two zinc ions and modeled ligand.")
+CREDIT = "ZAPP-1 · computational design model · RFdiffusion3"
 
 
 def backdrop(w, h, spots):
@@ -431,21 +522,34 @@ def backdrop(w, h, spots):
     return defs, body
 
 
+def masthead_art(st, x, y, w, h):
+    """Fit the deposited model inside the artwork panel without cropping it."""
+    rot = st.rotation(*MAST_VIEW)
+    points = np.array(list(st.ca.values()) + [a[2] for a in st.tsa] + st.metals)
+    projected = (points - st.centroid) @ rot.T
+    lo, hi = projected[:, :2].min(axis=0), projected[:, :2].max(axis=0)
+    mid = (lo + hi) / 2
+    scale = min((w - 32) / (hi[0] - lo[0]), (h - 32) / (hi[1] - lo[1]))
+    return render_items(ribbon(st, rot, scale,
+                               x + w / 2 - mid[0] * scale,
+                               y + h / 2 + mid[1] * scale))
+
+
 def masthead(st, w=1200, h=384):
     defs, body = backdrop(w, h, [
         (930, 186, 430, 320, PINK, 0.34),
         (1140, 50, 330, 280, BLUE, 0.38),
         (750, 366, 420, 240, PURPLE, 0.58),
     ])
-    defs += ZN_DEFS + gradient("pearl", PEARL, 52, 0, 790, 0, "userSpaceOnUse") + gradient("band", BAND)
+    defs += ZN_DEFS + gradient("band", BAND)
     defs += f'<clipPath id="c"><rect width="{w}" height="{h}" rx="8"/></clipPath>'
-    art = render_items(ribbon(st, st.rotation(*VIEW), 9.1, 942, 190))
-    title = fit(SERIF_DISPLAY, "Metallohydrolases", 94, 690, -0.021)
+    art = masthead_art(st, 804, 14, 382, 354)
+    title = fit(UI_SEMI, "Hypothesis-driven", 72, 700)
     copy = (
-        SERIF_DISPLAY.path("Computational design of", 40, 54, 160, SOFT, tracking=-0.01)
-        + SERIF_DISPLAY.path("Metallohydrolases", title, 50, 252, "url(#pearl)", tracking=-0.021)
-        + SANS.path("From catalytic geometry to designed enzymes.", 22, 55, 300, WHITE, tracking=-0.004)
-        + SANS.path(CREDIT, 11.5, 55, 352, MUTED)
+        UI_SEMI.path("Hypothesis-driven", title, 54, 150, WHITE)
+        + UI_SEMI.path("enzyme design", title, 54, 232, WHITE)
+        + UI_BODY.path("Quantum chemistry and generative deep learning", 23, 56, 285, SOFT)
+        + UI_BODY.path(CREDIT, 13, 56, 350, MUTED)
     )
     inner = f'{body}{art}<rect width="{w}" height="5" fill="url(#band)"/>{copy}'
     return svg(w, h, MAST_ALT, f'<g clip-path="url(#c)">{inner}</g>', defs)
@@ -457,15 +561,15 @@ def masthead_narrow(st, w=720, h=584):
         (630, 40, 300, 250, BLUE, 0.38),
         (110, 300, 400, 280, PURPLE, 0.6),
     ])
-    defs += ZN_DEFS + gradient("pearl", PEARL, 34, 0, 690, 0, "userSpaceOnUse") + gradient("band", BAND)
+    defs += ZN_DEFS + gradient("band", BAND)
     defs += f'<clipPath id="c"><rect width="{w}" height="{h}" rx="10"/></clipPath>'
-    art = render_items(ribbon(st, st.rotation(*VIEW), 7.9, 372, 180))
-    title = fit(SERIF_DISPLAY, "Metallohydrolases", 86, w - 68, -0.021)
+    art = masthead_art(st, 42, 18, 636, 304)
+    title = fit(UI_SEMI, "Hypothesis-driven", 62, w - 72)
     copy = (
-        SERIF_DISPLAY.path("Computational design of", 38, 36, 392, SOFT, tracking=-0.01)
-        + SERIF_DISPLAY.path("Metallohydrolases", title, 32, 474, "url(#pearl)", tracking=-0.021)
-        + SANS.path("From catalytic geometry", 26, 36, 518, WHITE, tracking=-0.004)
-        + SANS.path("to designed enzymes.", 26, 36, 548, WHITE, tracking=-0.004)
+        UI_SEMI.path("Hypothesis-driven", title, 36, 391, WHITE)
+        + UI_SEMI.path("enzyme design", title, 36, 459, WHITE)
+        + UI_BODY.path("Quantum chemistry and", 27, 38, 514, SOFT)
+        + UI_BODY.path("generative deep learning", 27, 38, 548, SOFT)
     )
     inner = f'{body}{art}<rect width="{w}" height="6" fill="url(#band)"/>{copy}'
     return svg(w, h, MAST_ALT, f'<g clip-path="url(#c)">{inner}</g>', defs)
@@ -665,7 +769,7 @@ def fetch(name, url):
 
 
 def main():
-    global CACHE, SERIF_DISPLAY, SANS, SANS_SEMI
+    global CACHE, UI_BODY, UI_SEMI, SANS, SANS_SEMI
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--cache", default=pathlib.Path.home() / ".cache" / "metallohydrolase-readme",
                     help="where fonts and coordinates are downloaded (outside the repository)")
@@ -675,17 +779,19 @@ def main():
     for name, url in SOURCES.items():
         fetch(name, url)
 
-    SERIF_DISPLAY = Type("Newsreader.ttf", opsz=72, wght=400)
+    UI_BODY = Type("MonaSans.ttf", wght=400, wdth=100)
+    UI_SEMI = Type("MonaSans.ttf", wght=600, wdth=100)
     SANS = Type("MonaSans.ttf", wght=450, wdth=100)
     SANS_SEMI = Type("MonaSans.ttf", wght=620, wdth=100)
     st = Structure(CACHE / "1QJI.pdb")
+    design = load_zapp1(Structure, ZAPP1_ARCHIVE)
 
-    assets = {"masthead.svg": masthead(st), "masthead-narrow.svg": masthead_narrow(st),
+    assets = {"masthead.svg": masthead(design), "masthead-narrow.svg": masthead_narrow(design),
               "pipeline.svg": pipeline(st), "pipeline-narrow.svg": pipeline_narrow(st),
               "spectrum.svg": spectrum()}
     for i, (name, label, sub, kind, alt) in enumerate(NAV):
         assets[f"go-{name}.svg"] = tile(label, sub, kind, i, len(NAV), alt)
-    size = min(fit(SERIF_DISPLAY, p[2], 34, 238, -0.015) for p in PAPERS)
+    size = min(fit(UI_SEMI, p[2], 24, 238) for p in PAPERS)
     for i, (name, role, study, doi, alt) in enumerate(PAPERS):
         assets[f"paper-{name}.svg"] = plate(role, study, doi, i, len(PAPERS), alt, size)
     for name, text in assets.items():
