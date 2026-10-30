@@ -1,5 +1,9 @@
 # Phosphotriesterase — RFdiffusion3 Science 2026
 
+Data accompanying **Atomic functional site scaffolding in biopolymers with RFdiffusion3**,
+Butcher, Krishna, Mitra et al., *Science* (2026),
+[doi:10.1126/science.aeh2982](https://doi.org/10.1126/science.aeh2982).
+
 Experimental data for de novo binuclear Zn(II) phosphotriesterases designed with
 RFdiffusion3 and assayed on paraoxon. The corresponding computational campaign
 is in [Design_Pipelines/Phosphotriesterase_RFdiffusion3](../../Design_Pipelines/Phosphotriesterase_RFdiffusion3/).
@@ -10,7 +14,7 @@ is in [Design_Pipelines/Phosphotriesterase_RFdiffusion3](../../Design_Pipelines/
 |---|---|
 | [wetlab_data_analysis.py](wetlab_data_analysis.py) | Reactive marimo analysis: raw-data calibration, background rates, kinetics, complete screens and figure export |
 | `wetlab_data_analysis.ipynb` | Historical Jupyter workflow |
-| `raw_wetlab_data/` | 15 files: calibration and background plates, nine kinetics plates, two screens, an order FASTA and design-assignment table |
+| `raw_wetlab_data/` | Calibration and background plates, nine kinetics plates, two screens, an order FASTA and design-assignment table |
 | `supplemental_data/supp_data__denovo_PTE_design_models.zip` | 288 design models: 96 from campaign 1 and 192 from campaign 2 |
 | `supplemental_data/supp_data__denovo_PTE_DNA_and_protein_sequences.xlsx` | Sequences, model identifiers, cloning information, 18 paper kinetics entries and an additional tagless ZAPP-1 comparison |
 | `supplemental_data/paraoxon_kinetics_ALL_DATA.xlsx` | Reference kinetic parameters, uncertainty budget and reporting notes used by the figure routines |
@@ -97,3 +101,5 @@ The `cloning_and_vector` sheet contains the complete vector sequence and
 cloning details for pGG-T7-cStrepII ([Addgene 262810](https://www.addgene.org/262810/)).
 The `analysis_notes` sheet describes the additional tagless comparison and
 relevant figure/reporting qualifications.
+
+[Citation guide](../../Docs/citations.md) · [BibTeX bibliography](../../Docs/references.bib)

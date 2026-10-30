@@ -1,81 +1,62 @@
-# =============================================================================
-#  pixi manifest -- lockfile-based, cross-platform installs without conda
-# =============================================================================
-#
-#  pixi (https://pixi.sh) resolves conda packages and writes a pixi.lock that
-#  pins the exact solve for every listed platform. Unlike a conda env export,
-#  that lock is portable across machines and reproducible over time.
-#
-#  INSTALL PIXI:      curl -fsSL https://pixi.sh/install.sh | bash
-#
-#  ANALYSIS ONLY (wet lab notebook -- fast, no GPU, works on macOS/Windows):
-#
-#      cd Environment
-#      pixi run -e analysis marimo edit ../Manuscript_Data/Metallohydrolase_Nature_2026/wetlab_data_analysis.py
-#
-#  FULL DESIGN ENVIRONMENT (linux-64 only; PyRosetta needs a license):
-#
-#      cd Environment
-#      pixi run -e design python -c "import pyrosetta; print('ok')"
-#
-#  REGENERATE THE LOCK after editing this file:
-#
-#      pixi install -e analysis && pixi install -e design
-#
-#  Commit the resulting pixi.lock -- that file is the reproducible artifact.
-#  This manifest ships without one so the first `pixi install` solves against
-#  current channels rather than a stale pin.
-# =============================================================================
-
-[project]
+# CPU analysis plus a Linux x86_64 CUDA helper environment.
+# Model packages/checkpoints are separate; see README.md.
+# No pixi.lock is shipped: the first install resolves the declared ranges.
+[workspace]
 name = "zinc-hydro"
 version = "0.2.0"
-description = "Metallohydrolase enzyme design environment"
+description = "Manuscript analysis and enzyme-design helper environments"
 authors = ["Baker Laboratory"]
 channels = ["conda-forge"]
 platforms = ["linux-64", "osx-64", "osx-arm64", "win-64"]
 
-# --- shared: the wet lab analysis stack ----------------------------------
 [dependencies]
 python = ">=3.10,<3.13"
-numpy = ">=1.26"
-pandas = ">=2.2"
+numpy = ">=1.26,<3"
+pandas = ">=2.2,<3"
 scipy = ">=1.13"
 matplotlib = ">=3.9"
 seaborn = ">=0.13"
 openpyxl = ">=3.1"
+pillow = "*"
 
 [pypi-dependencies]
 marimo = "==0.25.0"
 
 [tasks]
-lab = "marimo edit ../Manuscript_Data"
+lab = "marimo edit ../Manuscript_Data/Metallohydrolase_Nature_2026/wetlab_data_analysis.py"
 
-# --- feature: full design stack (linux-64 + CUDA only) -------------------
+# The historical name "design" refers to helper tooling, not model installation.
 [feature.design]
 channels = [
     "pytorch",
     "nvidia",
     "https://conda.rosettacommons.org",
-    "dglteam/label/th23_cu121",
-    "schrodinger",
     "conda-forge",
+    # Pixi does not expand conda's "defaults" multichannel alias.
+    "https://repo.anaconda.com/pkgs/main",
+    "https://repo.anaconda.com/pkgs/r",
 ]
 platforms = ["linux-64"]
 
 [feature.design.dependencies]
-jupyterlab = ">=4.2"
-ipykernel = ">=6.28"
 python = "3.10.*"
+pip = "*"
+numpy = "1.26.*"
+pandas = "2.2.*"
+scipy = "1.13.*"
+matplotlib = "3.9.*"
+seaborn = "0.13.*"
+openpyxl = "3.1.*"
+scikit-learn = "*"
+psutil = "*"
+jupyterlab = "4.2.*"
+ipykernel = "6.28.*"
+nbformat = "5.10.*"
+ipywidgets = "*"
 pytorch = "2.3.1.*"
 torchvision = "0.18.1.*"
 torchaudio = "2.3.1.*"
 pytorch-cuda = "12.1.*"
-dgl = "2.4.0.th23.cu121"
-e3nn = "0.5.1.*"
-jax = "0.4.27.*"
-jaxlib = "0.4.23.*"
-tensorflow = "2.16.1.*"
 pyrosetta = "2024.39.*"
 biopython = "1.84.*"
 rdkit = "2024.03.*"
@@ -99,7 +80,6 @@ tqdm = "4.66.*"
 [feature.design.pypi-dependencies]
 cython = ">=3.0,<3.1"
 prody = { git = "https://github.com/prody/ProDy" }
-se3-transformer = { git = "https://github.com/NVIDIA/DeepLearningExamples.git", subdirectory = "DGLPyTorch/DrugDiscovery/SE3Transformer" }
 
 [environments]
 analysis = { solve-group = "analysis" }

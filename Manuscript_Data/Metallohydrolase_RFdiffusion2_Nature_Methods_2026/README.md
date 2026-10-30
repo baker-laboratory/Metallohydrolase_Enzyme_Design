@@ -29,3 +29,5 @@ The model archive contains the three historical publication hit models
 (B11, C4 and D11) and 93 supplementary reconstructions matched to the final
 ordered sequences. Some reconstructed non-hit models retain nonideal zinc
 coordination geometries; these computational models do not establish activity.
+
+[Citation guide](../../Docs/citations.md) · [BibTeX bibliography](../../Docs/references.bib)

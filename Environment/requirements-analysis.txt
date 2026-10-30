@@ -1,23 +1,12 @@
-# Wet lab analysis dependencies (pip / uv equivalent of Environment/analysis.yml).
-#
-#   uv venv .venv --python 3.11
-#   source .venv/bin/activate
-#   uv pip install -r Environment/requirements-analysis.txt
-#   marimo edit Manuscript_Data/Metallohydrolase_Nature_2026/wetlab_data_analysis.py
-#
-# or with plain pip:
-#
-#   python -m venv .venv && source .venv/bin/activate
-#   pip install -r Environment/requirements-analysis.txt
-#
-# This covers Manuscript_Data/*/wetlab_data_analysis.py only. The design
-# pipelines need the full conda environment (Environment/zinc_hydro.yml),
-# because PyRosetta and the CUDA stack are not pip-installable from PyPI.
-
+# CPU dependencies for the four Manuscript_Data/*/wetlab_data_analysis.py apps.
+# Use Python 3.10–3.12 (3.11 recommended); see Environment/README.md.
+# Keep ranges aligned with analysis.yml and pixi.toml's analysis environment.
+# These ranges resolve at installation time; this file is not a lockfile.
 numpy>=1.26,<3
 pandas>=2.2,<3
 scipy>=1.13
 matplotlib>=3.9
 seaborn>=0.13
 openpyxl>=3.1
+pillow
 marimo==0.25.0
