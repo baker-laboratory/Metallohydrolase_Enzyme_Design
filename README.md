@@ -3,22 +3,22 @@
 <p align="center">From catalytic geometry to designed enzymes.</p>
 
 <p align="center">
-  <a href="Docs/README.md"><img src="https://img.shields.io/badge/Docs-287d8e?style=flat-square" width="48" height="26" alt="Documentation"></a>
-  <a href="#learn-the-workflow"><img src="https://img.shields.io/badge/Tutorials-287d8e?style=flat-square" width="74" height="26" alt="Tutorials and example notebooks"></a>
-  <a href="Manuscript_Data/README.md"><img src="https://img.shields.io/badge/Data-287d8e?style=flat-square" width="48" height="26" alt="Four experimental datasets"></a>
-  <a href="RFdiffusion3_Tutorial/README.md#learning-resources"><img src="https://img.shields.io/badge/Videos-287d8e?style=flat-square" width="61" height="26" alt="RFdiffusion3 video tutorials"></a>
-  <a href="#citation"><img src="https://img.shields.io/badge/Cite-BibTeX-287d8e?style=flat-square&amp;labelColor=287d8e" width="104" height="26" alt="Citations and copyable BibTeX"></a>
+  <a href="Docs/README.md"><img src="Docs/assets/badges/docs.svg" width="48" height="26" alt="Documentation"></a>
+  <a href="#learn-the-workflow"><img src="Docs/assets/badges/tutorials.svg" width="74" height="26" alt="Tutorials and example notebooks"></a>
+  <a href="Manuscript_Data/README.md"><img src="Docs/assets/badges/data.svg" width="48" height="26" alt="Four experimental datasets"></a>
+  <a href="RFdiffusion3_Tutorial/README.md#learning-resources"><img src="Docs/assets/badges/videos.svg" width="61" height="26" alt="RFdiffusion3 video tutorials"></a>
+  <a href="#citation"><img src="Docs/assets/badges/cite.svg" width="104" height="26" alt="Citations and copyable BibTeX"></a>
 </p>
 
 <p align="center">
-  <a href="https://doi.org/10.1038/s41586-025-09746-w"><img src="https://img.shields.io/badge/Nature-Metallohydrolases-1b4f5c?style=flat-square&amp;labelColor=263b4d" width="187" height="24" alt="Metallohydrolases in Nature — DOI 10.1038/s41586-025-09746-w"></a>
-  <a href="https://doi.org/10.1038/s41592-025-02975-x"><img src="https://img.shields.io/badge/Nature_Methods-RFdiffusion2-1b4f5c?style=flat-square&amp;labelColor=263b4d" width="209" height="24" alt="RFdiffusion2 in Nature Methods — DOI 10.1038/s41592-025-02975-x"></a>
-  <a href="https://doi.org/10.1126/science.aeh2982"><img src="https://img.shields.io/badge/Science-RFdiffusion3-1b4f5c?style=flat-square&amp;labelColor=263b4d" width="156" height="24" alt="RFdiffusion3 in Science — DOI 10.1126/science.aeh2982"></a>
+  <a href="https://doi.org/10.1038/s41586-025-09746-w"><img src="Docs/assets/badges/nature.svg" width="187" height="24" alt="Metallohydrolases in Nature — DOI 10.1038/s41586-025-09746-w"></a>
+  <a href="https://doi.org/10.1038/s41592-025-02975-x"><img src="Docs/assets/badges/nature-methods.svg" width="209" height="24" alt="RFdiffusion2 in Nature Methods — DOI 10.1038/s41592-025-02975-x"></a>
+  <a href="https://doi.org/10.1126/science.aeh2982"><img src="Docs/assets/badges/science.svg" width="156" height="24" alt="RFdiffusion3 in Science — DOI 10.1126/science.aeh2982"></a>
 </p>
 
 <p align="center">
-  <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-5b6a75?style=flat-square&amp;labelColor=263b4d" width="90" height="22" alt="MIT license"></a>
-  <a href="Environment/README.md#cpu-manuscript-analysis"><img src="https://img.shields.io/badge/Analysis_Python-3.10%E2%80%933.12-5b6a75?style=flat-square&amp;labelColor=263b4d" width="180" height="22" alt="CPU analysis: Python 3.10–3.12"></a>
+  <a href="LICENSE"><img src="Docs/assets/badges/license.svg" width="90" height="22" alt="MIT license"></a>
+  <a href="Environment/README.md#cpu-manuscript-analysis"><img src="Docs/assets/badges/python.svg" width="180" height="22" alt="CPU analysis: Python 3.10–3.12"></a>
 </p>
 
 Code, tutorials, and experimental data for designing metal-dependent enzymes
@@ -80,20 +80,20 @@ from installation and motif scaffolding to advanced enzyme design.
     <th>RFdiffusion3 · Active-site and scaffold detail</th>
   </tr>
   <tr>
-    <td width="50%" align="center">
+    <td width="60%" align="center" valign="middle">
       <a href="Docs/assets/rfdiffusion2-scaffold-generation.mp4?raw=true">
-        <img src="Docs/assets/rfdiffusion2-scaffold-generation.gif" width="400" alt="Complete RFdiffusion2 animation showing a protein scaffold forming around its catalytic site.">
+        <img src="Docs/assets/rfdiffusion2-scaffold-generation.gif" width="397" height="180" alt="Complete RFdiffusion2 animation showing a protein scaffold forming around its catalytic site.">
       </a>
     </td>
-    <td width="50%" align="center">
+    <td width="40%" align="center" valign="middle">
       <a href="Docs/assets/rfdiffusion3-supplementary.gif">
-        <img src="Docs/assets/rfdiffusion3-supplementary.gif" width="400" alt="Supplementary RFdiffusion3 animation showing the molecular active site and surrounding protein scaffold.">
+        <img src="Docs/assets/rfdiffusion3-supplementary.gif" width="255" height="180" alt="Supplementary RFdiffusion3 animation showing the molecular active site and surrounding protein scaffold.">
       </a>
     </td>
   </tr>
   <tr>
     <td align="center"><a href="Docs/assets/rfdiffusion2-scaffold-generation.mp4?raw=true">Cropped MP4 · 5.77 seconds</a><br><a href="Docs/assets/rfdiffusion2-scaffold-generation-original.mp4?raw=true">Original MP4</a></td>
-    <td align="center"><a href="Docs/assets/rfdiffusion3-supplementary.gif">Original GIF · 11 seconds</a></td>
+    <td align="center"><a href="Docs/assets/rfdiffusion3-supplementary.gif">Cropped GIF · 11 seconds</a><br><a href="Docs/assets/rfdiffusion3-supplementary-original.gif">Original GIF</a></td>
   </tr>
 </table>
 

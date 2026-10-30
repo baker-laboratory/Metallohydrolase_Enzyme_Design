@@ -39,3 +39,10 @@ Use [GitHub Issues](https://github.com/baker-laboratory/Metallohydrolase_Enzyme_
 for problems; include the command, traceback, commit, and environment. Keep
 bibliographic updates consistent across the README, [citation guide](citations.md),
 [BibTeX](references.bib), and [CITATION.cff](../CITATION.cff).
+
+## README colors
+
+The [badge SVGs](assets/badges/) use IPD blue `#4D97B7`, pink `#B11186`, and
+purple `#4B2E83`, matching the [official IPD logo](https://www.ipd.uw.edu/wp-content/uploads/2025/03/IPD-logo-UW-color-2025.png)
+and the [named PyMOL colors](https://github.com/SethWoodbury/pymolrc/blob/4cfc4d9f1838696b34d0f430394fb2fda850654a/.pymolrc#L118-L124).
+Keep dark text on blue and white text on pink/purple for legibility.
