@@ -1,6 +1,6 @@
 <h1 align="center">
   <picture>
-    <source media="(max-width: 640px)" srcset="Docs/assets/readme/masthead-narrow.svg">
+    <source media="(max-width: 1011px)" srcset="Docs/assets/readme/masthead-narrow.svg">
     <img src="Docs/assets/readme/masthead.svg" width="100%" alt="Computational design of metallohydrolases — from catalytic geometry to designed enzymes. Ribbon drawing of astacin with its zinc ion and a transition-state analogue, PDB 1QJI.">
   </picture>
 </h1>
@@ -13,7 +13,7 @@
 </p>
 
 <p align="center">
-  <a href="Docs/README.md"><img src="Docs/assets/readme/go-docs.svg" width="170" height="88" alt="Documentation: setup and workflows"></a>&nbsp;<a href="#the-design-pipeline"><img src="Docs/assets/readme/go-tutorials.svg" width="170" height="88" alt="Tutorials for RFdiffusion2 and RFdiffusion3"></a>&nbsp;<a href="Manuscript_Data/README.md"><img src="Docs/assets/readme/go-data.svg" width="170" height="88" alt="Datasets: four experimental datasets with analysis apps"></a>&nbsp;<a href="#citation"><img src="Docs/assets/readme/go-cite.svg" width="170" height="88" alt="Cite: BibTeX and CITATION.cff"></a>
+  <a href="Docs/README.md"><picture><source media="(max-width: 1199px)" srcset="Docs/assets/readme/go-docs.svg" width="142"><img src="Docs/assets/readme/go-docs.svg" width="170" height="88" alt="Documentation: setup and workflows"></picture></a>&nbsp;<a href="#the-design-pipeline"><picture><source media="(max-width: 1199px)" srcset="Docs/assets/readme/go-tutorials.svg" width="142"><img src="Docs/assets/readme/go-tutorials.svg" width="170" height="88" alt="Tutorials for RFdiffusion2 and RFdiffusion3"></picture></a>&nbsp;<a href="Manuscript_Data/README.md"><picture><source media="(max-width: 1199px)" srcset="Docs/assets/readme/go-data.svg" width="142"><img src="Docs/assets/readme/go-data.svg" width="170" height="88" alt="Datasets: four experimental datasets with analysis apps"></picture></a>&nbsp;<a href="#citation"><picture><source media="(max-width: 1199px)" srcset="Docs/assets/readme/go-cite.svg" width="142"><img src="Docs/assets/readme/go-cite.svg" width="170" height="88" alt="Cite: BibTeX and CITATION.cff"></picture></a>
 </p>
 
 <p align="center">
@@ -52,7 +52,7 @@ active site; sequence design and validation select candidates for testing.
 
 <p align="center">
   <picture>
-    <source media="(max-width: 640px)" srcset="Docs/assets/readme/pipeline-narrow.svg">
+    <source media="(max-width: 1199px)" srcset="Docs/assets/readme/pipeline-narrow.svg" width="640">
     <img src="Docs/assets/readme/pipeline.svg" width="100%" alt="Schematic of the design pipeline: active-site geometry (theozyme), scaffold generation with RFdiffusion2 and RFdiffusion3, sequence design with ProteinMPNN and LigandMPNN, structure validation with AlphaFold2 and AlphaFold3, and experimental characterization by activity assays. Illustration only: the noise cloud is not a model output, the overlaid traces are not an AlphaFold result, and the assay wells are not measurements.">
   </picture>
 </p>

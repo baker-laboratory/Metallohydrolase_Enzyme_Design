@@ -75,6 +75,12 @@ the [official IPD logo](https://www.ipd.uw.edu/wp-content/uploads/2025/03/IPD-lo
 and the [named PyMOL colors](https://github.com/SethWoodbury/pymolrc/blob/4cfc4d9f1838696b34d0f430394fb2fda850654a/.pymolrc#L118-L124),
 with deeper and lighter tints for plates and type. Ribbon colour follows facet
 angle and sequence position. The plates sit on a dark ground so one asset set
-reads on both GitHub themes. Pair the wide artwork with its `-narrow` variant
-in a `<picture>` element, and keep display sizes for the
+reads on both GitHub themes. Keep display sizes for the
 [animations](media.md) unchanged.
+
+The README column depends on GitHub's layout, not just the viewport: it is 324 px
+at a 390 px viewport, 406 px at 768 px, 570 px at 1012 px, and 838 px from
+1280 px. `<picture>` sources therefore use the masthead's narrow art up to
+1011 px, and the pipeline's narrow art (capped at 640 px) and 142 px navigation
+plates up to 1199 px. Recheck these against the repository page if the layout
+changes.
