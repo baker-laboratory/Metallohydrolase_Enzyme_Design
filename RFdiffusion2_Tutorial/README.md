@@ -95,4 +95,4 @@ AF2 weights are only needed if you continue into the downstream campaign.
 
 [Citation guide](../Docs/citations.md) · [BibTeX bibliography](../Docs/references.bib)
 
-Questions: Seth Woodbury (woodbuse@uw.edu) or Donghyo Kim (donghyo@uw.edu).
+Questions: Seth M. Woodbury (woodbuse@uw.edu) or Donghyo Kim (donghyo@uw.edu).

@@ -1,5 +1,5 @@
 """
-Created 2024-04-24 by Seth Woodbury (woodbuse@uw.edu)
+Created 2024-04-24 by Seth M. Woodbury (woodbuse@uw.edu)
 This script maps and copies remark 666 + header lines from pdbs in a reference directory to a new directory
 
 #IMPORTANT NOTE: This script requires that the new pdbs have an added suffix that utilizes the old name (forward mapping)

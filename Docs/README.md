@@ -14,7 +14,7 @@ adapting the computational tools to your own environment.
 | [Repository map](repository-map.md) | Where inputs, scripts, notebooks, and outputs belong |
 | [Animations and downloads](media.md) | Full-duration design animations and original MP4 files |
 | [Software and model weights](software-and-models.md) | Submodules, checkpoints, external tools, and licensing |
-| [Citations](citations.md) | Core publications, related metalloprotease work, and guidance on what to cite |
+| [Citations](citations.md) | Core publications, related derivative work, and guidance on what to cite |
 | [Contributing](contributing.md) | Making changes while preserving scientific provenance |
 
 The [environment reference](../Environment/README.md) contains installation

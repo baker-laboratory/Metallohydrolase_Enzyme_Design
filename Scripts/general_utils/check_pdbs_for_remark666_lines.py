@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 Script: check_pdbs_for_remark666_lines.py
-Author: Seth Woodbury (woodbuse@uw.edu)
+Author: Seth M. Woodbury (woodbuse@uw.edu)
 Date: 2025-01-22
 
 Description:

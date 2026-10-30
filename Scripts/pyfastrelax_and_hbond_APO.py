@@ -1,5 +1,5 @@
 """
-Created 2024-02-07 by Seth Woodbury (woodbuse@uw.edu)
+Created 2024-02-07 by Seth M. Woodbury (woodbuse@uw.edu)
 This script should do a pyfastrelax & output a new pdb with 
 hydrogen bond information about the specified atoms, including # of H-bonds and the residue doing them
 """

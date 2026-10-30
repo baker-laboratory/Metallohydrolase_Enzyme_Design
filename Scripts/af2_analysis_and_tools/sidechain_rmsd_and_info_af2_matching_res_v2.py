@@ -4,7 +4,7 @@
 Created on Tue Jan 25 2022
 Updated on Tue Apr 30 2024
 
-@author: ikalvet, updated by Seth Woodbury and Donghyo Kim
+@author: ikalvet, updated by Seth M. Woodbury and Donghyo Kim
 
 Computes per-atom-group RMSDs for catalytic residues between predicted models
 and the designs they came from, and appends them to a scorefile.

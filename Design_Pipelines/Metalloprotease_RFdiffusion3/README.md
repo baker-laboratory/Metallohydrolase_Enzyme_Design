@@ -34,15 +34,15 @@ and geometry idealization. It is a starting point for adapting the method;
 it does not supply this campaign's missing notebook. See the
 [workflow guide](../../Docs/workflows.md) for available downstream pipelines.
 
-## Related work
+## Related derivative work
 
-For a related study of designed zinc-dependent proteases, see Chen, A., Wu, K.,
+For related derivative work on designed zinc-dependent proteases, see Chen, A., Wu, K.,
 Choi, H. *et al.*, **Computational design of metalloproteases**, *Nature* (2026),
 [doi:10.1038/s41586-026-11167-2](https://doi.org/10.1038/s41586-026-11167-2).
 The paper's code and data are available in its own
 [Zenodo archive](https://doi.org/10.5281/zenodo.22654831).
 This directory remains the placeholder for the RFdiffusion3 *Science* campaign;
-the Nature study's deposit is linked as related work. See the
-[citation guide](../../Docs/citations.md#related-work-computational-design-of-metalloproteases).
+the Nature study's deposit is linked as related derivative work. See the
+[citation guide](../../Docs/citations.md#related-derivative-work-computational-design-of-metalloproteases).
 
 [BibTeX bibliography](../../Docs/references.bib)

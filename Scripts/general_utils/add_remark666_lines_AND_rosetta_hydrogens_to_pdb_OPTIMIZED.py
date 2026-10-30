@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-OPTIMIZED VERSION - Created 2026-01-14 by Seth Woodbury (woodbuse@uw.edu)
+OPTIMIZED VERSION - Created 2026-01-14 by Seth M. Woodbury (woodbuse@uw.edu)
 
 Optimized for processing 100k+ PDB files with:
 - Multiprocessing (uses all CPU cores) - disable with --single_thread

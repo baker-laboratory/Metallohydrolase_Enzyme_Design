@@ -43,16 +43,16 @@ with baseline and no-enzyme correction.
 The matching design campaign is
 [`Metalloprotease_RFdiffusion3`](../../Design_Pipelines/Metalloprotease_RFdiffusion3/).
 
-## Related work
+## Related derivative work
 
 Chen, A., Wu, K., Choi, H. *et al.* **Computational design of metalloproteases.**
 *Nature* (2026). [doi:10.1038/s41586-026-11167-2](https://doi.org/10.1038/s41586-026-11167-2).
 
-This related study explores designed zinc-dependent proteases and their
+This derivative study explores designed zinc-dependent proteases and their
 applications. Its data and code are archived separately at
 [Zenodo](https://doi.org/10.5281/zenodo.22654831). The files in this directory
 remain attributed to the RFdiffusion3 *Science* paper identified above.
-See the [citation guide](../../Docs/citations.md#related-work-computational-design-of-metalloproteases)
+See the [citation guide](../../Docs/citations.md#related-derivative-work-computational-design-of-metalloproteases)
 for the full reference and scope.
 
 [BibTeX bibliography](../../Docs/references.bib)

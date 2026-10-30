@@ -61,4 +61,4 @@ location and obtain AF2 weights for both prediction rounds.
 
 [Citation guide](../../Docs/citations.md) · [BibTeX bibliography](../../Docs/references.bib)
 
-Questions: Seth Woodbury (woodbuse@uw.edu) or Donghyo Kim (donghyo@uw.edu).
+Questions: Seth M. Woodbury (woodbuse@uw.edu) or Donghyo Kim (donghyo@uw.edu).

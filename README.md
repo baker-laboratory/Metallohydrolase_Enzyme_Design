@@ -1,28 +1,30 @@
-# Computational Design of Metallohydrolases
+<h1 align="center">Computational Design of Metallohydrolases</h1>
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-3a8050?style=flat-square)](LICENSE)
-[![Docs: guides](https://img.shields.io/badge/Docs-guides-336791?style=flat-square)](Docs/README.md)
-[![Python for analysis: 3.10–3.12](https://img.shields.io/badge/Analysis_Python-3.10%E2%80%933.12-3776ab?style=flat-square&logo=python&logoColor=white)](Environment/README.md#cpu-manuscript-analysis)
+<p align="center">From catalytic geometry to designed enzymes.</p>
 
-[![Examples: notebooks](https://img.shields.io/badge/Examples-notebooks-f37726?style=flat-square&logo=jupyter&logoColor=white)](#learn-the-workflow)
-[![Data: four datasets](https://img.shields.io/badge/Data-4_datasets-287d8e?style=flat-square)](Manuscript_Data/README.md)
-[![Videos: RFdiffusion3](https://img.shields.io/badge/Videos-RFdiffusion3-cc3333?style=flat-square&logo=youtube&logoColor=white)](RFdiffusion3_Tutorial/README.md#learning-resources)
-[![Cite: BibTeX](https://img.shields.io/badge/Cite-BibTeX-555555?style=flat-square)](Docs/references.bib)
+<p align="center">
+  <a href="Docs/README.md"><img src="https://img.shields.io/badge/Docs-287d8e?style=flat-square" width="48" height="26" alt="Documentation"></a>
+  <a href="#learn-the-workflow"><img src="https://img.shields.io/badge/Tutorials-287d8e?style=flat-square" width="74" height="26" alt="Tutorials and example notebooks"></a>
+  <a href="Manuscript_Data/README.md"><img src="https://img.shields.io/badge/Data-287d8e?style=flat-square" width="48" height="26" alt="Four experimental datasets"></a>
+  <a href="RFdiffusion3_Tutorial/README.md#learning-resources"><img src="https://img.shields.io/badge/Videos-287d8e?style=flat-square" width="61" height="26" alt="RFdiffusion3 video tutorials"></a>
+  <a href="#citation"><img src="https://img.shields.io/badge/Cite-BibTeX-287d8e?style=flat-square&amp;labelColor=287d8e" width="104" height="26" alt="Citations and copyable BibTeX"></a>
+</p>
 
-[![Nature DOI: 10.1038/s41586-025-09746-w](https://img.shields.io/badge/DOI-10.1038%2Fs41586--025--09746--w-287d8e?style=flat-square)](https://doi.org/10.1038/s41586-025-09746-w)
-[![Nature Methods DOI: 10.1038/s41592-025-02975-x](https://img.shields.io/badge/DOI-10.1038%2Fs41592--025--02975--x-466ca6?style=flat-square)](https://doi.org/10.1038/s41592-025-02975-x)
-[![Science DOI: 10.1126/science.aeh2982](https://img.shields.io/badge/DOI-10.1126%2Fscience.aeh2982-7359a6?style=flat-square)](https://doi.org/10.1126/science.aeh2982)
+<p align="center">
+  <a href="https://doi.org/10.1038/s41586-025-09746-w"><img src="https://img.shields.io/badge/Nature-Metallohydrolases-1b4f5c?style=flat-square&amp;labelColor=263b4d" width="187" height="24" alt="Metallohydrolases in Nature — DOI 10.1038/s41586-025-09746-w"></a>
+  <a href="https://doi.org/10.1038/s41592-025-02975-x"><img src="https://img.shields.io/badge/Nature_Methods-RFdiffusion2-1b4f5c?style=flat-square&amp;labelColor=263b4d" width="209" height="24" alt="RFdiffusion2 in Nature Methods — DOI 10.1038/s41592-025-02975-x"></a>
+  <a href="https://doi.org/10.1126/science.aeh2982"><img src="https://img.shields.io/badge/Science-RFdiffusion3-1b4f5c?style=flat-square&amp;labelColor=263b4d" width="156" height="24" alt="RFdiffusion3 in Science — DOI 10.1126/science.aeh2982"></a>
+</p>
 
-**From catalytic geometry to designed enzymes.**
+<p align="center">
+  <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-5b6a75?style=flat-square&amp;labelColor=263b4d" width="90" height="22" alt="MIT license"></a>
+  <a href="Environment/README.md#cpu-manuscript-analysis"><img src="https://img.shields.io/badge/Analysis_Python-3.10%E2%80%933.12-5b6a75?style=flat-square&amp;labelColor=263b4d" width="180" height="22" alt="CPU analysis: Python 3.10–3.12"></a>
+</p>
 
 Code, tutorials, and experimental data for designing metal-dependent enzymes
 with RFdiffusion2 and RFdiffusion3. The repository accompanies the
 metallohydrolase study [[1]](#ref-1) and contributes enzyme-design examples and data
 to the RFdiffusion2 [[2]](#ref-2) and RFdiffusion3 [[3]](#ref-3) studies.
-
-[**Docs**](Docs/README.md) · [**Quick start**](#quick-start) ·
-[**Tutorials**](#learn-the-workflow) · [**Data**](#explore-the-data) ·
-[**References / BibTeX**](#citation)
 
 <p align="center">
   <a href="Docs/assets/rfdiffusion3-highlight.mp4?raw=true">
@@ -90,7 +92,7 @@ from installation and motif scaffolding to advanced enzyme design.
     </td>
   </tr>
   <tr>
-    <td align="center"><a href="Docs/assets/rfdiffusion2-scaffold-generation.mp4?raw=true">Full-resolution MP4 · 5.77 seconds</a></td>
+    <td align="center"><a href="Docs/assets/rfdiffusion2-scaffold-generation.mp4?raw=true">Cropped MP4 · 5.77 seconds</a><br><a href="Docs/assets/rfdiffusion2-scaffold-generation-original.mp4?raw=true">Original MP4</a></td>
     <td align="center"><a href="Docs/assets/rfdiffusion3-supplementary.gif">Original GIF · 11 seconds</a></td>
   </tr>
 </table>
@@ -108,7 +110,7 @@ Each dataset has a `wetlab_data_analysis.py` marimo app. See
 [data and reproduction](Docs/data-and-reproduction.md) for assay coverage,
 figure exports, and the distinction between fresh fits and historical figures.
 
-**Related work:** Chen *et al.* [[4]](#ref-4) reports designed metalloproteases
+**Related derivative work:** Chen *et al.* [[4]](#ref-4) reports designed metalloproteases
 and applications in selective protein cleavage and caged biomodulator activation.
 Its code and data have a separate [Zenodo deposit](https://doi.org/10.5281/zenodo.22654831).
 
@@ -167,7 +169,146 @@ Cite the studies corresponding to the methods and data you use.
 1. <a id="ref-1"></a>Kim, D., Woodbury, S. M., Ahern, W. *et al.* Computational design of metallohydrolases. *Nature* **649**, 246–253 (2026). [DOI](https://doi.org/10.1038/s41586-025-09746-w).
 2. <a id="ref-2"></a>Ahern, W., Yim, J., Tischer, D. *et al.* Atom-level enzyme active site scaffolding using RFdiffusion2. *Nature Methods* **23**, 96–105 (2026). [DOI](https://doi.org/10.1038/s41592-025-02975-x).
 3. <a id="ref-3"></a>Butcher, J., Krishna, R., Mitra, R. *et al.* Atomic functional site scaffolding in biopolymers with RFdiffusion3. *Science*, eaeh2982 (2026). [DOI](https://doi.org/10.1126/science.aeh2982).
-4. <a id="ref-4"></a>Chen, A., Wu, K., Choi, H. *et al.* Computational design of metalloproteases. *Nature* (2026). [DOI](https://doi.org/10.1038/s41586-026-11167-2). **Related work; separate data deposit.**
+4. <a id="ref-4"></a>Chen, A., Wu, K., Choi, H. *et al.* Computational design of metalloproteases. *Nature* (2026). [DOI](https://doi.org/10.1038/s41586-026-11167-2). **Related derivative work; separate data deposit.**
+
+<details>
+<summary><strong>Copy BibTeX citations</strong></summary>
+
+```bibtex
+@article{kim2026metallohydrolases,
+  title     = {Computational design of metallohydrolases},
+  author    = {Kim, Donghyo and
+               Woodbury, Seth M. and
+               Ahern, Woody and
+               Tischer, Doug and
+               Kang, Alex and
+               Joyce, Emily and
+               Bera, Asim K. and
+               Hanikel, Nikita and
+               Salike, Saman and
+               Krishna, Rohith and
+               Yim, Jason and
+               Pellock, Samuel J. and
+               Lauko, Anna and
+               Kalvet, Indrek and
+               Hilvert, Donald and
+               Baker, David},
+  journal   = {Nature},
+  year      = {2026},
+  volume    = {649},
+  number    = {8095},
+  pages     = {246--253},
+  doi       = {10.1038/s41586-025-09746-w},
+  url       = {https://doi.org/10.1038/s41586-025-09746-w}
+}
+
+@article{ahern2026rfdiffusion2,
+  title     = {Atom-level enzyme active site scaffolding using {RFdiffusion2}},
+  author    = {Ahern, Woody and
+               Yim, Jason and
+               Tischer, Doug and
+               Salike, Saman and
+               Woodbury, Seth M. and
+               Kim, Donghyo and
+               Kalvet, Indrek and
+               Kipnis, Yakov and
+               Coventry, Brian and
+               Altae-Tran, Han Raut and
+               Bauer, Magnus S. and
+               Barzilay, Regina and
+               Jaakkola, Tommi S. and
+               Krishna, Rohith and
+               Baker, David},
+  journal   = {Nature Methods},
+  year      = {2026},
+  volume    = {23},
+  number    = {1},
+  pages     = {96--105},
+  doi       = {10.1038/s41592-025-02975-x},
+  url       = {https://doi.org/10.1038/s41592-025-02975-x}
+}
+
+@article{butcher2026rfdiffusion3,
+  title     = {Atomic functional site scaffolding in biopolymers with {RFdiffusion3}},
+  author    = {Butcher, Jasper and
+               Krishna, Rohith and
+               Mitra, Raktim and
+               Woodbury, Seth M. and
+               Kim, Donghyo and
+               Brent, Rafael I. and
+               Li, Yanjing and
+               Corley, Nathaniel and
+               Favor, Andrew and
+               Chen, Anqi and
+               Kim, Paul T. and
+               Funk, Jonathan and
+               Reinoso, Gabriela Bastidas and
+               Wu, Kejia and
+               Muraishi, Aiko and
+               Eisenach, Helen E. and
+               Salike, Saman and
+               Mathis, Simon and
+               Thompson, Tuscan Rock and
+               Ruder, Antonia and
+               Sehgal, Enisha and
+               Kubaney, Andrew and
+               Chen, Jie and
+               Politanska, Yuliya and
+               Coventry, Brian and
+               Zhang, Odin and
+               Hardy, Florence J. and
+               Qiang, Bo and
+               Didi, Kieran and
+               Kazman, Maxwell and
+               Schaaf, Lars L. and
+               DiMaio, Frank and
+               Baker, David},
+  journal   = {Science},
+  year      = {2026},
+  pages     = {eaeh2982},
+  doi       = {10.1126/science.aeh2982},
+  url       = {https://doi.org/10.1126/science.aeh2982}
+}
+
+% Related derivative work; published online 2026-10-14 without assigned volume, issue or pages.
+@article{chen2026metalloproteases,
+  title     = {Computational design of metalloproteases},
+  author    = {Chen, Anqi and
+               Wu, Kejia and
+               Choi, Hojae and
+               Venkatesh, Preetham and
+               Pellock, Samuel J. and
+               Hanikel, Nikita and
+               shin, Hojeong and
+               Evans, Declan and
+               Didi, Kieran and
+               Schaaf, Lars L. and
+               Díaz-Perlas, Cristina and
+               Coventry, Brian and
+               Kim, Donghyo and
+               Woodbury, Seth M. and
+               Ji, Pengfei and
+               Honda, Shingo and
+               Bera, Asim K. and
+               Nguyen, Hannah and
+               Kang, Alex and
+               Wang, Yanqing and
+               Li, Xinting and
+               Gerben, Stacey and
+               Chang, Lemuel and
+               Yan, Xiao and
+               Oller-Salvia, Benjamí and
+               Hyman, Anthony A. and
+               Hilvert, Donald and
+               Baker, David},
+  journal   = {Nature},
+  year      = {2026},
+  doi       = {10.1038/s41586-026-11167-2},
+  url       = {https://doi.org/10.1038/s41586-026-11167-2}
+}
+```
+
+</details>
 
 ## Contributing and contact
 
@@ -175,7 +316,7 @@ Cite the studies corresponding to the methods and data you use.
 with the failing command, error, and environment details.
 [Contributor guide](Docs/contributing.md) · [Agent guidance](AGENTS.md).
 
-**Scientific contacts:** [Seth Woodbury](mailto:woodbuse@uw.edu) · [Donghyo Kim](mailto:donghyo@uw.edu).
+**Scientific contacts:** [Seth M. Woodbury](mailto:woodbuse@uw.edu) · [Donghyo Kim](mailto:donghyo@uw.edu).
 
 Original project code uses the **[MIT License](LICENSE)**. Third-party software
 and model parameters retain their [own terms](Docs/software-and-models.md#licensing).
