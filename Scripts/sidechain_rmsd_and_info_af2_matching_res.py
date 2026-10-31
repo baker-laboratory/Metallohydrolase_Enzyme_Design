@@ -4,7 +4,7 @@
 Created on Tue Jan 25 2022
 Updated on Tue Apr 30 2024
 
-@author: ikalvet & updated by Seth Woodbury + Donghyo Kim
+@author: ikalvet & updated by Seth M. Woodbury + Donghyo Kim
 
 NOTE: WE NEED TO FIX THIS SCRIPT SUCH THAT THE REINDEXING KEEPS THE OG BLOCK ORDER FROM THE REMARK 666 LINES OR SOMETHING
 RN IT CURRENTLY REINDEXES BASED ON WHAT RESIDUE NUMBER IT IS!

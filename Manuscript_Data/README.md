@@ -8,12 +8,14 @@ under [`Design_Pipelines/`](../Design_Pipelines/).
 |---|---|---|
 | [`Metallohydrolase_Nature_2026/`](Metallohydrolase_Nature_2026/) | [`Metalloesterase_RFdiffusion2`](../Design_Pipelines/Metalloesterase_RFdiffusion2/) | **Published** — Kim, Woodbury, Ahern et al., *Nature* (2026) |
 | [`Metallohydrolase_RFdiffusion2_Nature_Methods_2026/`](Metallohydrolase_RFdiffusion2_Nature_Methods_2026/) | [`Metalloesterase_RFdiffusion2`](../Design_Pipelines/Metalloesterase_RFdiffusion2/) | **Published** — additional 4MU-butyrate data and shared Nature results |
-| [`Phosphotriesterase_RFdiffusion3_Science_2026/`](Phosphotriesterase_RFdiffusion3_Science_2026/) | [`Phosphotriesterase_RFdiffusion3`](../Design_Pipelines/Phosphotriesterase_RFdiffusion3/) | RFdiffusion3 Science 2026 manuscript; data and figure reproduction available |
-| [`Metalloprotease_RFdiffusion3_Science_2026/`](Metalloprotease_RFdiffusion3_Science_2026/) | [`Metalloprotease_RFdiffusion3`](../Design_Pipelines/Metalloprotease_RFdiffusion3/) | RFdiffusion3 Science 2026 manuscript; wet lab data and marimo analysis available |
+| [`Phosphotriesterase_RFdiffusion3_Science_2026/`](Phosphotriesterase_RFdiffusion3_Science_2026/) | [`Phosphotriesterase_RFdiffusion3`](../Design_Pipelines/Phosphotriesterase_RFdiffusion3/) | **Published** — RFdiffusion3, *Science* (2026); data and figure reproduction available |
+| [`Metalloprotease_RFdiffusion3_Science_2026/`](Metalloprotease_RFdiffusion3_Science_2026/) | [`Metalloprotease_RFdiffusion3`](../Design_Pipelines/Metalloprotease_RFdiffusion3/) | **Published** — RFdiffusion3, *Science* (2026); wet lab data and marimo analysis available |
 
 The Nature and Nature Methods directories use their 2026 journal issue year;
-both articles were first published online on 3 December 2025. RFdiffusion3
-directories use the manuscript designation supplied by the authors.
+both articles were first published online on 3 December 2025. The RFdiffusion3 datasets accompany
+[Atomic functional site scaffolding in biopolymers with RFdiffusion3](https://doi.org/10.1126/science.aeh2982),
+published in *Science* in 2026. The metalloprotease design directory is a
+placeholder; this does not limit access to the experimental analysis here.
 
 A typical dataset directory uses this layout:
 
@@ -33,8 +35,8 @@ links each experiment to its files.
 
 ## Running the analysis
 
-You do **not** need the design environment. The analysis notebooks use only
-marimo, numpy, pandas, scipy, matplotlib, seaborn, and openpyxl.
+You do **not** need the design environment. The analysis environment includes
+marimo, NumPy, pandas, SciPy, Matplotlib, seaborn, openpyxl and Pillow.
 
 ```bash
 # from the repository root
@@ -47,9 +49,9 @@ The marimo notebooks execute cells in dependency order. The Python source contai
 the analysis; historical `.ipynb` files are retained as an archive and are not
 required to run the marimo notebooks.
 
-There are no paths to edit. The first cell locates the repository by walking up
-from the notebook location, creates `wetlab_data_plots/`, and supplies the
-paths used by the analysis cells. Set `ZINC_HYDRO_REPO` only if
+The analysis apps locate their dataset within the repository and supply paths
+to the analysis cells. Keep the shared `Scripts/` directory alongside the
+datasets; outputs are written to each dataset's `wetlab_data_plots/`. Set `ZINC_HYDRO_REPO` only if
 you are running from somewhere unusual.
 
 `openpyxl` is required — 30 of the 43 Nature raw files are `.xlsx`. It is included in
@@ -76,9 +78,10 @@ Optional vector exports (`.eps`, `.svg`, `.pdf`) directly in
 `wetlab_data_plots/` are gitignored. The RFdiffusion3 reproduction PDFs in
 `wetlab_data_plots/paper_figures/` are included in the repository.
 
-The phosphotriesterase notebook uses its own RFdiffusion3 plotting functions to
-reproduce the manuscript's SI and main-figure panels, including their colors,
-labels, layouts, and PDF exports. See its dataset README for the numerical and
+The phosphotriesterase notebook uses its RFdiffusion3 plotting helpers to
+reproduce SI and main-figure panels with their colors, labels, layouts and PDF
+exports. The final assembled tagless SI figure and original instrument spectra
+are deposited separately; export rebuilds the kinetic side panel. See its dataset README for the numerical and
 visual comparison results and the separately labeled tagless ZAPP1 analysis.
 
 ### Reading it without running it
@@ -129,3 +132,5 @@ layout above and add a row linking its computational campaign. Shared results
 should link to their original dataset rather than duplicate raw files. The analysis notebook's first cell is
 specific to its dataset. Copy a marimo entrypoint and update its dataset path
 and analysis cells.
+
+[Citation guide](../Docs/citations.md) · [BibTeX bibliography](../Docs/references.bib)

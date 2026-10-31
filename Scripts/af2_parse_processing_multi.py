@@ -1,5 +1,5 @@
 """
-Created 2024-02-08 by Seth Woodbury (woodbuse@uw.edu)
+Created 2024-02-08 by Seth M. Woodbury (woodbuse@uw.edu)
 This script parses all the AF2 JSON files in an input directory and outputs af2_out_parsed.csv.
 Efficient logic and handling of extra data are implemented.
 """

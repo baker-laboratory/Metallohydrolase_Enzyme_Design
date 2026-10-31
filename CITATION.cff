@@ -1,0 +1,310 @@
+# MIT applies to original project code; third-party components retain their own licenses.
+cff-version: 1.2.0
+message: Please cite the primary publication below for this repository and the relevant method
+  paper when using RFdiffusion2 or RFdiffusion3. See Docs/citations.md for dataset-specific
+  guidance.
+type: software
+title: Metallohydrolase Enzyme Design
+authors:
+- family-names: Woodbury
+  given-names: Seth M.
+  orcid: https://orcid.org/0000-0003-0510-8240
+contact:
+- family-names: Woodbury
+  given-names: Seth M.
+  orcid: https://orcid.org/0000-0003-0510-8240
+  email: woodbuse@uw.edu
+- family-names: Kim
+  given-names: Donghyo
+  orcid: https://orcid.org/0000-0002-8097-3675
+  email: donghyo@uw.edu
+repository-code: https://github.com/baker-laboratory/Metallohydrolase_Enzyme_Design
+url: https://github.com/baker-laboratory/Metallohydrolase_Enzyme_Design
+license: MIT
+preferred-citation:
+  type: article
+  title: Computational design of metallohydrolases
+  authors:
+  - family-names: Kim
+    given-names: Donghyo
+    orcid: https://orcid.org/0000-0002-8097-3675
+  - family-names: Woodbury
+    given-names: Seth M.
+    orcid: https://orcid.org/0000-0003-0510-8240
+  - family-names: Ahern
+    given-names: Woody
+  - family-names: Tischer
+    given-names: Doug
+  - family-names: Kang
+    given-names: Alex
+    orcid: https://orcid.org/0000-0001-5487-0499
+  - family-names: Joyce
+    given-names: Emily
+  - family-names: Bera
+    given-names: Asim K.
+    orcid: https://orcid.org/0000-0001-9473-2912
+  - family-names: Hanikel
+    given-names: Nikita
+  - family-names: Salike
+    given-names: Saman
+  - family-names: Krishna
+    given-names: Rohith
+    orcid: https://orcid.org/0009-0003-6387-9622
+  - family-names: Yim
+    given-names: Jason
+    orcid: https://orcid.org/0000-0003-0575-7400
+  - family-names: Pellock
+    given-names: Samuel J.
+    orcid: https://orcid.org/0000-0002-7557-7985
+  - family-names: Lauko
+    given-names: Anna
+  - family-names: Kalvet
+    given-names: Indrek
+    orcid: https://orcid.org/0000-0002-6610-2857
+  - family-names: Hilvert
+    given-names: Donald
+    orcid: https://orcid.org/0000-0002-3941-621X
+  - family-names: Baker
+    given-names: David
+    orcid: https://orcid.org/0000-0001-7896-6217
+  journal: Nature
+  year: 2026
+  volume: '649'
+  issue: '8095'
+  start: '246'
+  end: '253'
+  doi: 10.1038/s41586-025-09746-w
+  url: https://doi.org/10.1038/s41586-025-09746-w
+references:
+- type: article
+  title: Atom-level enzyme active site scaffolding using RFdiffusion2
+  authors:
+  - family-names: Ahern
+    given-names: Woody
+  - family-names: Yim
+    given-names: Jason
+  - family-names: Tischer
+    given-names: Doug
+  - family-names: Salike
+    given-names: Saman
+  - family-names: Woodbury
+    given-names: Seth M.
+  - family-names: Kim
+    given-names: Donghyo
+    orcid: https://orcid.org/0000-0002-8097-3675
+  - family-names: Kalvet
+    given-names: Indrek
+    orcid: https://orcid.org/0000-0002-6610-2857
+  - family-names: Kipnis
+    given-names: Yakov
+  - family-names: Coventry
+    given-names: Brian
+    orcid: https://orcid.org/0000-0002-6910-6255
+  - family-names: Altae-Tran
+    given-names: Han Raut
+  - family-names: Bauer
+    given-names: Magnus S.
+  - family-names: Barzilay
+    given-names: Regina
+  - family-names: Jaakkola
+    given-names: Tommi S.
+    orcid: https://orcid.org/0000-0002-2199-0379
+  - family-names: Krishna
+    given-names: Rohith
+    orcid: https://orcid.org/0009-0003-6387-9622
+  - family-names: Baker
+    given-names: David
+    orcid: https://orcid.org/0000-0001-7896-6217
+  journal: Nature Methods
+  year: 2026
+  volume: '23'
+  issue: '1'
+  start: '96'
+  end: '105'
+  doi: 10.1038/s41592-025-02975-x
+  url: https://doi.org/10.1038/s41592-025-02975-x
+- type: article
+  title: Atomic functional site scaffolding in biopolymers with RFdiffusion3
+  authors:
+  - family-names: Butcher
+    given-names: Jasper
+    orcid: https://orcid.org/0009-0004-4864-1330
+  - family-names: Krishna
+    given-names: Rohith
+    orcid: https://orcid.org/0009-0003-6387-9622
+  - family-names: Mitra
+    given-names: Raktim
+    orcid: https://orcid.org/0000-0003-1182-3742
+  - family-names: Woodbury
+    given-names: Seth M.
+    orcid: https://orcid.org/0000-0003-0510-8240
+  - family-names: Kim
+    given-names: Donghyo
+  - family-names: Brent
+    given-names: Rafael I.
+    orcid: https://orcid.org/0000-0002-3233-7914
+  - family-names: Li
+    given-names: Yanjing
+  - family-names: Corley
+    given-names: Nathaniel
+    orcid: https://orcid.org/0000-0002-6509-7144
+  - family-names: Favor
+    given-names: Andrew
+    orcid: https://orcid.org/0000-0002-9977-2785
+  - family-names: Chen
+    given-names: Anqi
+    orcid: https://orcid.org/0000-0001-9857-0594
+  - family-names: Kim
+    given-names: Paul T.
+    orcid: https://orcid.org/0000-0002-8950-7179
+  - family-names: Funk
+    given-names: Jonathan
+    orcid: https://orcid.org/0009-0006-9496-1890
+  - family-names: Reinoso
+    given-names: Gabriela Bastidas
+    orcid: https://orcid.org/0009-0006-1199-564X
+  - family-names: Wu
+    given-names: Kejia
+    orcid: https://orcid.org/0000-0002-4532-4290
+  - family-names: Muraishi
+    given-names: Aiko
+  - family-names: Eisenach
+    given-names: Helen E.
+    orcid: https://orcid.org/0000-0002-3201-4517
+  - family-names: Salike
+    given-names: Saman
+  - family-names: Mathis
+    given-names: Simon
+  - family-names: Thompson
+    given-names: Tuscan Rock
+    orcid: https://orcid.org/0009-0003-1876-106X
+  - family-names: Ruder
+    given-names: Antonia
+    orcid: https://orcid.org/0009-0006-4962-9573
+  - family-names: Sehgal
+    given-names: Enisha
+    orcid: https://orcid.org/0000-0002-6000-0999
+  - family-names: Kubaney
+    given-names: Andrew
+    orcid: https://orcid.org/0009-0009-4982-6050
+  - family-names: Chen
+    given-names: Jie
+    orcid: https://orcid.org/0009-0001-4650-7785
+  - family-names: Politanska
+    given-names: Yuliya
+  - family-names: Coventry
+    given-names: Brian
+    orcid: https://orcid.org/0000-0002-6910-6255
+  - family-names: Zhang
+    given-names: Odin
+  - family-names: Hardy
+    given-names: Florence J.
+    orcid: https://orcid.org/0000-0003-0671-0209
+  - family-names: Qiang
+    given-names: Bo
+    orcid: https://orcid.org/0000-0001-7428-4104
+  - family-names: Didi
+    given-names: Kieran
+    orcid: https://orcid.org/0000-0001-6839-3320
+  - family-names: Kazman
+    given-names: Maxwell
+    orcid: https://orcid.org/0000-0003-4420-4016
+  - family-names: Schaaf
+    given-names: Lars L.
+    orcid: https://orcid.org/0000-0002-1935-236X
+  - family-names: DiMaio
+    given-names: Frank
+    orcid: https://orcid.org/0000-0002-7524-8938
+  - family-names: Baker
+    given-names: David
+    orcid: https://orcid.org/0000-0001-7896-6217
+  journal: Science
+  year: 2026
+  doi: 10.1126/science.aeh2982
+  url: https://doi.org/10.1126/science.aeh2982
+  start: eaeh2982
+- type: article
+  title: Computational design of metalloproteases
+  authors:
+  - family-names: Chen
+    given-names: Anqi
+    orcid: https://orcid.org/0000-0001-9857-0594
+  - family-names: Wu
+    given-names: Kejia
+    orcid: https://orcid.org/0000-0002-4532-4290
+  - family-names: Choi
+    given-names: Hojae
+    orcid: https://orcid.org/0009-0004-8035-1552
+  - family-names: Venkatesh
+    given-names: Preetham
+  - family-names: Pellock
+    given-names: Samuel J.
+    orcid: https://orcid.org/0000-0002-7557-7985
+  - family-names: Hanikel
+    given-names: Nikita
+  - family-names: shin
+    given-names: Hojeong
+  - family-names: Evans
+    given-names: Declan
+  - family-names: Didi
+    given-names: Kieran
+    orcid: https://orcid.org/0000-0001-6839-3320
+  - family-names: Schaaf
+    given-names: Lars L.
+    orcid: https://orcid.org/0000-0002-1935-236X
+  - family-names: Díaz-Perlas
+    given-names: Cristina
+    orcid: https://orcid.org/0000-0002-9552-3896
+  - family-names: Coventry
+    given-names: Brian
+    orcid: https://orcid.org/0000-0002-6910-6255
+  - family-names: Kim
+    given-names: Donghyo
+    orcid: https://orcid.org/0000-0002-8097-3675
+  - family-names: Woodbury
+    given-names: Seth M.
+    orcid: https://orcid.org/0000-0003-0510-8240
+  - family-names: Ji
+    given-names: Pengfei
+    orcid: https://orcid.org/0000-0002-8109-7929
+  - family-names: Honda
+    given-names: Shingo
+    orcid: https://orcid.org/0000-0002-9403-6631
+  - family-names: Bera
+    given-names: Asim K.
+    orcid: https://orcid.org/0000-0001-9473-2912
+  - family-names: Nguyen
+    given-names: Hannah
+    orcid: https://orcid.org/0000-0001-9696-4004
+  - family-names: Kang
+    given-names: Alex
+    orcid: https://orcid.org/0000-0001-5487-0499
+  - family-names: Wang
+    given-names: Yanqing
+    orcid: https://orcid.org/0009-0000-2223-2687
+  - family-names: Li
+    given-names: Xinting
+  - family-names: Gerben
+    given-names: Stacey
+    orcid: https://orcid.org/0000-0003-0313-6248
+  - family-names: Chang
+    given-names: Lemuel
+  - family-names: Yan
+    given-names: Xiao
+  - family-names: Oller-Salvia
+    given-names: Benjamí
+  - family-names: Hyman
+    given-names: Anthony A.
+    orcid: https://orcid.org/0000-0003-0851-704X
+  - family-names: Hilvert
+    given-names: Donald
+    orcid: https://orcid.org/0000-0002-3941-621X
+  - family-names: Baker
+    given-names: David
+    orcid: https://orcid.org/0000-0001-7896-6217
+  journal: Nature
+  year: 2026
+  date-published: '2026-10-14'
+  doi: 10.1038/s41586-026-11167-2
+  url: https://doi.org/10.1038/s41586-026-11167-2
+  notes: Related metalloprotease study. Its data and code are deposited separately at https://doi.org/10.5281/zenodo.22654831.

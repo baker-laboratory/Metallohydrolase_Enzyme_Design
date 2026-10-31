@@ -63,3 +63,5 @@ removed from spreadsheet exports.
 
 Designs are identified by source plate well (A1, A8, B9, C4, C5, F7, …).
 Notebook section headings identify the manuscript names ZETA_1–ZETA_4.
+
+[Citation guide](../../Docs/citations.md) · [BibTeX bibliography](../../Docs/references.bib)

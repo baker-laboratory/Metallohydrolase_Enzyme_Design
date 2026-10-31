@@ -70,3 +70,7 @@ __marimo__/
 .venv/
 .venv-*/
 Manuscript_Data/*/wetlab_data_analysis.html
+
+# Local package-manager state and helper container images
+.pixi/
+Environment/*.sif

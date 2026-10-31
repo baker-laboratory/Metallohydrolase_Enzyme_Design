@@ -1,22 +1,17 @@
 # Metalloprotease design with RFdiffusion3
 
-> **Status: in preparation.** This campaign is being prepared for release
-> alongside RFdiffusion3, and will be published here shortly.
+> **Repository status: campaign driver not included.** This directory contains
+> this scope README and placeholder input/output directories. The associated
+> experimental data are available for the published RFdiffusion3 study in
+> *Science* (2026), [doi:10.1126/science.aeh2982](https://doi.org/10.1126/science.aeh2982).
 
 ## Scope
 
-Design of de novo metalloproteases (mononuclear Zn(II) center, amide bond hydrolysis) using **RFdiffusion3** via the
-[foundry](https://github.com/RosettaCommons/foundry) framework, following the
-same staged workflow as
-[`../Metalloesterase_RFdiffusion2/`](../Metalloesterase_RFdiffusion2/):
-
-1. Theozyme preparation (quantum chemistry or crystal-structure derived)
-2. ORI token placement
-3. RFdiffusion3 backbone generation
-4. Two-stage filtering — rapid JSON metrics, then PyRosetta scaffold analysis
-5. Geometry idealization (Cartesian relaxation)
-6. Sequence design (LigandMPNN + FastMPNNDesign)
-7. Structure prediction and ligand placement (AF2 / PLACER)
+Design of de novo metalloproteases with a mononuclear Zn(II) center for amide
+bond hydrolysis, using **RFdiffusion3**. The shared
+[RFdiffusion3 tutorial](../../RFdiffusion3_Tutorial/) covers theozyme preparation,
+scaffold generation, filtering, and geometry idealization. Campaign-specific
+execution instructions require the missing driver and inputs.
 
 ## Planned layout
 
@@ -33,7 +28,21 @@ The matching experimental data are available at
 
 ## In the meantime
 
-The RFdiffusion3 workflow is already demonstrated end to end, on two worked
-examples, in [`../../RFdiffusion3_Tutorial/`](../../RFdiffusion3_Tutorial/).
-That tutorial is runnable today and is the right starting point for adapting the
-method to your own chemistry.
+The [RFdiffusion3 tutorial](../../RFdiffusion3_Tutorial/) includes two theozyme
+preparation examples and a 1QJI scaffold-generation workflow through filtering
+and geometry idealization. It is a starting point for adapting the method;
+it does not supply this campaign's missing notebook. See the
+[workflow guide](../../Docs/workflows.md) for available downstream pipelines.
+
+## Related derivative work
+
+For related derivative work on designed zinc-dependent proteases, see Chen, A., Wu, K.,
+Choi, H. *et al.*, **Computational design of metalloproteases**, *Nature* (2026),
+[doi:10.1038/s41586-026-11167-2](https://doi.org/10.1038/s41586-026-11167-2).
+The paper's code and data are available in its own
+[Zenodo archive](https://doi.org/10.5281/zenodo.22654831).
+This directory remains the placeholder for the RFdiffusion3 *Science* campaign;
+the Nature study's deposit is linked as related derivative work. See the
+[citation guide](../../Docs/citations.md#related-derivative-work-computational-design-of-metalloproteases).
+
+[BibTeX bibliography](../../Docs/references.bib)

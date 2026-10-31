@@ -1,0 +1,7 @@
+# The helper image needs only its environment specification. Keep scientific
+# data, source checkouts, local credentials and weights out of the build context.
+**
+!Environment/
+Environment/**
+!Environment/Dockerfile
+!Environment/zinc_hydro.yml

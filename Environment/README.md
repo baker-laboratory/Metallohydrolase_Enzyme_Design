@@ -1,24 +1,52 @@
-# Environment
+# Environments
 
-Four ways to get a working environment. Pick one — you do not need all of them.
+Choose an environment for your task. Run commands from the repository root
+unless shown otherwise; [getting started](../Docs/getting-started.md) lists the
+workflow entry points.
 
-## Which one do I want?
+| Task | Setup | Scope |
+|---|---|---|
+| Manuscript analysis | [pip/uv](requirements-analysis.txt), [conda](analysis.yml), or pixi `analysis` | CPU; Python 3.10–3.12 |
+| Structure preparation, PyRosetta scoring, sequence-design helpers | [zinc_hydro.yml](zinc_hydro.yml) or pixi `design` | Linux x86_64; Python 3.10; CUDA 12.1 |
+| Model inference | [Model setup](#model-environments-and-checkpoints) | Separate environments, source code, and checkpoints |
 
-| I want to… | Use | Time | Needs a GPU? |
-|---|---|---|---|
-| Re-plot the wet lab data in `Manuscript_Data/` | [`analysis.yml`](analysis.yml) or [`requirements-analysis.txt`](requirements-analysis.txt) | ~1 min | No |
-| Run the RFdiffusion2/3 design tutorials and pipelines | [`zinc_hydro.yml`](zinc_hydro.yml) | 20–40 min | Yes, for inference |
-| Reproduce our exact package versions | [`zinc_hydro.lock.yml`](zinc_hydro.lock.yml) | 20–40 min | Yes, for inference |
-| Work on a cluster that only allows containers | [`zinc_hydro.def`](zinc_hydro.def) (Apptainer) | ~40 min to build | Yes, for inference |
-| Use Docker instead of Apptainer | [`Dockerfile`](Dockerfile) | ~40 min to build | Yes, for inference |
-| Avoid conda entirely, with a real lockfile | [`pixi.toml`](pixi.toml) | ~5–40 min | Depends on env |
+## CPU manuscript analysis
 
----
+The pip, conda, and pixi specifications cover all four
+`Manuscript_Data/*/wetlab_data_analysis.py` apps with the same analysis packages.
+Keep `Scripts/` and the manuscript data alongside the apps. No CUDA, models,
+or PyRosetta are needed.
 
-## 1. Analysis only (smallest, works everywhere)
+### uv or pip
 
-Everything needed for `Manuscript_Data/*/wetlab_data_analysis.py` and nothing
-else. No CUDA, no PyTorch, no PyRosetta, no license.
+With [uv](https://docs.astral.sh/uv/) on Linux/macOS:
+
+```bash
+uv venv .venv --python 3.11
+uv pip install --python .venv/bin/python -r Environment/requirements-analysis.txt
+.venv/bin/marimo edit Manuscript_Data/Metallohydrolase_Nature_2026/wetlab_data_analysis.py
+```
+
+Or with an existing Python 3.11 installation:
+
+```bash
+python3.11 -m venv .venv
+.venv/bin/python -m pip install -r Environment/requirements-analysis.txt
+.venv/bin/marimo edit Manuscript_Data/Metallohydrolase_Nature_2026/wetlab_data_analysis.py
+```
+
+On Windows PowerShell:
+
+```powershell
+py -3.11 -m venv .venv
+.\.venv\Scripts\python.exe -m pip install -r Environment/requirements-analysis.txt
+.\.venv\Scripts\marimo.exe edit Manuscript_Data/Metallohydrolase_Nature_2026/wetlab_data_analysis.py
+```
+
+Replace the manuscript path to open another app. Use `marimo run` instead of
+`marimo edit` for a read-only interface.
+
+### Conda
 
 ```bash
 conda env create -f Environment/analysis.yml
@@ -26,155 +54,128 @@ conda activate zinc_hydro_analysis
 marimo edit Manuscript_Data/Metallohydrolase_Nature_2026/wetlab_data_analysis.py
 ```
 
-Or with `uv` / `pip`:
+### Pixi
 
 ```bash
-uv venv .venv --python 3.11 && source .venv/bin/activate
-uv pip install -r Environment/requirements-analysis.txt
-marimo edit Manuscript_Data/Metallohydrolase_Nature_2026/wetlab_data_analysis.py
+cd Environment
+pixi run -e analysis lab
 ```
 
-## 2. Full design environment
+The `lab` task opens the Nature manuscript app. To select another:
+
+```bash
+pixi run -e analysis marimo edit ../Manuscript_Data/Metalloprotease_RFdiffusion3_Science_2026/wetlab_data_analysis.py
+```
+
+Pixi declares analysis targets for Linux x86_64, Intel/Apple-silicon macOS, and
+Windows x86_64. Its first lock may also resolve the licensed Linux helper
+environment; use pip or `analysis.yml` if helper-channel access blocks analysis.
+
+## Linux CUDA helper environment
+
+Obtain [PyRosetta access](https://www.pyrosetta.org/downloads) before installing
+from the Rosetta channel:
 
 ```bash
 conda env create -f Environment/zinc_hydro.yml
 conda activate zinc_hydro
-python -m ipykernel install --user --name=zinc_hydro
-```
-
-`zinc_hydro.yml` pins minor versions only, so conda can pick builds that suit
-your platform and drivers. For our exact builds — every package pinned to its
-build string, linux-64 only — use `zinc_hydro.lock.yml` instead. Prefer the
-lockfile when you are checking a published number; prefer the portable file when
-you just need it to install.
-
-**PyRosetta needs a license** (free for academic use). Register at
-[els2.comotion.uw.edu/product/pyrosetta](https://els2.comotion.uw.edu/product/pyrosetta);
-the `conda.rosettacommons.org` channel then serves the builds.
-
-**CPU-only?** Use the analysis environment for wet lab notebooks. Theozyme
-XYZ→PDB conversion and PyRosetta scoring also run on CPUs, but need their own
-dependencies from the full design environment. See [GPU requirements](#gpu-requirements)
-below before adapting the design environment for CPU use.
-
-## 3. Containers
-
-```bash
-cd Environment
-apptainer build zinc_hydro.sif zinc_hydro.def
-export ZINC_HYDRO_SIF=$PWD/zinc_hydro.sif
-```
-
-or, with Docker (run from the repository root):
-
-```bash
-docker build -f Environment/Dockerfile -t zinc_hydro:latest .
-```
-
-The image's runscript is the environment's python, so `./zinc_hydro.sif script.py`
-works anywhere this repository expects an interpreter. Pass `--nv` for GPU work.
-
-> **A container is optional.** The conda environment above provides everything
-> the scripts need, including PyRosetta and Open Babel. Build an image only if
-> your cluster requires one, or if you want a single portable artifact.
-
-## 4. pixi
-
-```bash
-cd Environment
-pixi run -e analysis marimo edit ../Manuscript_Data   # analysis notebooks, cross-platform
-pixi run -e design python -c "import pyrosetta"   # full stack, linux-64
-```
-
-`pixi install` writes a `pixi.lock` that reproduces the solve across machines.
-Commit that lock if you want a fixed environment; we ship the manifest without
-one so the first install resolves against current channels.
-
----
-
-## GPU requirements
-
-The design workflows use GPUs for diffusion, sequence design, and structure
-prediction. Theozyme preparation, XYZ→PDB conversion, Rosetta/PyRosetta scoring,
-and wet lab analysis run on CPUs.
-
-| Execution in the design workflows | Steps |
-|---|---|
-| GPU | RFdiffusion2 / RFdiffusion3 inference, LigandMPNN, AlphaFold2 (SuperFold), AlphaFold3, PLACER |
-| CPU-only | theozyme prep, ligand `.params` generation, Rosetta/PyRosetta scoring and filtering, `Manuscript_Data/*/wetlab_data_analysis.py` |
-
-LigandMPNN and PLACER also provide CPU fallbacks in their included source code;
-they still need PyTorch and their other model dependencies.
-
-`zinc_hydro.yml` pins `pytorch-cuda=12.1`. NVIDIA lists Linux x86_64 driver
-525.60.13 as the minimum for CUDA 12.1
-[minor version compatibility](https://docs.nvidia.com/cuda/archive/12.1.0/cuda-toolkit-release-notes/index.html#cuda-driver).
-Individual models or features may require a newer driver; this is not a tested
-minimum for the entire pipeline. The supplied full design environment targets
-Linux with NVIDIA CUDA; this repository does not provide a full AMD/ROCm or
-Apple-silicon design environment.
-
-**Example resource requests.** The saved diffusion job scripts in
-[`RFdiffusion2_Tutorial/slurm_submit/`](../RFdiffusion2_Tutorial/slurm_submit/)
-and [`RFdiffusion3_Tutorial/slurm_submit/`](../RFdiffusion3_Tutorial/slurm_submit/)
-request one A4000 GPU and one CPU core per job:
-
-| Workload | Request |
-|---|---|
-| RFdiffusion2 tutorial | `--gres=gpu:a4000:1 --mem=8g -c 1`, with 6–8 hour time limits |
-| RFdiffusion3 production | `--gres=gpu:a4000:1 --mem=16g -c 1 -t 06:30:00` |
-
-SLURM's `--mem` specifies host RAM, not GPU memory. These scripts record requested
-resources and time limits; they do not establish minimum hardware requirements
-or measured runtimes. Each model's own hardware requirements also apply.
-
-For wet lab analysis without a GPU, use the analysis environment above. A CPU
-adaptation of the design environment must retain the dependencies needed by the
-selected scripts, including CPU builds of PyTorch where required. Removing the
-entire deep learning block does not produce a working environment for every
-CPU-capable tool; no complete CPU design environment is provided here.
-
----
-
-## Environment variables
-
-Every script and notebook here reads the same three variables. All are optional
-— the defaults are correct inside the conda environment.
-
-| Variable | Default when unset | Purpose |
-|---|---|---|
-| `ZINC_HYDRO_SIF` | the active python interpreter | Apptainer image used to run helper scripts |
-| `ZINC_HYDRO_OBABEL` | `obabel` from `$PATH` | Open Babel executable |
-| `ZINC_HYDRO_REPO` | auto-detected by walking up from the working directory | Repository root |
-
-Check what will actually be used before running anything:
-
-```bash
 python Scripts/env_config.py
+python -c "import pyrosetta, torch; print('helper imports OK'); print('CUDA available:', torch.cuda.is_available())"
+obabel -V
 ```
 
+The specification retains Python 3.10, PyTorch 2.3.1, CUDA 12.1, and PyRosetta
+2024.39, plus JupyterLab, marimo, Open Babel, and structure/chemistry packages.
+The equivalent pixi environment is named `design`:
+
+```bash
+cd Environment
+pixi run -e design python -c "import pyrosetta, torch; print('helper imports OK')"
 ```
-### ENVIRONMENT REPORT ###
-    python            : /opt/conda/envs/zinc_hydro/bin/python
-    conda_env         : zinc_hydro
-    repo_root         : /home/you/Metallohydrolase_Enzyme_Design
-    runner            : /opt/conda/envs/zinc_hydro/bin/python
-    obabel            : /opt/conda/envs/zinc_hydro/bin/obabel
-    ...
-```
 
-Any line prefixed with `!!` is a problem, with the fix printed underneath.
+Scripts that import model modules such as `rf_diffusion` or `openfold`, or call
+Foldseek, still need those tools installed separately. LigandMPNN helpers need
+their source checkout and weights. A helper import check does not test inference.
 
----
+GPU helpers require a host NVIDIA driver; conda and container CUDA packages do
+not install it. No complete CPU, AMD/ROCm, or Apple-silicon design environment is
+provided.
 
-## Files
+## Model environments and checkpoints
 
-| File | What it is |
+Initialize the required submodules and use each model's own interpreter or
+upstream container. The pinned [RFdiffusion2 metadata](https://github.com/RosettaCommons/RFdiffusion2/blob/d365cbf4db3958814a9f8e4f6f94fa309dfebc2b/pyproject.toml)
+requires Python ≥3.11; [foundry](https://github.com/RosettaCommons/foundry/blob/aad357b776e3c0d6b973080f8f8c4bcf3ed21e40/pyproject.toml)
+and [AlphaFold3](https://github.com/google-deepmind/alphafold3/blob/c0f97eda2f1f482fd94d3a38bece18c7069b4a5c/pyproject.toml)
+require ≥3.12, beyond the helper environment's Python 3.10.
+
+| Component | Setup reference |
 |---|---|
-| `analysis.yml` | Conda env for the wet lab analysis notebooks only |
-| `requirements-analysis.txt` | The same, for `pip` / `uv` |
-| `zinc_hydro.yml` | Portable conda env for the full design stack (minor-version pins) |
-| `zinc_hydro.lock.yml` | Exact conda export of the environment we ran (linux-64, build strings) |
-| `zinc_hydro.def` | Apptainer/Singularity definition, built from `zinc_hydro.yml` |
-| `Dockerfile` | Docker equivalent of `zinc_hydro.def` |
-| `pixi.toml` | pixi manifest with `analysis` and `design` environments |
+| RFdiffusion2 | [Pinned README](https://github.com/RosettaCommons/RFdiffusion2/blob/d365cbf4db3958814a9f8e4f6f94fa309dfebc2b/README.md): environment/container and weights |
+| RFdiffusion3 through foundry | [Pinned README](https://github.com/RosettaCommons/foundry/blob/aad357b776e3c0d6b973080f8f8c4bcf3ed21e40/README.md): package environment and checkpoints |
+| LigandMPNN/FastMPNNDesign, SuperFold/AF2, AF3, PLACER | [Software guide](../Docs/software-and-models.md): source, dependencies, weights, databases, and access |
+
+Configure notebook/script launchers for those installations. The helper
+containers below do not include model runtimes or checkpoints.
+
+## Optional helper containers
+
+Both recipes install the helper manifest under `/opt/conda/envs/zinc_hydro`.
+The repository and model data must be mounted at runtime.
+
+### Apptainer
+
+Build on Linux x86_64 from the repository root:
+
+```bash
+apptainer build Environment/zinc_hydro.sif Environment/zinc_hydro.def
+apptainer run Environment/zinc_hydro.sif Scripts/env_config.py
+export ZINC_HYDRO_SIF="$PWD/Environment/zinc_hydro.sif"
+```
+
+Building may require `--fakeroot` or an administrator. The runscript executes
+helper Python. Bind the repository if your site does not bind the working
+directory automatically. GPU helpers need
+`apptainer exec --nv IMAGE.sif python SCRIPT.py`; `ZINC_HYDRO_SIF` alone adds
+neither `--nv` nor data mounts.
+
+### Docker
+
+```bash
+docker build --platform linux/amd64 -f Environment/Dockerfile -t zinc_hydro:local .
+docker run --rm -it -v "$PWD":/work -w /work zinc_hydro:local bash
+```
+
+Add `--gpus all` for GPU helpers with NVIDIA Container Toolkit configured on the
+host. Mount additional data as needed. The root `.dockerignore` restricts build
+context to the recipe and environment specification. Package licenses still
+apply inside containers.
+
+## Helper configuration
+
+[`Scripts/env_config.py`](../Scripts/env_config.py) reads these optional settings;
+model packages use their own configuration.
+
+| Variable | Default | Purpose |
+|---|---|---|
+| `ZINC_HYDRO_SIF` | Active Python | Interpreter or executable Apptainer image for helper subprocesses |
+| `ZINC_HYDRO_OBABEL` | `obabel` on `PATH` | Open Babel executable |
+| `ZINC_HYDRO_REPO` | Location of `env_config.py`, then an upward directory search | Repository root override |
+
+Inspect resolved paths with `python Scripts/env_config.py`. Missing PyRosetta
+and Open Babel are expected in an analysis-only environment.
+
+## Reproducibility and validation
+
+These specifications resolve packages at installation time; no `pixi.lock` is
+shipped. Save resolved versions with your outputs. Helper/container installs
+also fetch unpinned ProDy from Git and depend on channel/license access.
+
+[`zinc_hydro.lock.yml`](zinc_hydro.lock.yml) preserves the historical Linux conda
+export unchanged. Its Git dependencies are unpinned, and it omits checkpoints,
+databases, and external tools: it is provenance, not a complete reproduction
+lock.
+
+A clean Linux Python 3.11 analysis installation was checked. Conda/pixi helper
+solves, container builds, GPU inference, and other operating systems were not
+validated during this refresh.

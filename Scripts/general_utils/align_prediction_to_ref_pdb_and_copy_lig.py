@@ -3,7 +3,7 @@
 """
 align_prediction_to_ref_pdb_and_copy_lig.py
 
-Created: 2026-01-15 by Seth Woodbury (woodbuse@uw.edu)
+Created: 2026-01-15 by Seth M. Woodbury (woodbuse@uw.edu)
 Updated: 2026-01-15 - Fixed HETATM stripping, improved sidechain optimization
 
 Description:

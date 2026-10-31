@@ -1,5 +1,5 @@
 """
-@author: Seth Woodbury + ChatGTP
+@author: Seth M. Woodbury + ChatGTP
 woodbuse@uw.edu
 """
 import glob
