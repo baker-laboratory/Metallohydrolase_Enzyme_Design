@@ -1,7 +1,7 @@
 <h1 align="center">
   <picture>
     <source media="(max-width: 1011px)" srcset="Docs/assets/readme/masthead-narrow.svg">
-    <img src="Docs/assets/readme/masthead.svg" width="100%" alt="Hypothesis-driven enzyme design — quantum chemistry and generative deep learning. Ribbon drawing of the deposited ZAPP-1 computational design model with its two zinc ions and modeled ligand.">
+    <img src="Docs/assets/readme/masthead.svg" width="100%" alt="Computational design of metallohydrolases. Hypothesis-driven enzyme design using quantum chemistry and generative deep learning. Ribbon drawing of the deposited ZAPP-1 computational design model with its two zinc ions and modeled ligand.">
   </picture>
 </h1>
 

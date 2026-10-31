@@ -509,7 +509,8 @@ def spectrum(w=1200, h=5):
 # ---------------------------------------------------------------- masthead
 VIEW = (0, -35, 20)   # roll, tilt, yaw about the centroid-to-zinc axis
 MAST_VIEW = (0, -35, 20)
-MAST_ALT = ("Hypothesis-driven enzyme design — quantum chemistry and generative deep learning. "
+MAST_ALT = ("Computational design of metallohydrolases. "
+            "Hypothesis-driven enzyme design using quantum chemistry and generative deep learning. "
             "Ribbon drawing of the deposited ZAPP-1 computational design model with its two zinc ions and modeled ligand.")
 CREDIT = "ZAPP-1 · computational design model · RFdiffusion3"
 
@@ -544,11 +545,12 @@ def masthead(st, w=1200, h=384):
     defs += ZN_DEFS + gradient("band", BAND)
     defs += f'<clipPath id="c"><rect width="{w}" height="{h}" rx="8"/></clipPath>'
     art = masthead_art(st, 804, 14, 382, 354)
-    title = fit(UI_SEMI, "Hypothesis-driven", 72, 700)
+    title = fit(UI_SEMI, "Computational design", 64, 700)
     copy = (
-        UI_SEMI.path("Hypothesis-driven", title, 54, 150, WHITE)
-        + UI_SEMI.path("enzyme design", title, 54, 232, WHITE)
-        + UI_BODY.path("Quantum chemistry and generative deep learning", 23, 56, 285, SOFT)
+        UI_SEMI.path("Computational design", title, 54, 145, WHITE)
+        + UI_SEMI.path("of metallohydrolases", title, 54, 222, WHITE)
+        + UI_BODY.path("Hypothesis-driven enzyme design using", 23, 56, 277, SOFT)
+        + UI_BODY.path("quantum chemistry and generative deep learning", 23, 56, 310, SOFT)
         + UI_BODY.path(CREDIT, 13, 56, 350, MUTED)
     )
     inner = f'{body}{art}<rect width="{w}" height="5" fill="url(#band)"/>{copy}'
@@ -564,12 +566,13 @@ def masthead_narrow(st, w=720, h=584):
     defs += ZN_DEFS + gradient("band", BAND)
     defs += f'<clipPath id="c"><rect width="{w}" height="{h}" rx="10"/></clipPath>'
     art = masthead_art(st, 42, 18, 636, 304)
-    title = fit(UI_SEMI, "Hypothesis-driven", 62, w - 72)
+    title = fit(UI_SEMI, "Computational design", 60, w - 72)
     copy = (
-        UI_SEMI.path("Hypothesis-driven", title, 36, 391, WHITE)
-        + UI_SEMI.path("enzyme design", title, 36, 459, WHITE)
-        + UI_BODY.path("Quantum chemistry and", 27, 38, 514, SOFT)
-        + UI_BODY.path("generative deep learning", 27, 38, 548, SOFT)
+        UI_SEMI.path("Computational design", title, 36, 382, WHITE)
+        + UI_SEMI.path("of metallohydrolases", title, 36, 450, WHITE)
+        + UI_BODY.path("Hypothesis-driven enzyme design", 26, 38, 492, SOFT)
+        + UI_BODY.path("using quantum chemistry and", 26, 38, 524, SOFT)
+        + UI_BODY.path("generative deep learning", 26, 38, 556, SOFT)
     )
     inner = f'{body}{art}<rect width="{w}" height="6" fill="url(#band)"/>{copy}'
     return svg(w, h, MAST_ALT, f'<g clip-path="url(#c)">{inner}</g>', defs)
@@ -592,17 +595,18 @@ def spline(pts, n=4):
 
 
 def g_site(st, cx, cy, s):
-    """Catalytic geometry: the three histidines and the zinc of 1QJI, from the deposited coordinates."""
+    """Catalytic geometry: the three imidazole rings and the zinc of 1QJI, from the deposited coordinates.
+
+    Only the ring atoms are drawn, so no CB, CA or backbone connections appear.
+    """
     rot = st.rotation(14, -28, 12)
     to = lambda p: (cx + (rot @ (p - st.zn))[0] * s, cy - (rot @ (p - st.zn))[1] * s)
+    ring = ("CG", "ND1", "CE1", "NE2", "CD2")
     bonds, dashes = "", ""
     for r in (92, 96, 102):
         atoms = st.res[r]
-        names = [x for x in atoms if x not in ("N", "C", "O")]
-        for i, x in enumerate(names):
-            for y in names[i + 1:]:
-                if np.linalg.norm(atoms[x] - atoms[y]) < 1.75:
-                    bonds += poly([to(atoms[x]), to(atoms[y])])
+        for x, y in zip(ring, ring[1:] + ring[:1]):
+            bonds += poly([to(atoms[x]), to(atoms[y])])
         dashes += poly([to(atoms["NE2"]), to(st.zn)])
     x, y = to(st.zn)
     return (f'<path d="{dashes}" fill="none" stroke="#CFC2F2" stroke-width="1.7" stroke-dasharray="2.2 3.6" stroke-linecap="round"/>'
