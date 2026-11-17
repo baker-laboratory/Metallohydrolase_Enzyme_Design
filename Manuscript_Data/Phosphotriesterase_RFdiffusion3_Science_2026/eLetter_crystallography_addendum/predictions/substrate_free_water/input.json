@@ -1,0 +1,44 @@
+{
+  "name": "zapp_i1_p1D1_znwat_notag_1mer_af3i1",
+  "sequences": [
+    {
+      "protein": {
+        "id": "A",
+        "sequence": "ITEEQYRAILEGLREKQELIRKGEIPGAHPEVYELYEEIVRTLEEKGPTEEAIIEAVKVYLKKAKEIVEKLADEEFEAPTGTKVTLAEHALEHPAIALKAAGVELPPELKAALEKFDEIARKLHPGLDALRLHLAGIADDPLFVELAREFGLGEDVERARASGFRISAAHGKGAFAVVFLFLYAIRKGYEDLIIEELK",
+        "unpairedMsa": "",
+        "pairedMsa": "",
+        "templates": "",
+        "modifications": [
+          {
+            "ptmType": "KCX",
+            "ptmPosition": 16
+          }
+        ]
+      }
+    },
+    {
+      "ligand": {
+        "id": [
+          "B",
+          "C"
+        ],
+        "ccdCodes": [
+          "ZN"
+        ]
+      }
+    },
+    {
+      "ligand": {
+        "id": "D",
+        "ccdCodes": [
+          "HOH"
+        ]
+      }
+    }
+  ],
+  "modelSeeds": [
+    1
+  ],
+  "dialect": "alphafold3",
+  "version": 1
+}
