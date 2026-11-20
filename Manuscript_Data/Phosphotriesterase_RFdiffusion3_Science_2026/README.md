@@ -8,6 +8,11 @@ Experimental data for de novo binuclear Zn(II) phosphotriesterases designed with
 RFdiffusion3 and assayed on paraoxon. The corresponding computational campaign
 is in [Design_Pipelines/Phosphotriesterase_RFdiffusion3](../../Design_Pipelines/Phosphotriesterase_RFdiffusion3/).
 
+Two experimental ZAPP-1 crystal structures are reported in the
+[bioRxiv preprint](https://doi.org/10.64898/2026.11.17.767279).
+See the [crystallography addendum](eLetter_crystallography_addendum/) for the
+associated files.
+
 ## Data
 
 | Location | Contents |

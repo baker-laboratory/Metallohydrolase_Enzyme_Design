@@ -107,6 +107,9 @@ Each dataset has a `wetlab_data_analysis.py` marimo app. See
 [data and reproduction](Docs/data-and-reproduction.md) for assay coverage,
 figure exports, and the distinction between fresh fits and historical figures.
 
+The ZAPP-1 crystallography preprint reports two experimental crystal
+structures [[5]](#ref-5).
+
 **Related derivative work:** Chen *et al.* [[4]](#ref-4) reports designed metalloproteases
 and applications in selective protein cleavage and caged biomodulator activation.
 Its code and data have a separate [Zenodo deposit](https://doi.org/10.5281/zenodo.22654831).
@@ -170,6 +173,7 @@ Cite the studies corresponding to the methods and data you use.
 2. <a id="ref-2"></a>Ahern, W., Yim, J., Tischer, D. *et al.* Atom-level enzyme active site scaffolding using RFdiffusion2. *Nature Methods* **23**, 96–105 (2026). [DOI](https://doi.org/10.1038/s41592-025-02975-x).
 3. <a id="ref-3"></a>Butcher, J., Krishna, R., Mitra, R. *et al.* Atomic functional site scaffolding in biopolymers with RFdiffusion3. *Science*, eaeh2982 (2026). [DOI](https://doi.org/10.1126/science.aeh2982).
 4. <a id="ref-4"></a>Chen, A., Wu, K., Choi, H. *et al.* Computational design of metalloproteases. *Nature* (2026). [DOI](https://doi.org/10.1038/s41586-026-11167-2). **Related derivative work; separate data deposit.**
+5. <a id="ref-5"></a>Woodbury, S. M., Kim, D., Mendoza, J. *et al.* Crystal structure of the first de novo designed phosphotriesterase ZAPP-1. *bioRxiv* preprint (2026). [DOI](https://doi.org/10.64898/2026.11.17.767279).
 
 <details>
 <summary><strong>Copy BibTeX citations</strong></summary>
@@ -305,6 +309,22 @@ Cite the studies corresponding to the methods and data you use.
   year      = {2026},
   doi       = {10.1038/s41586-026-11167-2},
   url       = {https://doi.org/10.1038/s41586-026-11167-2}
+}
+
+@article{woodbury2026zapp1,
+  title     = {Crystal structure of the first de novo designed phosphotriesterase {ZAPP-1}},
+  author    = {Woodbury, Seth M. and
+               Kim, Donghyo and
+               Mendoza, Johnny and
+               Kang, Alex and
+               Nguyen, Hannah and
+               Bera, Asim K. and
+               Baker, David},
+  journal   = {bioRxiv},
+  year      = {2026},
+  doi       = {10.64898/2026.11.17.767279},
+  url       = {https://doi.org/10.64898/2026.11.17.767279},
+  note      = {Preprint}
 }
 ```
 

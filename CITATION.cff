@@ -308,3 +308,33 @@ references:
   doi: 10.1038/s41586-026-11167-2
   url: https://doi.org/10.1038/s41586-026-11167-2
   notes: Related metalloprotease study. Its data and code are deposited separately at https://doi.org/10.5281/zenodo.22654831.
+- type: article
+  title: Crystal structure of the first de novo designed phosphotriesterase ZAPP-1
+  authors:
+  - family-names: Woodbury
+    given-names: Seth M.
+    orcid: https://orcid.org/0000-0003-0510-8240
+  - family-names: Kim
+    given-names: Donghyo
+    orcid: https://orcid.org/0000-0002-8097-3675
+  - family-names: Mendoza
+    given-names: Johnny
+    orcid: https://orcid.org/0000-0003-1573-4202
+  - family-names: Kang
+    given-names: Alex
+    orcid: https://orcid.org/0000-0001-5487-0499
+  - family-names: Nguyen
+    given-names: Hannah
+    orcid: https://orcid.org/0000-0001-9696-4004
+  - family-names: Bera
+    given-names: Asim K.
+    orcid: https://orcid.org/0000-0001-9473-2912
+  - family-names: Baker
+    given-names: David
+    orcid: https://orcid.org/0000-0001-7896-6217
+  journal: bioRxiv
+  year: 2026
+  date-published: '2026-11-19'
+  doi: 10.64898/2026.11.17.767279
+  url: https://doi.org/10.64898/2026.11.17.767279
+  notes: Preprint reporting two experimental ZAPP-1 crystal structures.

@@ -10,6 +10,7 @@ lists and BibTeX entries are in [references.bib](references.bib).
 | Primary metalloesterase campaign and Nature dataset | [[1]](#ref-1) |
 | RFdiffusion2 workflow or additional Nature Methods data | [[2]](#ref-2); also [[1]](#ref-1) for shared Nature results |
 | RFdiffusion3 workflow, Science phosphotriesterase or metalloprotease data | [[3]](#ref-3) |
+| ZAPP-1 crystal structures | [[5]](#ref-5) |
 
 ## References
 
@@ -17,6 +18,7 @@ lists and BibTeX entries are in [references.bib](references.bib).
 2. <a id="ref-2"></a>Ahern, W., Yim, J., Tischer, D. et al. **Atom-level enzyme active site scaffolding using RFdiffusion2.** *Nature Methods* **23**(1), 96–105 (2026). [DOI: 10.1038/s41592-025-02975-x](https://doi.org/10.1038/s41592-025-02975-x). BibTeX: `ahern2026rfdiffusion2`.
 3. <a id="ref-3"></a>Butcher, J., Krishna, R., Mitra, R. et al. **Atomic functional site scaffolding in biopolymers with RFdiffusion3.** *Science*, eaeh2982 (2026). [DOI: 10.1126/science.aeh2982](https://doi.org/10.1126/science.aeh2982). BibTeX: `butcher2026rfdiffusion3`.
 4. <a id="ref-4"></a>Chen, A., Wu, K., Choi, H. et al. **Computational design of metalloproteases.** *Nature* (2026). [DOI: 10.1038/s41586-026-11167-2](https://doi.org/10.1038/s41586-026-11167-2). BibTeX: `chen2026metalloproteases`.
+5. <a id="ref-5"></a>Woodbury, S. M., Kim, D., Mendoza, J. et al. **Crystal structure of the first de novo designed phosphotriesterase ZAPP-1.** *bioRxiv* preprint (2026). [DOI: 10.64898/2026.11.17.767279](https://doi.org/10.64898/2026.11.17.767279). BibTeX: `woodbury2026zapp1`.
 
 ## Related derivative work: Computational design of metalloproteases
 
@@ -36,12 +38,13 @@ Metadata follows publisher-deposited Crossref records
 ([1](https://api.crossref.org/works/10.1038/s41586-025-09746-w),
 [2](https://api.crossref.org/works/10.1038/s41592-025-02975-x),
 [3](https://api.crossref.org/works/10.1126/science.aeh2982),
-[4](https://api.crossref.org/works/10.1038/s41586-026-11167-2)).
+[4](https://api.crossref.org/works/10.1038/s41586-026-11167-2),
+[5](https://api.crossref.org/works/10.64898/2026.11.17.767279)).
 [CITATION.cff](../CITATION.cff) retains reference 1 as the repository's preferred citation.
 
 ## Copyable BibTeX
 
-Full author lists are included below. [Download all four entries](references.bib).
+Full author lists are included below. [Download all entries](references.bib).
 
 ### 1. Metallohydrolase design
 
@@ -187,5 +190,25 @@ Full author lists are included below. [Download all four entries](references.bib
   year      = {2026},
   doi       = {10.1038/s41586-026-11167-2},
   url       = {https://doi.org/10.1038/s41586-026-11167-2}
+}
+```
+
+### 5. ZAPP-1 crystallography
+
+```bibtex
+@article{woodbury2026zapp1,
+  title     = {Crystal structure of the first de novo designed phosphotriesterase {ZAPP-1}},
+  author    = {Woodbury, Seth M. and
+               Kim, Donghyo and
+               Mendoza, Johnny and
+               Kang, Alex and
+               Nguyen, Hannah and
+               Bera, Asim K. and
+               Baker, David},
+  journal   = {bioRxiv},
+  year      = {2026},
+  doi       = {10.64898/2026.11.17.767279},
+  url       = {https://doi.org/10.64898/2026.11.17.767279},
+  note      = {Preprint}
 }
 ```
