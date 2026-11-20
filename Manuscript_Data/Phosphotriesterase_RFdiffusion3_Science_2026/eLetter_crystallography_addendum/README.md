@@ -3,9 +3,12 @@
 The ZAPP-1 crystallography preprint reports two experimental structures and
 compares them with the RFdiffusion3 design and AlphaFold3 predictions.
 
-- [Read the bioRxiv preprint](https://doi.org/10.64898/2026.11.17.767279).
-- Archived technical report [PDF](report/ZAPP1_crystallography.pdf) and
-  [LaTeX source](report/ZAPP1_crystallography_source.zip).
+Please cite the [bioRxiv preprint](https://doi.org/10.64898/2026.11.17.767279)
+when referring to this work.
+
+- [Technical report (PDF)](report/ZAPP1_crystallography.pdf).
+- [Editable LaTeX source](report/ZAPP1_crystallography_source.zip). In Overleaf,
+  set `main.tex` as the main file and compile with pdfLaTeX and BibTeX.
 - `structures/design/`: RFdiffusion3 design model.
 - `structures/crystals/`: coordinate and reflection files used for the analyses.
   Form 1 is the pNPP-supplemented crystal (39CY, 1.42 Å); form 2 was prepared
