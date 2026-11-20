@@ -8,6 +8,31 @@ Wet lab measurements for the RFdiffusion3 metalloprotease campaign, with
 marimo analyses of cis cleavage, the trans fluorescence screen, G11 peptide
 specificity and the G11+Zn mass spectrum.
 
+## Sequences and design models
+
+The file prefix `TTR_MP` identifies the TTR-targeting metalloproteases.
+
+| Supplemental data | Contents |
+|---|---|
+| [DNA and protein sequences](supplemental_data/supp_data__denovo_TTR_MP_DNA_and_protein_sequences.xlsx) | 96 transthyretin designs with matched cis and trans orders, the 15 identified 1-hour cis observations, and reported kinetics for TTRg4, TTRg10, and TTRg11. |
+| [Computational design models](supplemental_data/supp_data__denovo_TTR_MP_design_models.zip) | One sequence-matched protease–peptide complex per ordered design. The model index links each PDB to its workbook row and records its SHA-256 digest. |
+
+P1 denotes the order plate for the 96 transthyretin designs reported in the
+paper. The `specificity_epitopes` sheet includes all seven substrate conditions
+from the TTRg11 specificity assay, including the two alpha-synuclein peptides.
+The `alpha_syn_peptide_orders` sheet gives the coding DNA from their archived
+short-peptide orders. The connection to the full reporters used in the assay
+remains unverified.
+The 18-hour cis data are indexed by gel and lane, and the trans acquisition is
+indexed by reader well. Full sample crosswalks are needed to link those
+measurements to the order plates.
+
+The cis sequences in the supplemental workbook are translations of the ordered
+inserts in the Science expression vector, including mScarlet-I3 and Strep-tag
+II. The source 1-hour cis files retain the shorter order-preview sequences and
+masses in their original columns. The workbook describes the construct and
+sequence basis for each sheet.
+
 ## Data files
 
 Source measurements are supplied as nine CSV files and five Excel workbooks.
@@ -39,6 +64,10 @@ and generates the screening, specificity and mass-spectrum plots and tables in
 fractions; the trans analysis displays fluorescence progress curves and
 well-level slopes. The specificity analysis displays fluorescence time courses
 with baseline and no-enzyme correction.
+
+The cis source files contain tabulated gel densitometry. The kinetics and
+zinc-condition plates are provided as instrument exports, and the supplemental
+sequence workbook gives the reported kinetic fit summaries from Table S4.
 
 The matching design campaign is
 [`Metalloprotease_RFdiffusion3`](../../Design_Pipelines/Metalloprotease_RFdiffusion3/).
